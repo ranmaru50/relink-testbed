@@ -1,0 +1,1 @@
+{"id":"malformed-json","group":"response","description":"Returns malformed JSON with an application/json media type.","document":"/arxml/valid/malformed-json.arxml","capabilityId":"malformed-temperature","inputs":{},"expected":{"request":{"method":"GET","pathname":"/api/representation/malformed-json"},"result":{"outcome":"error","layer":"representation"}}}

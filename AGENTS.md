@@ -10,3 +10,4 @@
 - Verify server behavior with TDD and always close every server cleanly.
 - Serve fixtures through an explicit registry; never resolve URL input directly as a file path.
 - When changing documentation, including README files, update the English version as the canonical source first and update the corresponding Japanese version to match its content and structure.
+- Keep diagnostic APIs under `/__testbed/*`, preserve passive request observation, and never add a dependency on a Runtime implementation.

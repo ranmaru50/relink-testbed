@@ -1,0 +1,1 @@
+{"id":"http-500","group":"http","description":"Returns an HTTP 500 interface failure.","document":"/arxml/valid/http-500.arxml","capabilityId":"failing-service","inputs":{},"expected":{"request":{"method":"GET","pathname":"/api/status/500"},"result":{"outcome":"error","layer":"interface"}}}

@@ -1,0 +1,1 @@
+{"id":"http-204-no-output","group":"http","description":"Returns HTTP 204 for a capability with no outputs.","document":"/arxml/valid/no-output-204.arxml","capabilityId":"empty","inputs":{},"expected":{"request":{"method":"GET","pathname":"/api/no-content"},"result":{"outcome":"success","outputs":{}}}}

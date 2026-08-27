@@ -1,0 +1,1 @@
+{"id":"multi-output-json","group":"response","description":"Returns multiple JSON outputs.","document":"/arxml/valid/multi-output-json.arxml","capabilityId":"climate","inputs":{},"expected":{"request":{"method":"GET","pathname":"/api/json/multi"},"result":{"outcome":"success","outputs":{"temperature":20.1,"humidity":44}}}}

@@ -18,7 +18,9 @@ export interface TestCaseDefinition {
   readonly id: string;
   readonly group: string;
   readonly description: string;
-  readonly documentPath?: string;
+  readonly document?: string;
+  readonly capabilityId?: string;
+  readonly inputs?: Readonly<Record<string, unknown>>;
   readonly expected?: unknown;
 }
 

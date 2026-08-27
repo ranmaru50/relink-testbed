@@ -12,6 +12,6 @@ export function createEntityHandler(): HttpHandler {
     }
     const fixture = arxmlFixtures[pathname];
     if (fixture === undefined) { response.writeHead(404).end(); return; }
-    response.writeHead(200, { "content-type": "application/xml; charset=utf-8" }).end(fixture);
+    response.writeHead(200, { "content-type": "application/xml; charset=utf-8", "access-control-allow-origin": "*" }).end(fixture);
   };
 }

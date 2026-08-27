@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
     "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
     "types": ["node", "vitest/globals"]
   },
   "include": ["src", "tests", "vitest.config.ts"]

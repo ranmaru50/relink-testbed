@@ -41,4 +41,20 @@ describe("RELink Testbed", () => {
     const second = await startTestbed(); instances.push(second);
     expect((await fetch(new URL("/api/no-content", second.entityOrigin))).status).toBe(204);
   });
+
+  it("exposes browser-readable, instance-local Harness diagnostics", async () => {
+    const testbed = await startTestbed(); instances.push(testbed);
+    const info = await (await fetch(new URL("/__testbed/info", testbed.entityOrigin))).json();
+    expect(info).toMatchObject({ name: "RELink Testbed", entityOrigin: testbed.entityOrigin, crossOrigin: testbed.crossOrigin });
+    const cases = await (await fetch(new URL("/__testbed/cases", testbed.entityOrigin))).json() as Array<{ id: string; documentUrl?: string }>;
+    expect(cases.map(item => item.id)).toContain("single-output-json");
+    expect(cases.find(item => item.id === "single-output-json")?.documentUrl).toBe(`${testbed.entityOrigin}/arxml/valid/single-output-json.arxml`);
+    expect((await fetch(new URL("/__testbed/cases/unknown", testbed.entityOrigin))).status).toBe(404);
+    await fetch(new URL("/api/json/single?a=1&a=2", testbed.entityOrigin));
+    expect((await (await fetch(new URL("/__testbed/requests/json-single", testbed.entityOrigin))).json()) as unknown[]).toHaveLength(1);
+    expect((await fetch(new URL("/__testbed/reset", testbed.entityOrigin), { method: "POST" })).status).toBe(204);
+    expect((await (await fetch(new URL("/__testbed/requests", testbed.entityOrigin))).json()) as unknown[]).toHaveLength(0);
+    const documentResponse = await fetch(testbed.case("single-output-json").documentUrl!);
+    expect(documentResponse.headers.get("access-control-allow-origin")).toBe("*");
+  });
 });

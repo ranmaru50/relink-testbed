@@ -3,5 +3,7 @@
   "group": "response",
   "description": "Returns a single JSON output.",
   "document": "/arxml/valid/single-output-json.arxml",
-  "expected": { "invocation": { "status": "success", "representation": "application/json", "values": { "temperature": 20.1 } } }
+  "capabilityId": "temperature",
+  "inputs": {},
+  "expected": { "request": { "method": "GET", "pathname": "/api/json/single" }, "result": { "outcome": "success", "outputs": { "temperature": 20.1 } } }
 }
