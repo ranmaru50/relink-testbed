@@ -1,0 +1,5 @@
+{
+  "id": "cross-origin-allowed",
+  "group": "security",
+  "description": "A separate origin that allows CORS."
+}

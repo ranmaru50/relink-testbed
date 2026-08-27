@@ -1,0 +1,6 @@
+{
+  "id": "post-json",
+  "group": "request",
+  "description": "Echoes POST JSON input.",
+  "document": "/arxml/valid/post-json.arxml"
+}

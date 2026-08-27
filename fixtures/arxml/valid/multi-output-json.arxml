@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><arxml><capability id="climate" type="sensor"><endpoint>/api/json/multi</endpoint><output name="temperature"/><output name="humidity"/></capability></arxml>

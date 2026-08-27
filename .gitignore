@@ -1,0 +1,28 @@
+# Dependencies and package-manager data
+node_modules/
+.pnpm-store/
+
+# Build, test, and coverage output
+dist/
+coverage/
+.vitest/
+.vite/
+.nyc_output/
+*.tsbuildinfo
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+commit_message.txt
+
+# Local environment and editor files
+.env
+.env.local
+.env.*.local
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

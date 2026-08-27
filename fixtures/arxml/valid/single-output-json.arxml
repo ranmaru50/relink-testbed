@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><arxml><capability id="temperature" type="sensor"><endpoint>/api/json/single</endpoint><output name="temperature" representation="application/json"/></capability></arxml>

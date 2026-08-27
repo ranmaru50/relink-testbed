@@ -1,0 +1,7 @@
+{
+  "id": "single-output-json",
+  "group": "response",
+  "description": "Returns a single JSON output.",
+  "document": "/arxml/valid/single-output-json.arxml",
+  "expected": { "invocation": { "status": "success", "representation": "application/json", "values": { "temperature": 20.1 } } }
+}
