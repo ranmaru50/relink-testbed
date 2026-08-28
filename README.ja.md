@@ -69,6 +69,39 @@ Fetch
 
 ---
 
+## 外部 Web Runtime Test Harness
+
+外部のブラウザー型 Harness は、Runtime に Testbed を組み込むことなく利用できます。Harness は機械可読なケースメタデータを取得し、AR-XML 文書 URL を Runtime に渡し、ユーザーが Capability を呼び出した後で受動的なリクエスト観測結果を取得します。
+
+```text
+Browser Harness
+   │
+   ├─ Web Runtime
+   │      │
+   │      └── AR-XML / Capability HTTP ──┐
+   │                                      │
+   └── Diagnostic API ────────────────────┤
+                                          ▼
+                                     RELink Testbed
+```
+
+Testbed は `pnpm dev` で起動します。エフェメラルな localhost ポートを使用し、Entity、Cross-Origin、診断 API の URL を表示します。Testbed 自身は Runtime を実行せず、Runtime 固有の結果報告も要求しません。
+
+診断エンドポイントは Entity Origin の `/__testbed/*` 配下にあります。
+
+- `GET /__testbed/info`
+- `GET /__testbed/cases`
+- `GET /__testbed/cases/{id}`
+- `GET /__testbed/requests`
+- `GET /__testbed/requests/{endpointId}`
+- `POST /__testbed/reset`
+
+これらの診断 API は許可的な CORS によりブラウザーから読み取れます。ベースラインの AR-XML 文書もブラウザーから読み取れます。一方、Capability の CORS 挙動はシナリオ固有のままであり、拒否シナリオを許可的にはしません。
+
+現在 Harness が対応するケースは `single-output-json`、`multi-output-json`、`post-json`、`http-204-no-output`、`relative-endpoint-invocable`、`http-500`、`malformed-json` です。ランタイム非依存のメタデータは `cases/**/*.json` に格納します。
+
+---
+
 ## 設計目標
 
 ### ローカルファースト

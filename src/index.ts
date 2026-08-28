@@ -6,7 +6,7 @@ export type { RecordedRequest, RequestHistory, TestCase, TestCaseDefinition } fr
 /** Starts the testbed for manual inspection and waits for a termination signal. */
 if (process.argv[1]?.endsWith("index.ts")) {
   const testbed = await (await import("./testbed/Testbed.js")).startTestbed();
-  console.log(`RELink Testbed\n\nEntity Origin:\n${testbed.entityOrigin}\n\nCross-Origin:\n${testbed.crossOrigin}`);
+  console.log(`RELink Testbed\n\nEntity Origin:\n${testbed.entityOrigin}\n\nCross-Origin:\n${testbed.crossOrigin}\n\nDiagnostic API:\n${testbed.entityOrigin}/__testbed/info`);
   await new Promise<void>(resolve => process.once("SIGINT", resolve));
   await testbed.close();
 }

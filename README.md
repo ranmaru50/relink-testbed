@@ -71,6 +71,39 @@ The environment should support scenarios for:
 
 ---
 
+## External Web Runtime Test Harness
+
+An external browser-based Harness may use this Testbed without importing it into a Runtime. The Harness loads machine-readable case metadata, gives the AR-XML document URL to a Runtime, and reads passive request observations after the user invokes a Capability.
+
+```text
+Browser Harness
+   │
+   ├─ Web Runtime
+   │      │
+   │      └── AR-XML / Capability HTTP ──┐
+   │                                      │
+   └── Diagnostic API ────────────────────┤
+                                          ▼
+                                     RELink Testbed
+```
+
+Start the Testbed with `pnpm dev`. It uses ephemeral localhost ports and prints the Entity, Cross-Origin, and diagnostic URLs. The Testbed never executes a Runtime or requests Runtime-specific result reports.
+
+Diagnostic endpoints are available under `/__testbed/*` on the Entity Origin:
+
+- `GET /__testbed/info`
+- `GET /__testbed/cases`
+- `GET /__testbed/cases/{id}`
+- `GET /__testbed/requests`
+- `GET /__testbed/requests/{endpointId}`
+- `POST /__testbed/reset`
+
+These diagnostics are browser-readable with permissive CORS. Baseline AR-XML documents are also browser-readable. Capability CORS behavior remains scenario-specific; the dedicated denied scenarios are not made permissive.
+
+Currently supported Harness cases are `single-output-json`, `multi-output-json`, `post-json`, `http-204-no-output`, `relative-endpoint-invocable`, `http-500`, and `malformed-json`. Their runtime-independent metadata is stored in `cases/**/*.json`.
+
+---
+
 ## Design Goals
 
 ### Local First
