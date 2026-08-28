@@ -68,6 +68,23 @@ describe("RELink Testbed", () => {
     expect((await fetch(new URL("/cors/denied", testbed.crossOrigin))).headers.get("access-control-allow-origin")).toBeNull();
   });
 
+  it("allows post-json preflight without recording it as a Capability request", async () => {
+    const testbed = await startTestbed(); instances.push(testbed);
+    const preflight = await fetch(new URL("/api/json/echo", testbed.entityOrigin), {
+      method: "OPTIONS",
+      headers: {
+        origin: "http://127.0.0.1:5173",
+        "access-control-request-method": "POST",
+        "access-control-request-headers": "content-type"
+      }
+    });
+    expect(preflight.status).toBe(204);
+    expect(preflight.headers.get("access-control-allow-origin")).toBe("*");
+    expect(preflight.headers.get("access-control-allow-methods")).toContain("POST");
+    expect(preflight.headers.get("access-control-allow-headers")).toContain("content-type");
+    expect(testbed.requests.all()).toHaveLength(0);
+  });
+
   it("preserves diagnostic request data and isolates reset per Testbed instance", async () => {
     const first = await startTestbed(); const second = await startTestbed(); instances.push(first, second);
     await fetch(new URL("/api/json/echo", first.entityOrigin), { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ query: "coffee" }) });

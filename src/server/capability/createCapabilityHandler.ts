@@ -29,6 +29,15 @@ async function readBody(request: IncomingMessage): Promise<Buffer> {
 export function createCapabilityHandler(record: (request: RecordedRequest) => void): HttpHandler {
   return async (request, response) => {
     const url = new URL(request.url ?? "/", "http://testbed.invalid");
+    // POST JSON の Harness 基準ケースだけは、ブラウザーの preflight を明示的に許可する。
+    if (request.method === "OPTIONS" && url.pathname === "/api/json/echo") {
+      response.writeHead(204, {
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "POST, OPTIONS",
+        "access-control-allow-headers": "content-type"
+      }).end();
+      return;
+    }
     const body = await readBody(request);
     const text = body.toString("utf8");
     let json: unknown;
