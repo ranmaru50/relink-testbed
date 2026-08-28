@@ -3,7 +3,13 @@ import type { IncomingMessage } from "node:http";
 import type { HttpHandler } from "../createHttpServer.js";
 import type { RecordedRequest, RequestHistory } from "../../testbed/types.js";
 
-/** Creates instance-local received request history. */
+/** Harness の基準ケースでブラウザーアクセスを許可する endpoint。 */
+const HARNESS_CORS_ENDPOINTS = new Set([
+  "/api/json/single", "/api/json/multi", "/api/json/echo", "/api/no-content",
+  "/api/status/500", "/api/representation/malformed-json"
+]);
+
+/** インスタンスに閉じた受信リクエスト履歴を作成する。 */
 export function createRequestHistory(): { readonly history: RequestHistory; record(request: RecordedRequest): void } {
   const records: RecordedRequest[] = [];
   return {
@@ -12,14 +18,14 @@ export function createRequestHistory(): { readonly history: RequestHistory; reco
   };
 }
 
-/** Safely reads a request body as bytes. */
+/** リクエスト本文を安全にバイト列として取得する。 */
 async function readBody(request: IncomingMessage): Promise<Buffer> {
   const chunks: Buffer[] = [];
   for await (const chunk of request) chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
   return Buffer.concat(chunks);
 }
 
-/** Creates a handler for Capability responses and observable request recording. */
+/** Capability 応答と受動的なリクエスト記録を提供するハンドラーを作成する。 */
 export function createCapabilityHandler(record: (request: RecordedRequest) => void): HttpHandler {
   return async (request, response) => {
     const url = new URL(request.url ?? "/", "http://testbed.invalid");
@@ -33,6 +39,7 @@ export function createCapabilityHandler(record: (request: RecordedRequest) => vo
     record({ method: request.method ?? "GET", pathname: url.pathname, query, headers: request.headers, body, text, timestamp: Date.now(), endpointId, ...(json === undefined ? {} : { json }) });
     const send = (status: number, contentType: string | undefined, value?: string | Uint8Array) => {
       response.statusCode = status;
+      if (HARNESS_CORS_ENDPOINTS.has(url.pathname)) response.setHeader("access-control-allow-origin", "*");
       if (contentType !== undefined) response.setHeader("content-type", contentType);
       response.end(value);
     };

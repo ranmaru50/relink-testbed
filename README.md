@@ -98,7 +98,7 @@ Diagnostic endpoints are available under `/__testbed/*` on the Entity Origin:
 - `GET /__testbed/requests/{endpointId}`
 - `POST /__testbed/reset`
 
-These diagnostics are browser-readable with permissive CORS. Baseline AR-XML documents are also browser-readable. Capability CORS behavior remains scenario-specific; the dedicated denied scenarios are not made permissive.
+These diagnostics, baseline AR-XML documents, and baseline Harness Capability endpoints are browser-readable with permissive CORS. Capability CORS behavior remains scenario-specific; dedicated denied scenarios are not made permissive.
 
 Currently supported Harness cases are `single-output-json`, `multi-output-json`, `post-json`, `http-204-no-output`, `relative-endpoint-invocable`, `http-500`, and `malformed-json`. Their runtime-independent metadata is stored in `cases/**/*.json`.
 

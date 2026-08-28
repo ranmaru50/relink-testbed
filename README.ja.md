@@ -96,7 +96,7 @@ Testbed は `pnpm dev` で起動します。エフェメラルな localhost ポ�
 - `GET /__testbed/requests/{endpointId}`
 - `POST /__testbed/reset`
 
-これらの診断 API は許可的な CORS によりブラウザーから読み取れます。ベースラインの AR-XML 文書もブラウザーから読み取れます。一方、Capability の CORS 挙動はシナリオ固有のままであり、拒否シナリオを許可的にはしません。
+これらの診断 API、ベースラインの AR-XML 文書、ベースライン Harness の Capability endpoint は、許可的な CORS によりブラウザーから読み取れます。一方、Capability の CORS 挙動はシナリオ固有のままであり、拒否シナリオを許可的にはしません。
 
 現在 Harness が対応するケースは `single-output-json`、`multi-output-json`、`post-json`、`http-204-no-output`、`relative-endpoint-invocable`、`http-500`、`malformed-json` です。ランタイム非依存のメタデータは `cases/**/*.json` に格納します。
 
