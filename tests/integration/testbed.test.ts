@@ -27,6 +27,15 @@ describe("RELink Testbed", () => {
     expect(testbed.requests.all()).toHaveLength(0);
   });
 
+  it("declares the complete JSON echo body as the single post-json output", async () => {
+    const testbed = await startTestbed(); instances.push(testbed);
+    const document = await (await fetch(testbed.case("post-json").documentUrl!)).text();
+    expect(document).toContain('<output name="query" type="object" />');
+    expect(testbed.case("post-json").expected).toMatchObject({
+      result: { outcome: "success", outputs: { query: { query: "coffee" } } }
+    });
+  });
+
   it("preserves malformed responses, delay behavior, and CORS infrastructure", async () => {
     const testbed = await startTestbed(); instances.push(testbed);
     expect(await (await fetch(new URL("/api/representation/malformed-json", testbed.entityOrigin))).text()).toBe('{"temperature":');
@@ -41,6 +50,15 @@ describe("RELink Testbed", () => {
     const first = await startTestbed(); await first.close();
     const second = await startTestbed(); instances.push(second);
     expect((await fetch(new URL("/api/no-content", second.entityOrigin))).status).toBe(204);
+  });
+
+  it("provides a selectable representation for the no-output HTTP 204 case", async () => {
+    const testbed = await startTestbed(); instances.push(testbed);
+    const testCase = testbed.case("http-204-no-output");
+    const document = await (await fetch(testCase.documentUrl!)).text();
+    expect(document).toContain('<representation media-type="application/json" />');
+    expect((await fetch(new URL("/api/no-content", testbed.entityOrigin))).status).toBe(204);
+    expect(testbed.requests.last("no-content")).toMatchObject({ method: "GET", pathname: "/api/no-content" });
   });
 
   it("exposes browser-readable, instance-local Harness diagnostics", async () => {

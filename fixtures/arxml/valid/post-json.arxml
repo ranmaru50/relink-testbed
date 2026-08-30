@@ -1,1 +1,21 @@
-<?xml version="1.0"?><arxml><capability id="echo" type="action"><endpoint>/api/json/echo</endpoint></capability></arxml>
+<?xml version="1.0" encoding="UTF-8"?>
+<ar-entity xmlns="https://relink.dev/ns/arxml/core/0.1" version="0.1">
+  <capabilities>
+    <capability id="echo" type="https://example.test/capabilities/search/echo/1">
+      <inputs>
+        <input name="query" type="string" required="true" />
+      </inputs>
+      <result>
+        <outputs>
+          <output name="query" type="object" />
+        </outputs>
+        <representations>
+          <representation media-type="application/json" />
+        </representations>
+      </result>
+      <interfaces>
+        <interface type="http" method="POST" endpoint="/api/json/echo" encoding="json" />
+      </interfaces>
+    </capability>
+  </capabilities>
+</ar-entity>

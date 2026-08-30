@@ -5,5 +5,5 @@
   "document": "/arxml/valid/post-json.arxml",
   "capabilityId": "echo",
   "inputs": { "query": "coffee" },
-  "expected": { "request": { "method": "POST", "pathname": "/api/json/echo", "json": { "query": "coffee" } }, "result": { "outcome": "success", "outputs": { "query": "coffee" } } }
+  "expected": { "request": { "method": "POST", "pathname": "/api/json/echo", "json": { "query": "coffee" } }, "result": { "outcome": "success", "outputs": { "query": { "query": "coffee" } } } }
 }
