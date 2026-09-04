@@ -16,8 +16,15 @@ interface MockRecord {
 /** Resolver の外部契約だけを再現し、runner の実行順序をネットワークなしで検証する。 */
 class MockResolverClient implements ConformanceHttpClient {
   private readonly records = new Map<string, MockRecord>();
+  /** ログインPOSTで受信した action 値を回帰テストから確認するための記録。 */
+  private readonly loginActions: string[] = [];
 
   public constructor(private readonly duplicateManifest?: "top-level" | "nested") {}
+
+  /** ログインPOSTが期待する action を送信したことを返す。 */
+  public get observedLoginActions(): readonly string[] {
+    return this.loginActions;
+  }
 
   public async request(request: HttpRequest): Promise<HttpResponseSnapshot> {
     const url = new URL(request.url);
@@ -34,7 +41,11 @@ class MockResolverClient implements ConformanceHttpClient {
     if (request.method !== "POST") return this.response(200, "<form method=\"post\">");
     const fields = new URLSearchParams(request.body ?? "");
     const action = fields.get("action") ?? "";
-    if (action === "") return this.response(200, "<form method=\"post\"><input name=\"csrf\" value=\"csrf-token\">");
+    if (!fields.has("uuid")) {
+      this.loginActions.push(action);
+      if (action === "login") return this.response(200, "<form method=\"post\"><input name=\"csrf\" value=\"csrf-token\">");
+      return this.response(200, "<form method=\"post\">");
+    }
     const uuid = (fields.get("uuid") ?? "").toLowerCase();
     if (action === "register") {
       const location = fields.get("location") ?? "";
@@ -101,7 +112,9 @@ describe("ResolverConformanceRunner", () => {
       adminPassword: "test-password",
       resolverCommit: "4b08eead4bcc23374044bb60340bb915102a29db"
     };
-    const report = await new ResolverConformanceRunner(profile, new MockResolverClient()).run();
+    const client = new MockResolverClient();
+    const report = await new ResolverConformanceRunner(profile, client).run();
+    expect(client.observedLoginActions).toEqual(["login"]);
     expect(report.results.filter(result => result.result === "FAIL").map(result => result.caseId)).toEqual(["MNET-001"]);
     expect(report.results.find(result => result.caseId === "HTTP-003")?.target).toBe("RESOLVER-SERVER");
     expect(report.results.filter(result => result.caseId === "MAN-001").map(result => [result.target, result.result])).toEqual([
