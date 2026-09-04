@@ -195,14 +195,21 @@ export class AdminSecurityAcceptanceRunner {
   /** 同一IPの失敗累積、username変更後のlock、lockout期限後の回復を検証する。 */
   private async loginThrottleCase(): Promise<CaseOutcome> {
     const headers = this.ipHeaders("192.0.2.1");
-    const first = await this.client().login({ headers, username: "admin", password: "wrong" });
-    const second = await this.client().login({ headers, username: "other-user", password: "wrong" });
+    const failures: LoginResult[] = [];
+    for (let attempt = 0; attempt < this.profile.loginMaxFailures; attempt++) {
+      const username = attempt === 0 ? "admin" : attempt === 1 ? "other-user" : `other-user-${attempt}`;
+      failures.push(await this.client().login({ headers, username, password: "wrong" }));
+    }
+    // 閾値が1の場合でも、lock後のusername変更がlockを回避しないことを確認する。
+    const usernameChangedAfterLock = this.profile.loginMaxFailures === 1
+      ? await this.client().login({ headers, username: "other-user", password: "wrong" })
+      : undefined;
     const locked = await this.client().login({ headers, username: this.profile.adminUsername, password: this.profile.adminPassword });
-    this.require(!first.authenticated && !second.authenticated && !locked.authenticated, "同一IPの失敗累積またはusername変更後のlockが確認できません。");
+    this.require(failures.every(result => !result.authenticated) && !locked.authenticated && (usernameChangedAfterLock === undefined || !usernameChangedAfterLock.authenticated), "同一IPの失敗累積またはusername変更後のlockが確認できません。");
     await this.waitFor(this.profile.loginLockoutSeconds);
     const recovered = await this.client().login({ headers });
     this.require(recovered.authenticated, "lockout期限後に正規ログインが回復しません。");
-    return { observation: { firstStatus: first.status, secondStatus: second.status, lockedStatus: locked.status, recoveredStatus: recovered.status, usernameChanged: true, sameIp: true } };
+    return { observation: { failureCount: failures.length, failureStatuses: failures.map(result => result.status), usernameChanged: true, usernameChangedAfterLock: usernameChangedAfterLock !== undefined, lockedStatus: locked.status, recoveredStatus: recovered.status, sameIp: true } };
   }
 
   /** IP bucket が別IPへ波及しないことを検証し、分散試行自体は対象外と明記する。 */
@@ -220,7 +227,15 @@ export class AdminSecurityAcceptanceRunner {
     this.require(login.authenticated && login.csrf !== undefined, "正常ログインまたはCSRF token発行を確認できません。");
     this.require(login.preAuthenticationSessionId !== login.postAuthenticationSessionId, "認証後にsession IDがrotationされません。");
     this.require(login.postAuthenticationSessionId !== "attacker-fixed-session-id", "攻撃者が指定したsession IDを認証後も受け入れています。");
-    return { observation: { status: login.status, sessionIdRotated: true, csrfIssued: true, attackerSessionIdRejected: true } };
+    const missingCsrf = this.registrationFields("", "csrf-missing");
+    const missingCsrfResponse = await client.mutation(missingCsrf.fields);
+    this.require(missingCsrfResponse.status === 403, "CSRF tokenが欠落したmutationを拒否しませんでした。");
+    await this.requireRecordAbsent(missingCsrf.uuid);
+    const invalidCsrf = this.registrationFields("invalid-csrf-token", "csrf-invalid");
+    const invalidCsrfResponse = await client.mutation(invalidCsrf.fields);
+    this.require(invalidCsrfResponse.status === 403, "不正なCSRF tokenのmutationを拒否しませんでした。");
+    await this.requireRecordAbsent(invalidCsrf.uuid);
+    return { observation: { status: login.status, sessionIdRotated: true, csrfIssued: true, attackerSessionIdRejected: true, missingCsrfRejected: true, invalidCsrfRejected: true } };
   }
 
   /** idle / absolute timeout 後の画面と form/API mutation の拒否を検証する。 */

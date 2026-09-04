@@ -53,6 +53,8 @@ reports/admin-security-0.1/native.json
 reports/admin-security-0.1/container.json
 ```
 
+Successful runner implementation, build, or invocation does not mean that Native or Container deployment acceptance has passed. A deployment acceptance result is established only by reports generated against the actual configured endpoints.
+
 The untrusted proxy URLs must reach the same deployment from an actually untrusted source. The runner cannot turn a client-supplied header into a different `REMOTE_ADDR`; if no such endpoint is configured, `PROXY-001` is recorded as `NOT-APPLICABLE` with the reason.
 
 The timeout cases intentionally wait longer than the configured limits. Use disposable acceptance deployments and do not point this command at a production session store.

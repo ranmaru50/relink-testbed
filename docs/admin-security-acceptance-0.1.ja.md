@@ -53,6 +53,8 @@ reports/admin-security-0.1/native.json
 reports/admin-security-0.1/container.json
 ```
 
+runner の実装、build、または実行が成功しても、Native / Container deployment の受入れが完了したことを意味しません。deployment の受入れ結果は、実際に設定された endpoint に対して生成した report によってのみ確定します。
+
 untrusted proxy URL は、実際に untrusted な送信元から同じ deployment へ到達する必要があります。runner は client が送信した header を別の `REMOTE_ADDR` に変換できません。そのような endpoint が未設定の場合、`PROXY-001` は理由付きの `NOT-APPLICABLE` として記録されます。
 
 timeout case は設定された期限を超えるまで意図的に待機します。使い捨ての受入れ deployment を使用し、本番の session store をこの command の対象にしないでください。

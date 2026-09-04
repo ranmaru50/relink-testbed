@@ -80,7 +80,7 @@ function profile(): SecurityProfile {
     baseUrl: "http://resolver.test",
     adminUsername: "admin",
     adminPassword: "secret",
-    loginMaxFailures: 2,
+    loginMaxFailures: 3,
     loginLockoutSeconds: 1,
     sessionIdleSeconds: 1,
     sessionAbsoluteSeconds: 1,
@@ -91,7 +91,7 @@ function profile(): SecurityProfile {
 
 describe("AdminSecurityAcceptanceRunner", () => {
   it("管理認証の HTTP 受入れケースを実行し、SQLite 証跡なしを明示する", async () => {
-    const client = new MockAdminClient(2);
+    const client = new MockAdminClient(3);
     let waits = 0;
     const report = await new AdminSecurityAcceptanceRunner(profile(), client, {
       wait: async () => {
