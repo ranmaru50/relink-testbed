@@ -108,6 +108,8 @@ The executable Resolver / Manifest 0.1 runner is documented in [docs/resolver-co
 
 Administrative authentication security acceptance is implemented and documented in [docs/admin-security-acceptance-0.1.md](docs/admin-security-acceptance-0.1.md). It separately records Native and Container observations for login throttling, session controls, CSRF, cookie attributes, trusted proxy metadata, and optional Resolver-side SQLite evidence without adding cases to the frozen catalog. Repository implementation completion remains distinct from live deployment acceptance.
 
+Resolver HTTP security-header acceptance is implemented and documented in [docs/resolver-http-security-headers-0.1.md](docs/resolver-http-security-headers-0.1.md). It keeps raw status and header fields, including duplicate fields, and verifies Native HTTPS/HTTP scoping plus Container error, administrative, TRACE, and representative redirect scenarios. Run it with `pnpm security:headers` against explicitly configured deployment endpoints.
+
 ---
 
 ## Design Goals

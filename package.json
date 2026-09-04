@@ -10,7 +10,8 @@
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsx src/index.ts",
     "conformance": "tsx src/conformance/run.ts",
-    "security:acceptance": "tsx src/security/run.ts"
+    "security:acceptance": "tsx src/security/run.ts",
+    "security:headers": "tsx src/security/headersRun.ts"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
