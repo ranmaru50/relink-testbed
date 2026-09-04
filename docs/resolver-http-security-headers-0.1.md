@@ -4,6 +4,12 @@
 
 This repository contains a Testbed-side acceptance runner for the protocol-visible HTTP hardening added to the Reference Resolver. It is separate from both the frozen Resolver / Manifest Conformance Catalog 0.1 and the administrative authentication acceptance runner.
 
+## Implementation status
+
+The runner implementation and review are complete at commit `ca40b2d`; the latest review found no Blocking, P1, or P2 issue. This is completion of the Testbed runner foundation, not completion of live deployment acceptance. Issue #3 remains open until the Native HTTPS and Container profiles are executed and their raw observation artifacts are committed.
+
+The acceptance scope follows the related Resolver work in [`relink-resolver#11`](https://github.com/ranmaru50/relink-resolver/issues/11) and [`relink-resolver#17`](https://github.com/ranmaru50/relink-resolver/pull/17). It does not add Resolver conformance cases or change Resolver semantics.
+
 The runner uses a Node.js HTTP client that retains `IncomingMessage.rawHeaders`. Header names are compared case-insensitively, while field multiplicity remains observable. A comma-combined value is not treated as equivalent to two expected single fields.
 
 ## Checks

@@ -106,7 +106,7 @@ Testbed は `pnpm dev` で起動します。エフェメラルな localhost ポ�
 
 管理認証のセキュリティ受入れは実装済みで、[docs/admin-security-acceptance-0.1.ja.md](docs/admin-security-acceptance-0.1.ja.md) に記載しています。Frozen Catalog に case を追加せず、ログイン乱用対策、セッション制御、CSRF、Cookie 属性、trusted proxy metadata、任意の Resolver 側 SQLite 証跡について Native と Container の観測結果を個別に記録します。リポジトリの実装完了と実 deployment の受入れ完了は別に扱います。
 
-Resolver HTTP セキュリティヘッダーの受入れは [docs/resolver-http-security-headers-0.1.ja.md](docs/resolver-http-security-headers-0.1.ja.md) に記載しています。重複 field を含む raw status / header を保持し、Native の HTTPS/HTTP 境界と Container の error、administrative、TRACE、代表的な redirect scenario を確認します。明示的に設定した deployment endpoint に対して `pnpm security:headers` で実行できます。
+Resolver HTTP セキュリティヘッダーの受入れ runner は実装・レビュー・文書化が完了しており、[docs/resolver-http-security-headers-0.1.ja.md](docs/resolver-http-security-headers-0.1.ja.md) に記載しています。重複 field を含む raw status / header を保持し、Native の HTTPS/HTTP 境界と Container の error、administrative、TRACE、代表的な redirect scenario を確認します。明示的に設定した deployment endpoint に対して `pnpm security:headers` で実行できます。実 Native HTTPS / Container 受入れと raw observation artifact の commit は、引き続き別の open な deployment 作業です。
 
 ---
 
