@@ -104,7 +104,7 @@ Testbed は `pnpm dev` で起動します。エフェメラルな localhost ポ�
 
 実行可能な Resolver / Manifest 0.1 runner については [docs/resolver-conformance-0.1.ja.md](docs/resolver-conformance-0.1.ja.md) を参照してください。Native と Container を別々に設定した profile に対して target ごとの case を実行し、raw HTTP 観測値を記録します。結果を曖昧な Resolver 全体の結果へ統合せず、正規化した JSON を出力します。
 
-管理認証のセキュリティ受入れは [docs/admin-security-acceptance-0.1.ja.md](docs/admin-security-acceptance-0.1.ja.md) に記載しています。Frozen Catalog に case を追加せず、ログイン乱用対策、セッション制御、CSRF、Cookie 属性、trusted proxy metadata、任意の Resolver 側 SQLite 証跡について Native と Container の観測結果を個別に記録します。
+管理認証のセキュリティ受入れは実装済みで、[docs/admin-security-acceptance-0.1.ja.md](docs/admin-security-acceptance-0.1.ja.md) に記載しています。Frozen Catalog に case を追加せず、ログイン乱用対策、セッション制御、CSRF、Cookie 属性、trusted proxy metadata、任意の Resolver 側 SQLite 証跡について Native と Container の観測結果を個別に記録します。リポジトリの実装完了と実 deployment の受入れ完了は別に扱います。
 
 ---
 

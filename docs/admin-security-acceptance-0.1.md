@@ -4,6 +4,10 @@ This repository contains the Testbed-side acceptance runner for the Resolver adm
 
 The runner records Native and Container results independently. It observes the HTTP boundary and does not import Resolver PHP code, read the Resolver database to infer HTTP conformance, or add a Runtime dependency.
 
+## Implementation status
+
+The Issue #2 Testbed implementation and review remediation are complete. The repository now contains the acceptance catalog, the Native/Container runner, the SQLite evidence contract, documentation, and network-free regression coverage. This status describes repository implementation completeness; it does not assert that either deployment has passed a live acceptance run.
+
 ## Coverage
 
 The HTTP cases cover:

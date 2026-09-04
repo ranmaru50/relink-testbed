@@ -4,6 +4,10 @@
 
 runner は Native と Container の結果を個別に記録します。HTTP 境界を観測し、Resolver の PHP コードを import せず、HTTP 適合性を推測するために Resolver の DB を読み取らず、Runtime への依存も追加しません。
 
+## 実装状態
+
+Issue #2 の Testbed 実装とレビュー指摘対応は完了しています。リポジトリには受入れ catalog、Native/Container runner、SQLite 証跡の契約、ドキュメント、ネットワークに依存しない回帰テストが含まれています。この状態はリポジトリの実装完了を示すものであり、いずれかの deployment が実環境の受入れ実行に合格したことを示すものではありません。
+
 ## 対象範囲
 
 HTTP case は次を対象とします。
