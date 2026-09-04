@@ -11,13 +11,13 @@ The runner uses a Node.js HTTP client that retains `IncomingMessage.rawHeaders`.
 For every applicable response the runner records the raw status, normalized headers, raw header fields, and body. It checks the following:
 
 - exactly one `X-Content-Type-Options: nosniff` field;
-- no Apache/PHP version or host disclosure in `Server` and no `X-Powered-By` field;
+- `Server` is absent or uses the fixed neutral token `relink` / `relink-resolver`, with no Apache/PHP version or host disclosure, and no `X-Powered-By` field;
 - `Strict-Transport-Security: max-age=31536000` on HTTPS and no HSTS on HTTP/development responses;
 - `Cache-Control: no-store` and the required `Content-Security-Policy` directives on administrative responses;
 - public CORS and `Referrer-Policy: no-referrer`; and
 - rejection of `TRACE` with HTTP 405.
 
-Native scenarios cover HTTPS public Resolver, Manifest, administrative login, an Apache error path, TRACE, redirect, 4xx, optional 5xx, and an HTTP development response. Container scenarios retain reproducible 400, 503, administrative 200, TRACE 405, and optional successful/redirect checks.
+Native scenarios cover HTTPS public Resolver, Manifest, administrative login, an Apache error path, TRACE, redirect, 4xx, optional 5xx, and an HTTP development response. Manifest receives only the common hardening checks; Resolver public CORS / Referrer-Policy checks are not applied to it. Container scenarios retain reproducible 400, 503, administrative 200, TRACE 405, and optional successful/redirect checks.
 
 ## Run
 

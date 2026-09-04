@@ -22,12 +22,11 @@ class MockHeaderClient implements HeaderHttpClient {
     const status = trace ? 405 : admin ? 200 : serverError ? 503 : clientError ? 400 : apacheError ? 404 : manifest ? 200 : 303;
     const fields: RawHeaderField[] = [
       { name: "X-Content-Type-Options", value: "nosniff" },
-      { name: "Server", value: "relink" },
-      { name: "Referrer-Policy", value: "no-referrer" }
+      { name: "Server", value: "relink" }
     ];
     if (https) fields.push({ name: "Strict-Transport-Security", value: "max-age=31536000" });
     if (admin) fields.push({ name: "Cache-Control", value: "no-store" }, { name: "Content-Security-Policy", value: "default-src 'none'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'" });
-    if (!admin && !trace) fields.push({ name: "Access-Control-Allow-Origin", value: "*" });
+    if (!admin && !manifest && !trace) fields.push({ name: "Access-Control-Allow-Origin", value: "*" }, { name: "Referrer-Policy", value: "no-referrer" });
     return { status, headers: this.toHeaders(fields), rawHeaders: fields, body: admin ? "login" : "" };
   }
 
@@ -94,6 +93,25 @@ describe("HeaderSecurityAcceptanceRunner", () => {
     expect(result?.detail).toContain("xContentTypeOptions");
     expect(result?.detail).toContain("noInformationDisclosure");
     expect(result?.detail).toContain("noPoweredBy");
+  });
+
+  it("Server の内部 FQDN と private IP を情報露出として FAIL にする", async () => {
+    const client: HeaderHttpClient = {
+      request: async request => {
+        const url = new URL(request.url);
+        const manifest = url.pathname.endsWith("/manifest");
+        const rawHeaders: RawHeaderField[] = [
+          { name: "X-Content-Type-Options", value: "nosniff" },
+          { name: "Server", value: manifest ? "10.0.0.5" : "internal-host.example" },
+          { name: "Strict-Transport-Security", value: "max-age=31536000" }
+        ];
+        if (!manifest) rawHeaders.push({ name: "Access-Control-Allow-Origin", value: "*" }, { name: "Referrer-Policy", value: "no-referrer" });
+        return { status: manifest ? 200 : 303, headers: {}, rawHeaders, body: "" };
+      }
+    };
+    const report = await new HeaderSecurityAcceptanceRunner(nativeProfile(), client).run();
+    expect(report.results.find(result => result.scenario === "NATIVE-HTTPS-PUBLIC")?.detail).toContain("noInformationDisclosure");
+    expect(report.results.find(result => result.scenario === "NATIVE-HTTPS-MANIFEST")?.detail).toContain("noInformationDisclosure");
   });
 
   it("Container の未設定 503 endpoint を UNSUPPORTED-OPTIONAL として記録する", async () => {

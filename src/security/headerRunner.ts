@@ -2,7 +2,7 @@
 
 import type { HeaderHttpClient, HeaderHttpResponse, HeaderSecurityProfile, HeaderSecurityReport, HeaderSecurityResult, HeaderSecurityResultClass, HeaderSecurityScenarioId, RawHeaderField } from "./headerTypes.js";
 
-type Surface = "public" | "admin" | "trace" | "error";
+type Surface = "resolver-public" | "manifest" | "admin" | "trace" | "error";
 type Transport = "https" | "http";
 interface ScenarioOptions {
   readonly scenario: HeaderSecurityScenarioId;
@@ -22,22 +22,22 @@ export class HeaderSecurityAcceptanceRunner {
   public async run(): Promise<HeaderSecurityReport> {
     const results: HeaderSecurityResult[] = [];
     if (this.profile.name === "native") {
-      await this.execute(results, { scenario: "NATIVE-HTTPS-PUBLIC", transport: "https", path: this.profile.publicPath, surface: "public", expectedStatus: 303 });
-      await this.execute(results, { scenario: "NATIVE-HTTPS-MANIFEST", transport: "https", path: this.profile.manifestPath, surface: "public", expectedStatus: 200 });
+      await this.execute(results, { scenario: "NATIVE-HTTPS-PUBLIC", transport: "https", path: this.profile.publicPath, surface: "resolver-public", expectedStatus: 303 });
+      await this.execute(results, { scenario: "NATIVE-HTTPS-MANIFEST", transport: "https", path: this.profile.manifestPath, surface: "manifest", expectedStatus: 200 });
       await this.execute(results, { scenario: "NATIVE-HTTPS-ADMIN", transport: "https", path: this.profile.adminPath, surface: "admin", expectedStatus: 200 });
       await this.execute(results, { scenario: "NATIVE-HTTPS-APACHE-ERROR", transport: "https", path: this.profile.apacheErrorPath, surface: "error" });
       await this.execute(results, { scenario: "NATIVE-HTTPS-TRACE", transport: "https", path: this.profile.tracePath, surface: "trace", expectedStatus: 405 });
-      await this.execute(results, { scenario: "NATIVE-HTTPS-REDIRECT", transport: "https", path: this.profile.publicPath, surface: "public", expectedStatus: 303 });
-      await this.execute(results, { scenario: "NATIVE-HTTPS-4XX", transport: "https", path: this.profile.clientErrorPath, surface: "public", expectedStatus: 400 });
-      await this.execute(results, { scenario: "NATIVE-HTTPS-5XX", transport: "https", url: this.profile.serverErrorUrl, surface: "public", expectedStatus: [500, 501, 502, 503, 504, 505], optional: true });
-      await this.execute(results, { scenario: "NATIVE-HTTP-DEVELOPMENT", transport: "http", path: this.profile.publicPath, surface: "public" });
+      await this.execute(results, { scenario: "NATIVE-HTTPS-REDIRECT", transport: "https", path: this.profile.publicPath, surface: "resolver-public", expectedStatus: 303 });
+      await this.execute(results, { scenario: "NATIVE-HTTPS-4XX", transport: "https", path: this.profile.clientErrorPath, surface: "resolver-public", expectedStatus: 400 });
+      await this.execute(results, { scenario: "NATIVE-HTTPS-5XX", transport: "https", url: this.profile.serverErrorUrl, surface: "resolver-public", expectedStatus: [500, 501, 502, 503, 504, 505], optional: true });
+      await this.execute(results, { scenario: "NATIVE-HTTP-DEVELOPMENT", transport: "http", path: this.profile.publicPath, surface: "resolver-public" });
     } else {
       const transport = this.profile.httpsUrl === undefined ? "http" : "https";
-      await this.execute(results, { scenario: "CONTAINER-PUBLIC-400", transport, path: this.profile.clientErrorPath, surface: "public", expectedStatus: 400 });
-      await this.execute(results, { scenario: "CONTAINER-PUBLIC-503", transport, url: this.profile.serverErrorUrl, surface: "public", expectedStatus: 503 });
+      await this.execute(results, { scenario: "CONTAINER-PUBLIC-400", transport, path: this.profile.clientErrorPath, surface: "resolver-public", expectedStatus: 400 });
+      await this.execute(results, { scenario: "CONTAINER-PUBLIC-503", transport, url: this.profile.serverErrorUrl, surface: "resolver-public", expectedStatus: 503 });
       await this.execute(results, { scenario: "CONTAINER-ADMIN-200", transport, path: this.profile.adminPath, surface: "admin", expectedStatus: 200 });
       await this.execute(results, { scenario: "CONTAINER-TRACE-405", transport, path: this.profile.tracePath, surface: "trace", expectedStatus: 405 });
-      await this.execute(results, { scenario: "CONTAINER-SUCCESS-REDIRECT", transport, path: this.profile.publicPath, surface: "public", expectedStatus: [200, 303], optional: true });
+      await this.execute(results, { scenario: "CONTAINER-SUCCESS-REDIRECT", transport, path: this.profile.publicPath, surface: "resolver-public", expectedStatus: [200, 303], optional: true });
     }
     return { reportVersion: "resolver-http-security-headers-0.1", profile: this.profile.name, generatedAt: new Date().toISOString(), results };
   }
@@ -72,7 +72,7 @@ export class HeaderSecurityAcceptanceRunner {
     const checks: Record<string, boolean> = {
       expectedStatus: statusExpected,
       xContentTypeOptions: values("x-content-type-options").length === 1 && values("x-content-type-options")[0]?.trim().toLowerCase() === "nosniff",
-      noInformationDisclosure: values("server").every(value => !/(apache|php|\b\d+\.\d+|127\.0\.0\.1|localhost)/i.test(value)),
+      noInformationDisclosure: values("server").every(value => ["relink", "relink-resolver"].includes(value.trim().toLowerCase())),
       noPoweredBy: values("x-powered-by").length === 0,
       hstsScope: options.transport === "https" ? values("strict-transport-security").length === 1 && values("strict-transport-security")[0]?.trim().toLowerCase() === "max-age=31536000" : values("strict-transport-security").length === 0
     };
@@ -81,7 +81,7 @@ export class HeaderSecurityAcceptanceRunner {
       checks.cacheControl = values("cache-control").length === 1 && values("cache-control")[0]?.trim().toLowerCase() === "no-store";
       checks.csp = csp.length === 1 && ["default-src 'none'", "form-action 'self'", "base-uri 'none'", "frame-ancestors 'none'"].every(directive => csp[0]?.toLowerCase().includes(directive) === true);
     }
-    if (options.surface === "public") {
+    if (options.surface === "resolver-public") {
       checks.cors = values("access-control-allow-origin").length === 1 && values("access-control-allow-origin")[0]?.trim() === "*";
       checks.referrerPolicy = values("referrer-policy").length === 1 && values("referrer-policy")[0]?.trim().toLowerCase() === "no-referrer";
     }

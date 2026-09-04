@@ -11,13 +11,13 @@ runner は Node.js の HTTP client を使用し、`IncomingMessage.rawHeaders` �
 適用可能な各 response について、raw status、正規化 header、raw header field、body を記録します。次を確認します。
 
 - `X-Content-Type-Options: nosniff` が単一 field であること;
-- `Server` に Apache/PHP の version や host の露出がなく、`X-Powered-By` がないこと;
+- `Server` が未設定または固定の neutral token `relink` / `relink-resolver` で、Apache/PHP の version や host の露出がなく、`X-Powered-By` がないこと;
 - HTTPS では `Strict-Transport-Security: max-age=31536000` があり、HTTP/development response では HSTS がないこと;
 - administrative response に `Cache-Control: no-store` と必須の `Content-Security-Policy` directive があること;
 - public response の CORS と `Referrer-Policy: no-referrer` が維持されること;
 - `TRACE` が HTTP 405 で拒否されること。
 
-Native は HTTPS の public Resolver、Manifest、administrative login、Apache error path、TRACE、redirect、4xx、任意の5xx、HTTP development response を対象とします。Container は再現可能な 400、503、administrative 200、TRACE 405、任意の successful/redirect check を対象とします。
+Native は HTTPS の public Resolver、Manifest、administrative login、Apache error path、TRACE、redirect、4xx、任意の5xx、HTTP development response を対象とします。Manifest には共通 hardening check だけを適用し、Resolver public 用の CORS / Referrer-Policy check は適用しません。Container は再現可能な 400、503、administrative 200、TRACE 405、任意の successful/redirect check を対象とします。
 
 ## 実行
 

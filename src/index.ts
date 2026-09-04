@@ -10,6 +10,7 @@ export { HeaderSecurityAcceptanceRunner } from "./security/headerRunner.js";
 export { loadHeaderSecurityProfiles } from "./security/headerProfiles.js";
 export { RawSecurityHttpClient } from "./security/rawHttpClient.js";
 export type { HeaderSecurityProfile, HeaderSecurityReport, HeaderSecurityResult } from "./security/headerTypes.js";
+export type { RawSecurityHttpClientOptions } from "./security/rawHttpClient.js";
 
 /** Starts the testbed for manual inspection and waits for a termination signal. */
 if (process.argv[1]?.endsWith("index.ts")) {
