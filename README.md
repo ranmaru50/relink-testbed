@@ -102,6 +102,10 @@ These diagnostics, baseline AR-XML documents, and baseline Harness Capability en
 
 Currently supported Harness cases are `single-output-json`, `multi-output-json`, `post-json`, `http-204-no-output`, `relative-endpoint-invocable`, `http-500`, and `malformed-json`. Their runtime-independent metadata is stored in `cases/**/*.json`.
 
+## Resolver / Manifest conformance
+
+The executable Resolver / Manifest 0.1 runner is documented in [docs/resolver-conformance-0.1.md](docs/resolver-conformance-0.1.md). It runs target-specific cases against separately configured Native and Container profiles, records raw HTTP observations, and writes normalized JSON results without collapsing targets into an overall Resolver result.
+
 ---
 
 ## Design Goals
