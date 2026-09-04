@@ -253,13 +253,13 @@ export class AdminSecurityAcceptanceRunner {
     const absoluteClient = this.client();
     const absoluteLogin = await absoluteClient.login();
     this.require(absoluteLogin.authenticated && absoluteLogin.csrf !== undefined, "absolute timeout 検証用ログインに失敗しました。");
-    await this.waitFor(this.profile.sessionAbsoluteSeconds);
+    const absoluteRefreshCount = await this.keepAliveUntilAbsoluteTimeout(absoluteClient);
     const absolutePage = await absoluteClient.page();
     const absoluteFixture = this.registrationFields(absoluteLogin.csrf ?? "", "absolute");
     const absoluteMutation = await absoluteClient.mutation(absoluteFixture.fields, "format=json");
     this.require(this.isLoginPage(absolutePage.body) && this.isLoginPage(absoluteMutation.body), "absolute timeout後も管理画面またはAPI mutationが受理されました。");
     await this.requireRecordAbsent(absoluteFixture.uuid);
-    return { observation: { idlePageRejected: true, idleMutationRejected: true, absolutePageRejected: true, absoluteApiMutationRejected: true } };
+    return { observation: { idlePageRejected: true, idleMutationRejected: true, absolutePageRejected: true, absoluteApiMutationRejected: true, absoluteRefreshCount } };
   }
 
   /** 管理 session Cookie の Secure / HttpOnly / SameSite=Strict を検証する。 */
@@ -322,6 +322,24 @@ export class AdminSecurityAcceptanceRunner {
   /** Resolver設定の秒数に少し余裕を加え、期限超過を確実にする。 */
   private async waitFor(seconds: number): Promise<void> {
     await this.waiter.wait(seconds * 1_000 + this.profile.waitGraceMilliseconds);
+  }
+
+  /** idle timeoutを発火させずにreadを継続し、absolute timeoutだけを超過させる。 */
+  private async keepAliveUntilAbsoluteTimeout(client: AdminSecurityClient): Promise<number> {
+    const absoluteMilliseconds = this.profile.sessionAbsoluteSeconds * 1_000;
+    // idle期限の3分の1以下でreadし、スケジューリング遅延を吸収する。
+    const refreshMilliseconds = Math.max(100, Math.min(this.profile.sessionIdleSeconds * 1_000 / 3, absoluteMilliseconds / 2));
+    let elapsedMilliseconds = 0;
+    let refreshCount = 0;
+    while (elapsedMilliseconds + refreshMilliseconds < absoluteMilliseconds) {
+      await this.waiter.wait(refreshMilliseconds);
+      elapsedMilliseconds += refreshMilliseconds;
+      const refresh = await client.page();
+      this.require(!this.isLoginPage(refresh.body), "absolute timeoutの分離中にidle timeoutが発火しました。");
+      refreshCount++;
+    }
+    await this.waiter.wait(absoluteMilliseconds - elapsedMilliseconds + this.profile.waitGraceMilliseconds);
+    return refreshCount;
   }
 
   /** timeout後の未認証 login form を識別する。 */
