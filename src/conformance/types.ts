@@ -26,7 +26,7 @@ export type NormativeStrength = "MUST" | "SHOULD" | "MAY";
 
 export interface CatalogCase {
   readonly id: string;
-  readonly target: ConformanceTarget;
+  readonly targets: readonly ConformanceTarget[];
   readonly strength: NormativeStrength;
   readonly description: string;
 }

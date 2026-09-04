@@ -7,6 +7,7 @@ import type {
   ConformanceReport,
   ConformanceResult,
   ConformanceResultClass,
+  ConformanceTarget,
   HttpResponseSnapshot,
   ResolverProfile
 } from "./types.js";
@@ -59,7 +60,7 @@ class AdminClient {
     this.saveCookies(loginPage);
     const response = await this.form({ username: this.profile.adminUsername, password: this.profile.adminPassword });
     this.saveCookies(response);
-    if (response.status < 200 || response.status >= 300 || response.body.includes("<form method=\"post\">") && !response.body.includes("name=\"csrf\"")) {
+    if (response.status < 200 || response.status >= 300) {
       throw new Error(`Admin login failed with HTTP ${response.status}.`);
     }
     this.csrf = this.extractCsrf(response.body);
@@ -153,7 +154,8 @@ async function prepareFixtures(admin: AdminClient): Promise<void> {
       continue;
     }
     const response = await admin.register(uuid, state, location, ENTITY_ID, integrity);
-    if (response.status < 200 || response.status >= 300 || response.body.includes("操作に失敗")) {
+    const created = await admin.getRecord(uuid);
+    if (response.status < 200 || response.status >= 300 || created?.record.state !== state || created.record.location !== location || created.record.entity_id !== ENTITY_ID) {
       throw new Error(`Fixture ${uuid} could not be registered.`);
     }
   }
@@ -168,13 +170,14 @@ export class ResolverConformanceRunner {
     await admin.login();
     await prepareFixtures(admin);
     const executed = new Map<string, ConformanceResult>();
-    const execute = async (caseId: string, operation: () => Promise<CaseOutcome>): Promise<void> => {
+    const execute = async (caseId: string, operation: () => Promise<CaseOutcome>, executableTargets?: readonly ConformanceTarget[]): Promise<void> => {
       const catalogCase = findCatalogCase(caseId);
+      const targets = executableTargets ?? catalogCase.targets;
       try {
         const outcome = await operation();
-        executed.set(caseId, this.result(catalogCase, outcome.result ?? "PASS", outcome.observation, outcome.detail));
+        for (const target of targets) executed.set(this.resultKey(caseId, target), this.result(catalogCase, target, outcome.result ?? "PASS", outcome.observation, outcome.detail));
       } catch (error: unknown) {
-        executed.set(caseId, this.result(catalogCase, "FAIL", {}, error instanceof Error ? error.message : String(error)));
+        for (const target of targets) executed.set(this.resultKey(caseId, target), this.result(catalogCase, target, "FAIL", {}, error instanceof Error ? error.message : String(error)));
       }
     };
 
@@ -182,14 +185,16 @@ export class ResolverConformanceRunner {
     await execute("RES-002", async () => {
       const update = await admin.updateLocation(FIXTURES.active, LOCATION_B);
       const response = await this.resolve(FIXTURES.active);
-      this.require(update.body.includes("更新しました"), "Location update was not accepted.");
+      const record = await admin.getRecord(FIXTURES.active);
+      this.require(update.status >= 200 && update.status < 300 && record?.record.location === LOCATION_B, "Location update was not accepted.");
       return this.expect(response, 303, LOCATION_B);
     });
     await execute("RES-003", () => this.expectStatus(FIXTURES.unknown, 404));
     await execute("RES-004", async () => {
       const response = await admin.register(FIXTURES.unsafe, "ACTIVE", "http://unsafe.example/description.arxml");
       const publicResponse = await this.resolve(FIXTURES.unsafe);
-      this.require(response.body.includes("操作に失敗"), "Unsafe Location was accepted by the admin surface.");
+      const record = await admin.getRecord(FIXTURES.unsafe);
+      this.require(response.status >= 200 && response.status < 300 && record === null, "Unsafe Location was accepted by the admin surface.");
       this.require(publicResponse.status !== 303 || !this.hasUnsafeLocation(publicResponse), "Unsafe Location was emitted.");
       return { observation: { registrationStatus: response.status, publicStatus: publicResponse.status, adminRejected: true } };
     });
@@ -230,13 +235,14 @@ export class ResolverConformanceRunner {
       const before = await this.manifest(FIXTURES.active);
       const update = await admin.updateLocation(FIXTURES.active, LOCATION_A);
       const after = await this.manifest(FIXTURES.active);
+      const record = await admin.getRecord(FIXTURES.active);
       const beforeEntity = this.manifestEntityId(before.body);
       const afterEntity = this.manifestEntityId(after.body);
-      this.require(update.body.includes("更新しました"), "Location update was not accepted.");
+      this.require(update.status >= 200 && update.status < 300 && record?.record.state === "ACTIVE" && record.record.location === LOCATION_A, "Location update was not accepted.");
       this.require(beforeEntity === afterEntity, "Entity identity changed with Description Location.");
       this.require(this.manifestLocation(before.body) !== this.manifestLocation(after.body), "Description Location did not change.");
       return { observation: { entityIdBefore: beforeEntity, entityIdAfter: afterEntity, locationBefore: this.manifestLocation(before.body), locationAfter: this.manifestLocation(after.body) } };
-    });
+    }, ["LIFECYCLE-ADMIN", "RESOLVER-SERVER"]);
     await execute("LIFE-011", async () => {
       const record = await admin.getRecord(FIXTURES.lifecycle);
       const transitions = record?.history.filter(item => item.event_type === "lifecycle_transition") ?? [];
@@ -253,24 +259,34 @@ export class ResolverConformanceRunner {
         ? { observation: { cacheControl: cache } }
         : { result: "PASS-WITH-DEVIATION", observation: { cacheControl: cache }, detail: "Profile cache_max_age is not the catalog default of 60 seconds." };
     });
-    await execute("CACHE-003", () => this.expectHeader(FIXTURES.unknown, 404, "cache-control", "no-store"));
+    await execute("CACHE-003", async () => {
+      const responses = await Promise.all([
+        this.resolve("not-a-uuid"),
+        this.resolve(FIXTURES.unknown),
+        this.resolve(FIXTURES.active, "?l=2")
+      ]);
+      for (const response of responses) this.require(response.headers["cache-control"] === "no-store", "A CACHE-003 error response did not use no-store.");
+      return { observation: { subcases: responses.map(response => ({ status: response.status, cacheControl: response.headers["cache-control"] })) } };
+    });
     await execute("CACHE-004", () => this.expectHeader(FIXTURES.retired, 410, "cache-control", "max-age="));
     await execute("CORS-001", () => this.expectHeader(FIXTURES.active, 303, "access-control-allow-origin", "*"));
-    await execute("MAN-001", () => this.expectManifest(FIXTURES.active));
+    await execute("MAN-001", () => this.expectManifest(FIXTURES.active), ["MANIFEST-PRODUCER"]);
+    await execute("MAN-003", () => this.expectManifest(FIXTURES.active), ["MANIFEST-PRODUCER"]);
+    await execute("MAN-004", () => this.expectManifest(FIXTURES.active), ["MANIFEST-PRODUCER"]);
     await execute("MAN-005", async () => {
       const response = await this.manifest(FIXTURES.active);
       const manifest = this.parseJson(response.body);
       this.require(this.stringAt(manifest, ["anchor", "id"]).toLowerCase() === FIXTURES.active, "Manifest anchor.id does not match the request path.");
       return { observation: { status: response.status, anchorId: this.stringAt(manifest, ["anchor", "id"]) } };
-    });
-    await execute("MAN-006", async () => this.manifestIdentityCase(admin));
+    }, ["MANIFEST-ENDPOINT"]);
+    await execute("MAN-006", async () => this.manifestIdentityCase(admin), ["MANIFEST-PRODUCER"]);
     await execute("MAN-008", async () => {
       const response = await this.manifest(FIXTURES.active);
       const location = this.manifestLocation(response.body);
       this.require(location.startsWith("https://"), "Manifest emitted a non-HTTPS L1 Description Location.");
       return { observation: { location } };
-    });
-    await execute("MAN-009", () => this.expectStatus(FIXTURES.active, 303, LOCATION_B));
+    }, ["MANIFEST-PRODUCER"]);
+    await execute("MAN-009", () => this.expectStatus(FIXTURES.active, 303, LOCATION_B), ["RESOLVER-SERVER"]);
     await execute("MAN-010", () => this.expectManifest(FIXTURES.active));
     await execute("MAN-011", () => this.expectManifestStatus(FIXTURES.suspended, 404));
     await execute("MAN-012", () => this.expectManifestStatus(FIXTURES.retired, 410));
@@ -280,30 +296,33 @@ export class ResolverConformanceRunner {
       const manifest = this.parseJson(response.body);
       this.require(this.objectAt(manifest, ["description"])["integrity"] === undefined, "Baseline fixture unexpectedly contains integrity metadata.");
       return { observation: { status: response.status, integrityPresent: false } };
-    });
+    }, ["MANIFEST-PRODUCER"]);
     await execute("MAN-015", async () => {
       const response = await this.manifest(FIXTURES.integrity);
       const integrity = this.objectAt(this.parseJson(response.body), ["description"])["integrity"];
       this.objectAt(integrity, []);
       this.require(this.stringAt(integrity, ["algorithm"]) === "sha-256" && /^[0-9a-f]{64}$/.test(this.stringAt(integrity, ["digest"])), "sha-256 integrity syntax is invalid.");
       return { observation: { status: response.status, integrity } };
-    });
+    }, ["MANIFEST-PRODUCER"]);
     await execute("MNET-001", async () => {
       const protocol = new URL(this.profile.baseUrl).protocol;
       return protocol === "https:"
         ? { observation: { baseProtocol: protocol } }
         : { result: "FAIL", observation: { baseProtocol: protocol }, detail: "The observed profile uses HTTP, but Manifest L1 retrieval requires HTTPS." };
-    });
+    }, ["MANIFEST-ENDPOINT"]);
 
     for (const catalogCase of conformanceCatalog) {
-      if (!executed.has(catalogCase.id)) executed.set(catalogCase.id, this.result(catalogCase, "NOT-APPLICABLE", {}, this.notApplicableReason(catalogCase)));
+      for (const target of catalogCase.targets) {
+        const key = this.resultKey(catalogCase.id, target);
+        if (!executed.has(key)) executed.set(key, this.result(catalogCase, target, "NOT-APPLICABLE", {}, this.notApplicableReason(catalogCase, target)));
+      }
     }
     return {
       catalogVersion: this.profile.catalogVersion ?? CONFORMANCE_CATALOG_VERSION,
       profile: this.profile.name,
       resolverCommit: this.profile.resolverCommit,
       generatedAt: new Date().toISOString(),
-      results: conformanceCatalog.map(catalogCase => executed.get(catalogCase.id) as ConformanceResult)
+      results: conformanceCatalog.flatMap(catalogCase => catalogCase.targets.map(target => executed.get(this.resultKey(catalogCase.id, target)) as ConformanceResult))
     };
   }
 
@@ -342,7 +361,7 @@ export class ResolverConformanceRunner {
   private async expectTransition(admin: AdminClient, uuid: string, state: string): Promise<CaseOutcome> {
     const response = await admin.transition(uuid, state);
     const record = await admin.getRecord(uuid);
-    this.require(!response.body.includes("操作に失敗") && record?.record.state === state, `Transition to ${state} was not accepted.`);
+    this.require(response.status >= 200 && response.status < 300 && record?.record.state === state, `Transition to ${state} was not accepted.`);
     return { observation: { state: record.record.state, version: record.record.version } };
   }
 
@@ -350,7 +369,7 @@ export class ResolverConformanceRunner {
     const before = await admin.getRecord(uuid);
     const response = await admin.transition(uuid, state);
     const after = await admin.getRecord(uuid);
-    this.require(response.body.includes("操作に失敗") && after?.record.state === "RETIRED" && before?.record.version === after.record.version, `Invalid transition to ${state} was accepted.`);
+    this.require(response.status >= 200 && response.status < 300 && after?.record.state === "RETIRED" && before?.record.version === after.record.version, `Invalid transition to ${state} was accepted.`);
     return { observation: { attemptedState: state, responseStatus: response.status, state: after.record.state, version: after.record.version } };
   }
 
@@ -385,7 +404,8 @@ export class ResolverConformanceRunner {
     const after = await this.manifest(FIXTURES.active);
     const beforeJson = this.parseJson(before.body);
     const afterJson = this.parseJson(after.body);
-    this.require(update.body.includes("更新しました"), "Location update was not accepted.");
+    const record = await admin.getRecord(FIXTURES.active);
+    this.require(update.status >= 200 && update.status < 300 && record?.record.location === LOCATION_B, "Location update was not accepted.");
     this.require(this.stringAt(beforeJson, ["entity", "id"]) === this.stringAt(afterJson, ["entity", "id"]), "Entity identity changed when Location changed.");
     return { observation: { entityId: this.stringAt(afterJson, ["entity", "id"]), location: this.stringAt(afterJson, ["description", "location"]) } };
   }
@@ -396,12 +416,14 @@ export class ResolverConformanceRunner {
     return { observation: this.snapshot(response) };
   }
 
-  private result(catalogCase: CatalogCase, result: ConformanceResultClass, observation: Readonly<Record<string, unknown>>, detail?: string): ConformanceResult {
+  private resultKey(caseId: string, target: ConformanceTarget): string { return `${caseId}:${target}`; }
+
+  private result(catalogCase: CatalogCase, target: ConformanceTarget, result: ConformanceResultClass, observation: Readonly<Record<string, unknown>>, detail?: string): ConformanceResult {
     return {
       catalogVersion: this.profile.catalogVersion ?? CONFORMANCE_CATALOG_VERSION,
       profile: this.profile.name,
       resolverCommit: this.profile.resolverCommit,
-      target: catalogCase.target,
+      target,
       caseId: catalogCase.id,
       strength: catalogCase.strength,
       result,
@@ -410,9 +432,9 @@ export class ResolverConformanceRunner {
     };
   }
 
-  private notApplicableReason(catalogCase: CatalogCase): string {
-    if (catalogCase.target === "INTEGRITY-CONSUMER") return "Resolver profile does not claim Manifest integrity verification as a consumer.";
-    if (catalogCase.target === "L1-CONSUMER" || catalogCase.target === "MANIFEST-CONSUMER") return "Consumer behavior is outside the Reference Resolver server/endpoint target.";
+  private notApplicableReason(catalogCase: CatalogCase, target: ConformanceTarget): string {
+    if (target === "INTEGRITY-CONSUMER") return "Resolver profile does not claim Manifest integrity verification as a consumer.";
+    if (target === "L1-CONSUMER" || target === "MANIFEST-CONSUMER") return "Consumer behavior is outside the Reference Resolver server/endpoint target.";
     return "The case requires an optional or non-server implementation surface not exposed by this profile.";
   }
 

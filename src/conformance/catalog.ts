@@ -93,8 +93,31 @@ const consumerOnlyCases: readonly CatalogSeed[] = [
   ["SCHEMA-002", "MANIFEST-CONSUMER", "MUST", "UUID and absolute-URI semantics are checked explicitly."],
 ];
 
+/** Frozen catalog が1つの caseへ割り当てる複数の conformance target。 */
+const targetOverrides: Readonly<Record<string, readonly ConformanceTarget[]>> = {
+  "NET-003": ["L1-CONSUMER", "MANIFEST-CONSUMER"],
+  "NET-004": ["L1-CONSUMER", "MANIFEST-CONSUMER"],
+  "NET-005": ["L1-CONSUMER", "MANIFEST-CONSUMER"],
+  "LIFE-010": ["LIFECYCLE-ADMIN", "RESOLVER-SERVER"],
+  "MAN-001": ["MANIFEST-CONSUMER", "MANIFEST-PRODUCER"],
+  "MAN-003": ["MANIFEST-CONSUMER", "MANIFEST-PRODUCER"],
+  "MAN-004": ["MANIFEST-CONSUMER", "MANIFEST-PRODUCER"],
+  "MAN-005": ["MANIFEST-CONSUMER", "MANIFEST-ENDPOINT"],
+  "MAN-006": ["MANIFEST-PRODUCER", "MANIFEST-CONSUMER"],
+  "MAN-008": ["MANIFEST-PRODUCER", "MANIFEST-CONSUMER"],
+  "MAN-009": ["RESOLVER-SERVER", "L1-CONSUMER"],
+  "MAN-014": ["MANIFEST-PRODUCER", "MANIFEST-CONSUMER"],
+  "MAN-015": ["MANIFEST-PRODUCER", "MANIFEST-CONSUMER"],
+  "MNET-001": ["MANIFEST-ENDPOINT", "MANIFEST-CONSUMER"]
+};
+
 /** カタログ ID を削除・改名せずに保持する、実行順序付きのケース一覧。 */
-export const conformanceCatalog: readonly CatalogCase[] = [...resolverCases, ...consumerOnlyCases].map(([id, target, strength, description]) => ({ id, target, strength, description }));
+export const conformanceCatalog: readonly CatalogCase[] = [...resolverCases, ...consumerOnlyCases].map(([id, target, strength, description]) => ({
+  id,
+  targets: targetOverrides[id] ?? [target],
+  strength,
+  description
+}));
 
 export function findCatalogCase(caseId: string): CatalogCase {
   const testCase = conformanceCatalog.find(candidate => candidate.id === caseId);

@@ -23,7 +23,7 @@ reports/resolver-conformance-0.1/native.json
 reports/resolver-conformance-0.1/container.json
 ```
 
-Each result contains the catalog version, target, case ID, normative strength, result class, observed HTTP details, and the pinned Resolver commit. There is no aggregate Resolver PASS/FAIL field.
+Each result contains the catalog version, target, case ID, normative strength, result class, observed HTTP details, and the pinned Resolver commit. A case assigned to multiple targets expands to one result per `(caseId, target)` pair. There is no aggregate Resolver PASS/FAIL field.
 
 ## Scope and result interpretation
 
@@ -33,4 +33,4 @@ The runner executes the applicable server, endpoint, producer, lifecycle, cache,
 
 The runner uses manual redirect handling so raw status, `Location`, and cache/CORS headers remain observable. It does not follow Description Locations or perform capability execution. This preserves the Resolver/Runtime boundary and avoids treating a successful Resolver response as permission to fetch an Entity description.
 
-The executable runner is unit-tested with injected/local HTTP clients. Running the command against both profiles is an environment acceptance step and requires the pinned Resolver deployments; it does not require internet access after the deployments have been prepared.
+The executable runner is unit-tested with injected/local HTTP clients. A Container execution artifact is committed at `reports/resolver-conformance-0.1/container.json`. Running the command against both profiles is an environment acceptance step and requires the pinned Resolver deployments; it does not require internet access after the deployments have been prepared. Native execution remains a separate environment acceptance step when Apache/PHP is available.

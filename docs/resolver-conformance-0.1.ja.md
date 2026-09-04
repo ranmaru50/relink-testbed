@@ -23,7 +23,7 @@ reports/resolver-conformance-0.1/native.json
 reports/resolver-conformance-0.1/container.json
 ```
 
-各結果には catalog version、target、case ID、normative strength、result class、観測した HTTP 情報、固定 Resolver commit が含まれます。Resolver 全体を表す曖昧な PASS / FAIL は出力しません。
+各結果には catalog version、target、case ID、normative strength、result class、観測した HTTP 情報、固定 Resolver commit が含まれます。複数 target に割り当てられた case は `(caseId, target)` ごとに1結果へ展開します。Resolver 全体を表す曖昧な PASS / FAIL は出力しません。
 
 ## 範囲と結果の解釈
 
@@ -33,4 +33,4 @@ runner は、該当する server、endpoint、producer、lifecycle、cache、COR
 
 runner は redirect を手動処理し、raw status、`Location`、cache / CORS header を観測可能にします。Description Location を追跡したり capability を実行したりしません。これにより Resolver / Runtime の境界を保ち、Resolver の成功応答を Entity description 取得の許可として扱いません。
 
-実行可能 runner は、注入可能な local HTTP client を使って単体テストします。両 profile に対するコマンド実行は環境受入れ作業であり、固定 Resolver deployment が必要です。deployment 準備後の runner 自体はインターネットへ接続しません。
+実行可能 runner は、注入可能な local HTTP client を使って単体テストします。Container の実行 artifact は `reports/resolver-conformance-0.1/container.json` に commit しています。両 profile に対するコマンド実行は環境受入れ作業であり、固定 Resolver deployment が必要です。deployment 準備後の runner 自体はインターネットへ接続しません。Native 実行は Apache/PHP が利用可能な別環境で行う受入れ作業として残ります。

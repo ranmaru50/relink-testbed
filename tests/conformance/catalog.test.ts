@@ -8,9 +8,10 @@ describe("Frozen Resolver / Manifest Catalog", () => {
   it("keeps stable case IDs and target-specific metadata", () => {
     expect(CONFORMANCE_CATALOG_VERSION).toBe("0.1");
     expect(new Set(conformanceCatalog.map(testCase => testCase.id)).size).toBe(conformanceCatalog.length);
-    expect(findCatalogCase("RES-001")).toMatchObject({ target: "RESOLVER-SERVER", strength: "MUST" });
-    expect(findCatalogCase("LIFE-011")).toMatchObject({ target: "REFERENCE-RESOLVER", strength: "SHOULD" });
-    expect(findCatalogCase("INT-008")).toMatchObject({ target: "INTEGRITY-CONSUMER", strength: "MUST" });
+    expect(findCatalogCase("RES-001")).toMatchObject({ targets: ["RESOLVER-SERVER"], strength: "MUST" });
+    expect(findCatalogCase("LIFE-010")).toMatchObject({ targets: ["LIFECYCLE-ADMIN", "RESOLVER-SERVER"] });
+    expect(findCatalogCase("MAN-001")).toMatchObject({ targets: ["MANIFEST-CONSUMER", "MANIFEST-PRODUCER"] });
+    expect(findCatalogCase("INT-008")).toMatchObject({ targets: ["INTEGRITY-CONSUMER"], strength: "MUST" });
   });
 
   it("loads two profiles with the same pinned Resolver commit", () => {

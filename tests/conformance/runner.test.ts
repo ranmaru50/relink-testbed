@@ -64,7 +64,7 @@ class MockResolverClient implements ConformanceHttpClient {
 
   private publicEndpoint(request: HttpRequest, url: URL): HttpResponseSnapshot {
     const match = /^\/relink\/([^/]+)(\/manifest)?$/.exec(url.pathname);
-    if (match === null || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(match[1] ?? "")) return this.response(400);
+    if (match === null || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(match[1] ?? "")) return this.response(400, "", { "cache-control": "no-store" });
     const uuid = (match[1] ?? "").toLowerCase();
     const record = this.records.get(uuid);
     if (match[2] !== undefined) {
@@ -98,6 +98,10 @@ describe("ResolverConformanceRunner", () => {
     const report = await new ResolverConformanceRunner(profile, new MockResolverClient()).run();
     expect(report.results.filter(result => result.result === "FAIL").map(result => result.caseId)).toEqual(["MNET-001"]);
     expect(report.results.find(result => result.caseId === "HTTP-003")?.target).toBe("RESOLVER-SERVER");
+    expect(report.results.filter(result => result.caseId === "MAN-001").map(result => [result.target, result.result])).toEqual([
+      ["MANIFEST-CONSUMER", "NOT-APPLICABLE"],
+      ["MANIFEST-PRODUCER", "PASS"]
+    ]);
     expect(report.results.find(result => result.caseId === "INT-008")?.result).toBe("NOT-APPLICABLE");
     expect(report.results.find(result => result.caseId === "MNET-001")?.result).toBe("FAIL");
   });
