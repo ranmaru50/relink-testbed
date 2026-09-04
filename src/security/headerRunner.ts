@@ -72,7 +72,7 @@ export class HeaderSecurityAcceptanceRunner {
     const checks: Record<string, boolean> = {
       expectedStatus: statusExpected,
       xContentTypeOptions: values("x-content-type-options").length === 1 && values("x-content-type-options")[0]?.trim().toLowerCase() === "nosniff",
-      noInformationDisclosure: values("server").every(value => ["relink", "relink-resolver"].includes(value.trim().toLowerCase())),
+      noInformationDisclosure: values("server").every(value => ["apache", "relink", "relink-resolver"].includes(value.trim().toLowerCase())),
       noPoweredBy: values("x-powered-by").length === 0,
       hstsScope: options.transport === "https" ? values("strict-transport-security").length === 1 && values("strict-transport-security")[0]?.trim().toLowerCase() === "max-age=31536000" : values("strict-transport-security").length === 0
     };

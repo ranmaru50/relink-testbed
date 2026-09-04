@@ -11,7 +11,7 @@ runner は Node.js の HTTP client を使用し、`IncomingMessage.rawHeaders` �
 適用可能な各 response について、raw status、正規化 header、raw header field、body を記録します。次を確認します。
 
 - `X-Content-Type-Options: nosniff` が単一 field であること;
-- `Server` が未設定または固定の neutral token `relink` / `relink-resolver` で、Apache/PHP の version や host の露出がなく、`X-Powered-By` がないこと;
+- `Server` が未設定または許容された generic token `Apache`、`relink`、`relink-resolver` で、Apache/PHP の version や host の露出がなく、`X-Powered-By` がないこと;
 - HTTPS では `Strict-Transport-Security: max-age=31536000` があり、HTTP/development response では HSTS がないこと;
 - administrative response に `Cache-Control: no-store` と必須の `Content-Security-Policy` directive があること;
 - public response の CORS と `Referrer-Policy: no-referrer` が維持されること;

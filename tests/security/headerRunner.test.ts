@@ -114,6 +114,25 @@ describe("HeaderSecurityAcceptanceRunner", () => {
     expect(report.results.find(result => result.scenario === "NATIVE-HTTPS-MANIFEST")?.detail).toContain("noInformationDisclosure");
   });
 
+  it("Server: Apache は許容し、version付き Apache は FAIL にする", async () => {
+    const client: HeaderHttpClient = {
+      request: async request => {
+        const url = new URL(request.url);
+        const manifest = url.pathname.endsWith("/manifest");
+        const rawHeaders: RawHeaderField[] = [
+          { name: "X-Content-Type-Options", value: "nosniff" },
+          { name: "Server", value: manifest ? "Apache/2.4.68" : "Apache" },
+          { name: "Strict-Transport-Security", value: "max-age=31536000" }
+        ];
+        if (!manifest) rawHeaders.push({ name: "Access-Control-Allow-Origin", value: "*" }, { name: "Referrer-Policy", value: "no-referrer" });
+        return { status: manifest ? 200 : 303, headers: {}, rawHeaders, body: "" };
+      }
+    };
+    const report = await new HeaderSecurityAcceptanceRunner(nativeProfile(), client).run();
+    expect(report.results.find(result => result.scenario === "NATIVE-HTTPS-PUBLIC")).toMatchObject({ result: "PASS" });
+    expect(report.results.find(result => result.scenario === "NATIVE-HTTPS-MANIFEST")?.detail).toContain("noInformationDisclosure");
+  });
+
   it("Container の未設定 503 endpoint を UNSUPPORTED-OPTIONAL として記録する", async () => {
     const profile: HeaderSecurityProfile = { ...nativeProfile(), name: "container", httpsUrl: undefined, serverErrorUrl: undefined };
     const report = await new HeaderSecurityAcceptanceRunner(profile, new MockHeaderClient()).run();

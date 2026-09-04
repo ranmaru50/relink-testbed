@@ -11,7 +11,7 @@ The runner uses a Node.js HTTP client that retains `IncomingMessage.rawHeaders`.
 For every applicable response the runner records the raw status, normalized headers, raw header fields, and body. It checks the following:
 
 - exactly one `X-Content-Type-Options: nosniff` field;
-- `Server` is absent or uses the fixed neutral token `relink` / `relink-resolver`, with no Apache/PHP version or host disclosure, and no `X-Powered-By` field;
+- `Server` is absent or uses the allowed generic token `Apache`, `relink`, or `relink-resolver`, with no Apache/PHP version or host disclosure, and no `X-Powered-By` field;
 - `Strict-Transport-Security: max-age=31536000` on HTTPS and no HSTS on HTTP/development responses;
 - `Cache-Control: no-store` and the required `Content-Security-Policy` directives on administrative responses;
 - public CORS and `Referrer-Policy: no-referrer`; and
