@@ -8,7 +8,8 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "build": "tsc -p tsconfig.build.json",
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "conformance": "tsx src/conformance/run.ts"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

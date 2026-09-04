@@ -100,6 +100,10 @@ Testbed は `pnpm dev` で起動します。エフェメラルな localhost ポ�
 
 現在 Harness が対応するケースは `single-output-json`、`multi-output-json`、`post-json`、`http-204-no-output`、`relative-endpoint-invocable`、`http-500`、`malformed-json` です。ランタイム非依存のメタデータは `cases/**/*.json` に格納します。
 
+## Resolver / Manifest 適合性
+
+実行可能な Resolver / Manifest 0.1 runner については [docs/resolver-conformance-0.1.ja.md](docs/resolver-conformance-0.1.ja.md) を参照してください。Native と Container を別々に設定した profile に対して target ごとの case を実行し、raw HTTP 観測値を記録します。結果を曖昧な Resolver 全体の結果へ統合せず、正規化した JSON を出力します。
+
 ---
 
 ## 設計目標
