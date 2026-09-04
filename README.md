@@ -106,6 +106,8 @@ Currently supported Harness cases are `single-output-json`, `multi-output-json`,
 
 The executable Resolver / Manifest 0.1 runner is documented in [docs/resolver-conformance-0.1.md](docs/resolver-conformance-0.1.md). It runs target-specific cases against separately configured Native and Container profiles, records raw HTTP observations, and writes normalized JSON results without collapsing targets into an overall Resolver result.
 
+Administrative authentication security acceptance is implemented and documented in [docs/admin-security-acceptance-0.1.md](docs/admin-security-acceptance-0.1.md). It separately records Native and Container observations for login throttling, session controls, CSRF, cookie attributes, trusted proxy metadata, and optional Resolver-side SQLite evidence without adding cases to the frozen catalog. Repository implementation completion remains distinct from live deployment acceptance.
+
 ---
 
 ## Design Goals
