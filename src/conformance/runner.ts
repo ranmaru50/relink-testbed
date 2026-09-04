@@ -60,7 +60,7 @@ class AdminClient {
   public async login(): Promise<void> {
     const loginPage = await this.http.request({ url: this.adminUrl(), method: "GET" });
     this.saveCookies(loginPage);
-    const response = await this.form({ username: this.profile.adminUsername, password: this.profile.adminPassword });
+    const response = await this.form({ action: "login", username: this.profile.adminUsername, password: this.profile.adminPassword });
     this.saveCookies(response);
     if (response.status < 200 || response.status >= 300) {
       throw new Error(`Admin login failed with HTTP ${response.status}.`);
