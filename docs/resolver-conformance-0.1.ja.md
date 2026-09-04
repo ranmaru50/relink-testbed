@@ -27,7 +27,7 @@ reports/resolver-conformance-0.1/container.json
 
 ## 範囲と結果の解釈
 
-runner は、該当する server、endpoint、producer、lifecycle、cache、CORS、identifier、Core / Manifest independence の case を実行します。redirect / network-policy enforcement、duplicate-member parsing、extension、resource limit、schema semantics、optional integrity verification など consumer 固有の case は、Reference Resolver 自体が consumer ではないため `NOT-APPLICABLE` として出力します。これは失敗ではなく target の境界です。
+runner は、該当する server、endpoint、producer、lifecycle、cache、CORS、identifier、Core / Manifest independence の case を実行します。redirect / network-policy enforcement、extension、resource limit、schema semantics、optional integrity verification など consumer 固有の case は、Reference Resolver 自体が consumer ではないため `NOT-APPLICABLE` として出力します。duplicate-member parsing も consumer target では `NOT-APPLICABLE` ですが、producer target では通常の parse 前に Manifest の生 JSON を検査します。これは失敗ではなく target の境界です。
 
 `MNET-001` は profile URL が HTTPS なら `PASS` です。Manifest L1 retrieval は catalog の `MUST` なので、ローカル HTTP profile は `FAIL` になります。試験対象 profile に HTTPS 終端を用意してください。`CACHE-002` は `SHOULD` のため、catalog の既定値である 60 秒を使わない profile では `PASS-WITH-DEVIATION` になります。
 

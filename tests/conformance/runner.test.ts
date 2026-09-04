@@ -17,6 +17,8 @@ interface MockRecord {
 class MockResolverClient implements ConformanceHttpClient {
   private readonly records = new Map<string, MockRecord>();
 
+  public constructor(private readonly duplicateManifest?: "top-level" | "nested") {}
+
   public async request(request: HttpRequest): Promise<HttpResponseSnapshot> {
     const url = new URL(request.url);
     if (url.pathname === "/admin.php") return this.admin(request, url);
@@ -70,8 +72,12 @@ class MockResolverClient implements ConformanceHttpClient {
     if (match[2] !== undefined) {
       if (record === undefined || record.state === "SUSPENDED") return this.response(404, "", { "cache-control": "no-store" });
       if (record.state === "RETIRED") return this.response(410, "", { "cache-control": "public, max-age=300" });
-      const manifest = { manifestVersion: "0.1", anchor: { id: uuid }, entity: { id: record.entity_id }, description: { location: record.location, ...(record.integrity === undefined ? {} : { integrity: record.integrity }) }, lifecycle: { status: record.state.toLowerCase() } };
-      return this.response(200, JSON.stringify(manifest), { "content-type": "application/json; charset=utf-8", "cache-control": "public, max-age=60", "access-control-allow-origin": "*" });
+      const body = uuid === "550e8400-e29b-41d4-a716-446655440008" && this.duplicateManifest === "top-level"
+        ? `{"manifestVersion":"0.1","anchor":{"id":"${uuid}"},"anchor":{"id":"${uuid}"},"entity":{"id":"${record.entity_id}"},"description":{"location":"${record.location}"},"lifecycle":{"status":"${record.state.toLowerCase()}"}}`
+        : uuid === "550e8400-e29b-41d4-a716-446655440008" && this.duplicateManifest === "nested"
+          ? `{"manifestVersion":"0.1","anchor":{"id":"${uuid}","id":"${uuid}"},"entity":{"id":"${record.entity_id}"},"description":{"location":"${record.location}"},"lifecycle":{"status":"${record.state.toLowerCase()}"}}`
+          : JSON.stringify({ manifestVersion: "0.1", anchor: { id: uuid }, entity: { id: record.entity_id }, description: { location: record.location, ...(record.integrity === undefined ? {} : { integrity: record.integrity }) }, lifecycle: { status: record.state.toLowerCase() } });
+      return this.response(200, body, { "content-type": "application/json; charset=utf-8", "cache-control": "public, max-age=60", "access-control-allow-origin": "*" });
     }
     if (request.method !== "GET") return this.response(405, "", { allow: "GET", "cache-control": "no-store" });
     if (url.searchParams.has("l")) return this.response(501, "", { "cache-control": "no-store" });
@@ -104,5 +110,19 @@ describe("ResolverConformanceRunner", () => {
     ]);
     expect(report.results.find(result => result.caseId === "INT-008")?.result).toBe("NOT-APPLICABLE");
     expect(report.results.find(result => result.caseId === "MNET-001")?.result).toBe("FAIL");
+  });
+
+  it.each(["top-level", "nested"] as const)("fails MAN-004 when the producer emits a %s duplicate member", async duplicateManifest => {
+    const profile: ResolverProfile = {
+      name: "test",
+      baseUrl: "http://resolver.test",
+      adminUsername: "admin",
+      adminPassword: "test-password",
+      resolverCommit: "4b08eead4bcc23374044bb60340bb915102a29db"
+    };
+    const report = await new ResolverConformanceRunner(profile, new MockResolverClient(duplicateManifest)).run();
+    const result = report.results.find(candidate => candidate.caseId === "MAN-004" && candidate.target === "MANIFEST-PRODUCER");
+    expect(result?.result).toBe("FAIL");
+    expect(result?.detail).toContain("duplicate member");
   });
 });

@@ -1,6 +1,7 @@
 // src/conformance/runner.ts
 
 import { conformanceCatalog, CONFORMANCE_CATALOG_VERSION, findCatalogCase } from "./catalog.js";
+import { assertNoDuplicateObjectMembers } from "./strictJson.js";
 import type {
   CatalogCase,
   ConformanceHttpClient,
@@ -21,6 +22,7 @@ const FIXTURES = {
   versionOne: "550e8400-e29b-11d4-a716-446655440005",
   unsafe: "550e8400-e29b-41d4-a716-446655440006",
   integrity: "550e8400-e29b-41d4-a716-446655440007",
+  duplicate: "550e8400-e29b-41d4-a716-446655440008",
   unknown: "550e8400-e29b-41d4-a716-446655440099"
 } as const;
 
@@ -143,7 +145,8 @@ async function prepareFixtures(admin: AdminClient): Promise<void> {
     [FIXTURES.lifecycle, "ACTIVE", LOCATION_A, false],
     [FIXTURES.suspendedLifecycle, "SUSPENDED", LOCATION_A, false],
     [FIXTURES.versionOne, "ACTIVE", LOCATION_A, false],
-    [FIXTURES.integrity, "ACTIVE", LOCATION_A, true]
+    [FIXTURES.integrity, "ACTIVE", LOCATION_A, true],
+    [FIXTURES.duplicate, "ACTIVE", LOCATION_A, false]
   ];
   for (const [uuid, state, location, integrity] of fixtures) {
     const existing = await admin.getRecord(uuid);
@@ -272,10 +275,10 @@ export class ResolverConformanceRunner {
     await execute("CORS-001", () => this.expectHeader(FIXTURES.active, 303, "access-control-allow-origin", "*"));
     await execute("MAN-001", () => this.expectManifest(FIXTURES.active), ["MANIFEST-PRODUCER"]);
     await execute("MAN-003", () => this.expectManifest(FIXTURES.active), ["MANIFEST-PRODUCER"]);
-    await execute("MAN-004", () => this.expectManifest(FIXTURES.active), ["MANIFEST-PRODUCER"]);
+    await execute("MAN-004", () => this.expectManifest(FIXTURES.duplicate), ["MANIFEST-PRODUCER"]);
     await execute("MAN-005", async () => {
       const response = await this.manifest(FIXTURES.active);
-      const manifest = this.parseJson(response.body);
+      const manifest = this.parseManifest(response.body);
       this.require(this.stringAt(manifest, ["anchor", "id"]).toLowerCase() === FIXTURES.active, "Manifest anchor.id does not match the request path.");
       return { observation: { status: response.status, anchorId: this.stringAt(manifest, ["anchor", "id"]) } };
     }, ["MANIFEST-ENDPOINT"]);
@@ -293,13 +296,13 @@ export class ResolverConformanceRunner {
     await execute("MAN-013", () => this.expectManifestStatus(FIXTURES.unknown, 404));
     await execute("MAN-014", async () => {
       const response = await this.manifest(FIXTURES.active);
-      const manifest = this.parseJson(response.body);
+      const manifest = this.parseManifest(response.body);
       this.require(this.objectAt(manifest, ["description"])["integrity"] === undefined, "Baseline fixture unexpectedly contains integrity metadata.");
       return { observation: { status: response.status, integrityPresent: false } };
     }, ["MANIFEST-PRODUCER"]);
     await execute("MAN-015", async () => {
       const response = await this.manifest(FIXTURES.integrity);
-      const integrity = this.objectAt(this.parseJson(response.body), ["description"])["integrity"];
+      const integrity = this.objectAt(this.parseManifest(response.body), ["description"])["integrity"];
       this.objectAt(integrity, []);
       this.require(this.stringAt(integrity, ["algorithm"]) === "sha-256" && /^[0-9a-f]{64}$/.test(this.stringAt(integrity, ["digest"])), "sha-256 integrity syntax is invalid.");
       return { observation: { status: response.status, integrity } };
@@ -385,7 +388,7 @@ export class ResolverConformanceRunner {
     const response = await this.manifest(uuid);
     this.require(response.status === 200, `Expected Manifest HTTP 200, received ${response.status}.`);
     this.require((response.headers["content-type"] ?? "").startsWith("application/json"), "Manifest Content-Type is not application/json.");
-    const manifest = this.parseJson(response.body);
+    const manifest = this.parseManifest(response.body);
     for (const key of ["manifestVersion", "anchor", "entity", "description", "lifecycle"]) this.require(manifest[key] !== undefined, `Manifest is missing ${key}.`);
     this.require(this.stringAt(manifest, ["manifestVersion"]) === "0.1", "Manifest version is not 0.1.");
     this.require(["active", "suspended", "retired"].includes(this.stringAt(manifest, ["lifecycle", "status"])), "Manifest lifecycle status is invalid.");
@@ -402,8 +405,8 @@ export class ResolverConformanceRunner {
     const before = await this.manifest(FIXTURES.active);
     const update = await admin.updateLocation(FIXTURES.active, LOCATION_B);
     const after = await this.manifest(FIXTURES.active);
-    const beforeJson = this.parseJson(before.body);
-    const afterJson = this.parseJson(after.body);
+    const beforeJson = this.parseManifest(before.body);
+    const afterJson = this.parseManifest(after.body);
     const record = await admin.getRecord(FIXTURES.active);
     this.require(update.status >= 200 && update.status < 300 && record?.record.location === LOCATION_B, "Location update was not accepted.");
     this.require(this.stringAt(beforeJson, ["entity", "id"]) === this.stringAt(afterJson, ["entity", "id"]), "Entity identity changed when Location changed.");
@@ -447,6 +450,11 @@ export class ResolverConformanceRunner {
     return this.objectAt(value, []);
   }
 
+  private parseManifest(body: string): Record<string, unknown> {
+    assertNoDuplicateObjectMembers(body);
+    return this.parseJson(body);
+  }
+
   private objectAt(value: unknown, path: readonly string[]): Record<string, unknown> {
     let current = value;
     for (const key of path) {
@@ -467,9 +475,9 @@ export class ResolverConformanceRunner {
     return current;
   }
 
-  private manifestEntityId(body: string): string { return this.stringAt(this.parseJson(body), ["entity", "id"]); }
+  private manifestEntityId(body: string): string { return this.stringAt(this.parseManifest(body), ["entity", "id"]); }
 
-  private manifestLocation(body: string): string { return this.stringAt(this.parseJson(body), ["description", "location"]); }
+  private manifestLocation(body: string): string { return this.stringAt(this.parseManifest(body), ["description", "location"]); }
 
   private mixedCase(value: string): string {
     return [...value].map((character, index) => index % 3 === 0 ? character.toUpperCase() : character).join("");

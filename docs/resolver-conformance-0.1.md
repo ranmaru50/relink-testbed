@@ -27,7 +27,7 @@ Each result contains the catalog version, target, case ID, normative strength, r
 
 ## Scope and result interpretation
 
-The runner executes the applicable server, endpoint, producer, lifecycle, cache, CORS, identifier, and Core/Manifest independence cases. Consumer-only cases (including redirect/network-policy enforcement, duplicate-member parsing, extensions, resource limits, schema semantics, and optional integrity verification) are emitted as `NOT-APPLICABLE` because the Reference Resolver is not the consumer under test. This is a target boundary, not a failure.
+The runner executes the applicable server, endpoint, producer, lifecycle, cache, CORS, identifier, and Core/Manifest independence cases. Consumer-only cases (including redirect/network-policy enforcement, extensions, resource limits, schema semantics, and optional integrity verification) are emitted as `NOT-APPLICABLE` because the Reference Resolver is not the consumer under test. Duplicate-member parsing is also `NOT-APPLICABLE` for the consumer target, while the producer target checks the raw Manifest JSON before parsing it. This is a target boundary, not a failure.
 
 `MNET-001` is `PASS` when the configured profile URL is HTTPS. A local HTTP profile is reported as `FAIL` because Manifest L1 retrieval is a catalog `MUST`; HTTPS termination must be part of the tested profile. `CACHE-002` is reported as `PASS-WITH-DEVIATION` when the profile does not use the catalog's default 60-second cache lifetime because that case is a `SHOULD`.
 
