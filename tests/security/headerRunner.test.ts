@@ -26,7 +26,7 @@ class MockHeaderClient implements HeaderHttpClient {
     ];
     if (https) fields.push({ name: "Strict-Transport-Security", value: "max-age=31536000" });
     if (admin) fields.push({ name: "Cache-Control", value: "no-store" }, { name: "Content-Security-Policy", value: "default-src 'none'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'" });
-    if (!admin && !manifest && !trace) fields.push({ name: "Access-Control-Allow-Origin", value: "*" }, { name: "Referrer-Policy", value: "no-referrer" });
+    if (!admin && !manifest && !trace && !serverError && !apacheError) fields.push({ name: "Access-Control-Allow-Origin", value: "*" }, { name: "Referrer-Policy", value: "no-referrer" });
     return { status, headers: this.toHeaders(fields), rawHeaders: fields, body: admin ? "login" : "" };
   }
 
@@ -103,9 +103,7 @@ describe("HeaderSecurityAcceptanceRunner", () => {
         headers: {},
         rawHeaders: [
           { name: "X-Content-Type-Options", value: "nosniff" },
-          { name: "Server", value: "relink" },
-          { name: "Access-Control-Allow-Origin", value: "*" },
-          { name: "Referrer-Policy", value: "no-referrer" }
+          { name: "Server", value: "relink" }
         ],
         body: request.url
       })
@@ -115,6 +113,8 @@ describe("HeaderSecurityAcceptanceRunner", () => {
       result: "PASS",
       observation: { transport: "http", checks: { hstsScope: true } }
     });
+    expect(report.results.find(result => result.scenario === "NATIVE-HTTPS-5XX")?.observation).not.toHaveProperty("checks.cors");
+    expect(report.results.find(result => result.scenario === "NATIVE-HTTPS-5XX")?.observation).not.toHaveProperty("checks.referrerPolicy");
   });
 
   it("Container の Apache 5XX error fixture に公開 Resolver 用 header 検査を適用しない", async () => {

@@ -29,7 +29,7 @@ export class HeaderSecurityAcceptanceRunner {
       await this.execute(results, { scenario: "NATIVE-HTTPS-TRACE", transport: "https", path: this.profile.tracePath, surface: "trace", expectedStatus: 405 });
       await this.execute(results, { scenario: "NATIVE-HTTPS-REDIRECT", transport: "https", path: this.profile.publicPath, surface: "resolver-public", expectedStatus: 303 });
       await this.execute(results, { scenario: "NATIVE-HTTPS-4XX", transport: "https", path: this.profile.clientErrorPath, surface: "resolver-public", expectedStatus: 400 });
-      await this.execute(results, { scenario: "NATIVE-HTTPS-5XX", transport: "https", url: this.profile.serverErrorUrl, surface: "resolver-public", expectedStatus: [500, 501, 502, 503, 504, 505], optional: true });
+      await this.execute(results, { scenario: "NATIVE-HTTPS-5XX", transport: "https", url: this.profile.serverErrorUrl, surface: "error", expectedStatus: [500, 501, 502, 503, 504, 505], optional: true });
       await this.execute(results, { scenario: "NATIVE-HTTP-DEVELOPMENT", transport: "http", path: this.profile.publicPath, surface: "resolver-public" });
     } else {
       const transport = this.profile.httpsUrl === undefined ? "http" : "https";
