@@ -95,6 +95,54 @@ describe("HeaderSecurityAcceptanceRunner", () => {
     expect(result?.detail).toContain("noPoweredBy");
   });
 
+  it("明示 URL の protocol を 5XX の transport 判定へ使用する", async () => {
+    const profile: HeaderSecurityProfile = { ...nativeProfile(), serverErrorUrl: "http://native.test/security/503" };
+    const client: HeaderHttpClient = {
+      request: async request => ({
+        status: 503,
+        headers: {},
+        rawHeaders: [
+          { name: "X-Content-Type-Options", value: "nosniff" },
+          { name: "Server", value: "relink" },
+          { name: "Access-Control-Allow-Origin", value: "*" },
+          { name: "Referrer-Policy", value: "no-referrer" }
+        ],
+        body: request.url
+      })
+    };
+    const report = await new HeaderSecurityAcceptanceRunner(profile, client).run();
+    expect(report.results.find(result => result.scenario === "NATIVE-HTTPS-5XX")).toMatchObject({
+      result: "PASS",
+      observation: { transport: "http", checks: { hstsScope: true } }
+    });
+  });
+
+  it("Container の Apache 5XX error fixture に公開 Resolver 用 header 検査を適用しない", async () => {
+    const profile: HeaderSecurityProfile = {
+      ...nativeProfile(),
+      name: "container",
+      serverErrorUrl: "http://container.test/__security__/503"
+    };
+    const client: HeaderHttpClient = {
+      request: async request => ({
+        status: 503,
+        headers: {},
+        rawHeaders: [
+          { name: "X-Content-Type-Options", value: "nosniff" },
+          { name: "Server", value: "Apache" }
+        ],
+        body: request.url
+      })
+    };
+    const report = await new HeaderSecurityAcceptanceRunner(profile, client).run();
+    expect(report.results.find(result => result.scenario === "CONTAINER-PUBLIC-503")).toMatchObject({
+      result: "PASS",
+      observation: { transport: "http", checks: { hstsScope: true } }
+    });
+    expect(report.results.find(result => result.scenario === "CONTAINER-PUBLIC-503")?.observation).not.toHaveProperty("checks.cors");
+    expect(report.results.find(result => result.scenario === "CONTAINER-PUBLIC-503")?.observation).not.toHaveProperty("checks.referrerPolicy");
+  });
+
   it("Server の内部 FQDN と private IP を情報露出として FAIL にする", async () => {
     const client: HeaderHttpClient = {
       request: async request => {

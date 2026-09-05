@@ -34,7 +34,7 @@ export class HeaderSecurityAcceptanceRunner {
     } else {
       const transport = this.profile.httpsUrl === undefined ? "http" : "https";
       await this.execute(results, { scenario: "CONTAINER-PUBLIC-400", transport, path: this.profile.clientErrorPath, surface: "resolver-public", expectedStatus: 400 });
-      await this.execute(results, { scenario: "CONTAINER-PUBLIC-503", transport, url: this.profile.serverErrorUrl, surface: "resolver-public", expectedStatus: 503 });
+      await this.execute(results, { scenario: "CONTAINER-PUBLIC-503", transport, url: this.profile.serverErrorUrl, surface: "error", expectedStatus: 503 });
       await this.execute(results, { scenario: "CONTAINER-ADMIN-200", transport, path: this.profile.adminPath, surface: "admin", expectedStatus: 200 });
       await this.execute(results, { scenario: "CONTAINER-TRACE-405", transport, path: this.profile.tracePath, surface: "trace", expectedStatus: 405 });
       await this.execute(results, { scenario: "CONTAINER-SUCCESS-REDIRECT", transport, path: this.profile.publicPath, surface: "resolver-public", expectedStatus: [200, 303], optional: true });
@@ -44,25 +44,34 @@ export class HeaderSecurityAcceptanceRunner {
 
   /** 未設定 endpoint や外部エラーを他シナリオへ波及させず正規化する。 */
   private async execute(results: HeaderSecurityResult[], options: ScenarioOptions): Promise<void> {
-    const baseUrl = options.transport === "https" ? this.profile.httpsUrl : this.profile.httpUrl;
+    const transport = options.url === undefined ? options.transport : this.transportForUrl(options.url);
+    const baseUrl = transport === "https" ? this.profile.httpsUrl : this.profile.httpUrl;
     if (options.url === undefined && baseUrl === undefined) {
-      results.push(this.result(options.scenario, "NOT-APPLICABLE", { transport: options.transport, configured: false }, `${options.transport.toUpperCase()} endpoint is not configured.`));
+      results.push(this.result(options.scenario, "NOT-APPLICABLE", { transport, configured: false }, `${transport.toUpperCase()} endpoint is not configured.`));
       return;
     }
     if (options.url === undefined && options.path === undefined) {
       const result: HeaderSecurityResultClass = options.optional === true ? "UNSUPPORTED-OPTIONAL" : "NOT-APPLICABLE";
-      results.push(this.result(options.scenario, result, { transport: options.transport, configured: false }, "このシナリオを再現する endpoint が設定されていません。"));
+      results.push(this.result(options.scenario, result, { transport, configured: false }, "このシナリオを再現する endpoint が設定されていません。"));
       return;
     }
     const url = options.url ?? new URL(options.path ?? "/", baseUrl!).toString();
     try {
       const response = await this.http.request({ url, method: options.surface === "trace" ? "TRACE" : "GET" });
-      const checks = this.checks(response, options);
+      const checks = this.checks(response, { ...options, transport });
       const failures = Object.entries(checks).filter(([, passed]) => !passed).map(([name]) => name);
-      results.push(this.result(options.scenario, failures.length === 0 ? "PASS" : "FAIL", { ...this.snapshot(response), checks, transport: options.transport, url }, failures.length === 0 ? undefined : `Failed checks: ${failures.join(", ")}`));
+      results.push(this.result(options.scenario, failures.length === 0 ? "PASS" : "FAIL", { ...this.snapshot(response), checks, transport, url }, failures.length === 0 ? undefined : `Failed checks: ${failures.join(", ")}`));
     } catch (error: unknown) {
-      results.push(this.result(options.scenario, "FAIL", { transport: options.transport, url }, error instanceof Error ? error.message : String(error)));
+      results.push(this.result(options.scenario, "FAIL", { transport, url }, error instanceof Error ? error.message : String(error)));
     }
+  }
+
+  /** 明示 URL の protocol を transport 判定へ反映する。 */
+  private transportForUrl(url: string): Transport {
+    const protocol = new URL(url).protocol;
+    if (protocol === "https:") return "https";
+    if (protocol === "http:") return "http";
+    throw new Error(`Unsupported URL protocol: ${protocol}`);
   }
 
   /** 要件を scenario surface と transport に応じて boolean check へ変換する。 */
