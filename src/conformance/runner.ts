@@ -30,8 +30,8 @@ const LOCATION_A = "https://entity.example/description-a.arxml";
 const LOCATION_B = "https://entity.example/description-b.arxml";
 const ENTITY_ID = "https://identity.example/entities/test-fixture";
 const INTEGRITY_DIGEST = "0000000000000000000000000000000000000000000000000000000000000000";
-// ログイン後のredirect追従で許可する最大遷移回数。
-const MAX_LOGIN_REDIRECTS = 5;
+// 管理面のPOST後redirect追従で許可する最大遷移回数。
+const MAX_ADMIN_REDIRECTS = 5;
 
 interface ResolverRecordSnapshot {
   readonly uuid: string;
@@ -62,8 +62,8 @@ class AdminClient {
   public async login(): Promise<void> {
     const loginPage = await this.http.request({ url: this.adminUrl(), method: "GET" });
     this.saveCookies(loginPage);
-    const loginResponse = await this.form({ action: "login", username: this.profile.adminUsername, password: this.profile.adminPassword });
-    const response = await this.followLoginRedirects(loginResponse);
+    const loginResponse = await this.postForm({ action: "login", username: this.profile.adminUsername, password: this.profile.adminPassword });
+    const response = await this.followAdminRedirects(loginResponse, "login");
     if (response.status < 200 || response.status >= 300) {
       throw new Error(`Admin login final response failed with HTTP ${response.status}.`);
     }
@@ -82,13 +82,20 @@ class AdminClient {
     return JSON.parse(response.body) as AdminRecordResponse;
   }
 
-  public async form(fields: Readonly<Record<string, string>>): Promise<HttpResponseSnapshot> {
+  private async form(fields: Readonly<Record<string, string>>): Promise<HttpResponseSnapshot> {
+    const response = await this.postForm(fields);
+    return this.followAdminRedirects(response, fields.action ?? "form");
+  }
+
+  /** 管理面へフォームを送信し、redirect前のraw応答を取得する。 */
+  private async postForm(fields: Readonly<Record<string, string>>): Promise<HttpResponseSnapshot> {
     const body = new URLSearchParams(fields).toString();
     const response = await this.http.request({
       url: this.adminUrl(),
       method: "POST",
       headers: { ...this.cookieHeaders(), "content-type": "application/x-www-form-urlencoded" },
-      body
+      body,
+      redirect: "manual"
     });
     this.saveCookies(response);
     return response;
@@ -118,30 +125,30 @@ class AdminClient {
     return new URL(this.profile.adminUrl ?? "/admin.php", this.profile.baseUrl).toString();
   }
 
-  /** ログインPOSTのredirectをCookie付きGETで手動追従する。 */
-  private async followLoginRedirects(initialResponse: HttpResponseSnapshot): Promise<HttpResponseSnapshot> {
+  /** 管理面POSTのredirectをCookie付きGETで手動追従する。 */
+  private async followAdminRedirects(initialResponse: HttpResponseSnapshot, operation: string): Promise<HttpResponseSnapshot> {
     let response = initialResponse;
     for (let redirectCount = 0; response.status >= 300 && response.status < 400; redirectCount++) {
-      if (redirectCount >= MAX_LOGIN_REDIRECTS) throw new Error(`Admin login redirect exceeded ${MAX_LOGIN_REDIRECTS} hops.`);
+      if (redirectCount >= MAX_ADMIN_REDIRECTS) throw new Error(`Admin ${operation} redirect exceeded ${MAX_ADMIN_REDIRECTS} hops.`);
       const location = response.headers.location;
-      if (location === undefined || location.trim() === "") throw new Error("Admin login redirect response did not contain a Location header.");
-      const target = this.loginRedirectUrl(location);
+      if (location === undefined || location.trim() === "") throw new Error(`Admin ${operation} redirect response did not contain a Location header.`);
+      const target = this.adminRedirectUrl(location, operation);
       response = await this.http.request({ url: target, method: "GET", headers: this.cookieHeaders(), redirect: "manual" });
       this.saveCookies(response);
     }
     return response;
   }
 
-  /** ログインredirect先を同一originに制限し、相対URLを解決する。 */
-  private loginRedirectUrl(location: string): string {
+  /** 管理面redirect先を同一originに制限し、相対URLを解決する。 */
+  private adminRedirectUrl(location: string, operation: string): string {
     let target: URL;
     try {
       target = new URL(location, this.adminUrl());
     } catch {
-      throw new Error("Admin login redirect Location is invalid.");
+      throw new Error(`Admin ${operation} redirect Location is invalid.`);
     }
     const adminOrigin = new URL(this.adminUrl()).origin;
-    if (target.origin !== adminOrigin) throw new Error("Admin login redirect target must stay on the admin origin.");
+    if (target.origin !== adminOrigin) throw new Error(`Admin ${operation} redirect target must stay on the admin origin.`);
     return target.toString();
   }
 
