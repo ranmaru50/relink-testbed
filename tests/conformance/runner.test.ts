@@ -13,17 +13,26 @@ interface MockRecord {
   history: Record<string, unknown>[];
 }
 
+type LoginResponseMode = "success" | "redirect" | "missing-location" | "external" | "final-error";
+
 /** Resolver の外部契約だけを再現し、runner の実行順序をネットワークなしで検証する。 */
 class MockResolverClient implements ConformanceHttpClient {
   private readonly records = new Map<string, MockRecord>();
   /** ログインPOSTで受信した action 値を回帰テストから確認するための記録。 */
   private readonly loginActions: string[] = [];
+  /** ログイン後GETへ渡されたCookieを回帰テストから確認するための記録。 */
+  private readonly loginRedirectCookies: string[] = [];
 
-  public constructor(private readonly duplicateManifest?: "top-level" | "nested") {}
+  public constructor(private readonly duplicateManifest?: "top-level" | "nested", private readonly loginResponseMode: LoginResponseMode = "success") {}
 
   /** ログインPOSTが期待する action を送信したことを返す。 */
   public get observedLoginActions(): readonly string[] {
     return this.loginActions;
+  }
+
+  /** ログイン後GETへ渡されたCookieを返す。 */
+  public get observedLoginRedirectCookies(): readonly string[] {
+    return this.loginRedirectCookies;
   }
 
   public async request(request: HttpRequest): Promise<HttpResponseSnapshot> {
@@ -38,12 +47,25 @@ class MockResolverClient implements ConformanceHttpClient {
       const record = this.records.get(uuid);
       return record === undefined ? this.response(404) : this.response(200, JSON.stringify({ record: { uuid, state: record.state, location: record.location, entity_id: record.entity_id, version: record.version }, history: record.history }));
     }
-    if (request.method !== "POST") return this.response(200, "<form method=\"post\">");
+    if (request.method !== "POST") {
+      if (url.searchParams.get("login") === "redirected") {
+        this.loginRedirectCookies.push(request.headers?.cookie ?? "");
+        return this.response(200, "<form method=\"post\"><input name=\"csrf\" value=\"csrf-token\">");
+      }
+      if (url.searchParams.get("login") === "error") return this.response(500, "login failed");
+      return this.response(200, "<form method=\"post\">");
+    }
     const fields = new URLSearchParams(request.body ?? "");
     const action = fields.get("action") ?? "";
     if (!fields.has("uuid")) {
       this.loginActions.push(action);
-      if (action === "login") return this.response(200, "<form method=\"post\"><input name=\"csrf\" value=\"csrf-token\">");
+      if (action === "login") {
+        if (this.loginResponseMode === "redirect") return this.response(302, "", { location: "/admin.php?login=redirected", "set-cookie": "PHPSESSID=authenticated" });
+        if (this.loginResponseMode === "missing-location") return this.response(302, "");
+        if (this.loginResponseMode === "external") return this.response(302, "", { location: "https://attacker.example/login" });
+        if (this.loginResponseMode === "final-error") return this.response(302, "", { location: "/admin.php?login=error" });
+        return this.response(200, "<form method=\"post\"><input name=\"csrf\" value=\"csrf-token\">");
+      }
       return this.response(200, "<form method=\"post\">");
     }
     const uuid = (fields.get("uuid") ?? "").toLowerCase();
@@ -123,6 +145,37 @@ describe("ResolverConformanceRunner", () => {
     ]);
     expect(report.results.find(result => result.caseId === "INT-008")?.result).toBe("NOT-APPLICABLE");
     expect(report.results.find(result => result.caseId === "MNET-001")?.result).toBe("FAIL");
+  });
+
+  it("follows a successful login redirect while preserving the session Cookie", async () => {
+    const profile: ResolverProfile = {
+      name: "test",
+      baseUrl: "http://resolver.test",
+      adminUsername: "admin",
+      adminPassword: "test-password",
+      resolverCommit: "4b08eead4bcc23374044bb60340bb915102a29db"
+    };
+    const client = new MockResolverClient(undefined, "redirect");
+
+    await new ResolverConformanceRunner(profile, client).run();
+
+    expect(client.observedLoginRedirectCookies).toEqual(["PHPSESSID=authenticated"]);
+  });
+
+  it.each([
+    ["missing-location", "Admin login redirect response did not contain a Location header."],
+    ["external", "Admin login redirect target must stay on the admin origin."],
+    ["final-error", "Admin login final response failed with HTTP 500."]
+  ] as const)("rejects an invalid login redirect (%s)", async (loginResponseMode, message) => {
+    const profile: ResolverProfile = {
+      name: "test",
+      baseUrl: "http://resolver.test",
+      adminUsername: "admin",
+      adminPassword: "test-password",
+      resolverCommit: "4b08eead4bcc23374044bb60340bb915102a29db"
+    };
+
+    await expect(new ResolverConformanceRunner(profile, new MockResolverClient(undefined, loginResponseMode)).run()).rejects.toThrow(message);
   });
 
   it.each(["top-level", "nested"] as const)("fails MAN-004 when the producer emits a %s duplicate member", async duplicateManifest => {
