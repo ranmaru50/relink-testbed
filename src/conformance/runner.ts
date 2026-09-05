@@ -32,6 +32,8 @@ const ENTITY_ID = "https://identity.example/entities/test-fixture";
 const INTEGRITY_DIGEST = "0000000000000000000000000000000000000000000000000000000000000000";
 // 管理面のPOST後redirect追従で許可する最大遷移回数。
 const MAX_ADMIN_REDIRECTS = 5;
+// RETIRED遷移で要求される管理面確認チェックボックスの送信値。
+const RETIREMENT_CONFIRMATION_VALUE = "1";
 
 interface ResolverRecordSnapshot {
   readonly uuid: string;
@@ -118,7 +120,14 @@ class AdminClient {
   }
 
   public async transition(uuid: string, state: string): Promise<HttpResponseSnapshot> {
-    return this.form({ action: "transition", csrf: this.csrf, uuid, state, reason: "conformance fixture" });
+    return this.form({
+      action: "transition",
+      csrf: this.csrf,
+      uuid,
+      state,
+      reason: "conformance fixture",
+      ...(state === "RETIRED" ? { confirm_retire: RETIREMENT_CONFIRMATION_VALUE } : {})
+    });
   }
 
   private adminUrl(): string {

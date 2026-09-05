@@ -22,6 +22,12 @@ interface ObservedAdminRedirect {
   readonly cookie: string;
 }
 
+interface ObservedTransition {
+  readonly uuid: string;
+  readonly state: string;
+  readonly confirmRetire?: string;
+}
+
 /** Resolver の外部契約だけを再現し、runner の実行順序をネットワークなしで検証する。 */
 class MockResolverClient implements ConformanceHttpClient {
   private readonly records = new Map<string, MockRecord>();
@@ -31,6 +37,8 @@ class MockResolverClient implements ConformanceHttpClient {
   private readonly loginRedirectCookies: string[] = [];
   /** 管理操作POST後のredirect GETへ渡されたCookieを記録する。 */
   private readonly adminRedirects: ObservedAdminRedirect[] = [];
+  /** ライフサイクル遷移に送信された確認値を記録する。 */
+  private readonly transitions: ObservedTransition[] = [];
 
   public constructor(
     private readonly duplicateManifest?: "top-level" | "nested",
@@ -52,6 +60,11 @@ class MockResolverClient implements ConformanceHttpClient {
   /** 管理操作redirect GETの内容を返す。 */
   public get observedAdminRedirects(): readonly ObservedAdminRedirect[] {
     return this.adminRedirects;
+  }
+
+  /** ライフサイクル遷移へ送信された確認値を返す。 */
+  public get observedTransitions(): readonly ObservedTransition[] {
+    return this.transitions;
   }
 
   public async request(request: HttpRequest): Promise<HttpResponseSnapshot> {
@@ -114,6 +127,11 @@ class MockResolverClient implements ConformanceHttpClient {
     }
     if (action === "transition") {
       const next = fields.get("state") ?? "";
+      const confirmation = fields.get("confirm_retire");
+      this.transitions.push({ uuid, state: next, ...(confirmation === null ? {} : { confirmRetire: confirmation }) });
+      if (next === "RETIRED" && confirmation !== "1") {
+        return this.adminOperationResult(action, this.response(200, "操作に失敗しました"));
+      }
       const allowed = [`ACTIVE:${"SUSPENDED"}`, `SUSPENDED:${"ACTIVE"}`, `ACTIVE:${"RETIRED"}`, `SUSPENDED:${"RETIRED"}`];
       if (record.state === next || !allowed.includes(`${record.state}:${next}`)) {
         return this.adminOperationResult(action, record.state === next ? this.response(200, "変更しました") : this.response(200, "操作に失敗しました"));
@@ -230,6 +248,21 @@ describe("ResolverConformanceRunner", () => {
     expect(report.results.filter(result => result.result === "FAIL").map(result => result.caseId)).toEqual(["MNET-001"]);
     expect(client.observedAdminRedirects.length).toBeGreaterThan(0);
     expect(client.observedAdminRedirects.every(redirect => redirect.action === operation && redirect.cookie.includes("operation=redirected"))).toBe(true);
+  });
+
+  it("confirms RETIRED transitions and preserves lifecycle rejection and HTTP 410 regressions", async () => {
+    const client = new MockResolverClient();
+    const report = await new ResolverConformanceRunner(createTestProfile(), client).run();
+    const lifecycleCaseIds = ["LIFE-006", "LIFE-007", "LIFE-008", "LIFE-009", "LIFE-012"];
+    const lifecycleCases = report.results.filter(result => lifecycleCaseIds.includes(result.caseId));
+
+    expect(lifecycleCases).toHaveLength(lifecycleCaseIds.length);
+    expect(lifecycleCases.every(result => result.result === "PASS")).toBe(true);
+    expect(client.observedTransitions.filter(transition => transition.state === "RETIRED").map(transition => transition.confirmRetire)).toEqual([
+      "1",
+      "1"
+    ]);
+    expect(client.observedTransitions.filter(transition => transition.state !== "RETIRED").every(transition => transition.confirmRetire === undefined)).toBe(true);
   });
 
   it.each(["redirect-301", "redirect-303"] as const)("follows %s as a PRG redirect", async responseMode => {
