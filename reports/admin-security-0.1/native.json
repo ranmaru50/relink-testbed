@@ -1,0 +1,96 @@
+{
+  "reportVersion": "admin-security-0.1",
+  "profile": "native",
+  "generatedAt": "2026-09-05T14:34:48.620Z",
+  "results": [
+    {
+      "profile": "native",
+      "caseId": "AUTH-001",
+      "result": "PASS",
+      "observation": {
+        "failureCount": 2,
+        "failureStatuses": [
+          200,
+          200
+        ],
+        "usernameChanged": true,
+        "usernameChangedAfterLock": false,
+        "lockedStatus": 200,
+        "recoveredStatus": 200,
+        "sameIp": true
+      }
+    },
+    {
+      "profile": "native",
+      "caseId": "AUTH-002",
+      "result": "PASS",
+      "observation": {
+        "blockedIpStatus": 200,
+        "otherIpStatus": 200,
+        "distributedIpAttempts": "out-of-scope"
+      },
+      "detail": "IPを変更する分散試行は管理ネットワーク制限の対象であり、このcaseでは評価しません。"
+    },
+    {
+      "profile": "native",
+      "caseId": "SESSION-001",
+      "result": "PASS",
+      "observation": {
+        "status": 200,
+        "sessionIdRotated": true,
+        "csrfIssued": true,
+        "attackerSessionIdRejected": true,
+        "missingCsrfRejected": true,
+        "invalidCsrfRejected": true
+      }
+    },
+    {
+      "profile": "native",
+      "caseId": "SESSION-002",
+      "result": "PASS",
+      "observation": {
+        "idlePageRejected": true,
+        "idleMutationRejected": true,
+        "absolutePageRejected": true,
+        "absoluteApiMutationRejected": true,
+        "absoluteRefreshCount": 4
+      }
+    },
+    {
+      "profile": "native",
+      "caseId": "COOKIE-001",
+      "result": "PASS",
+      "observation": {
+        "cookieName": "PHPSESSID",
+        "attributes": [
+          "path=/",
+          "secure",
+          "httponly",
+          "samesite=strict"
+        ],
+        "secure": true,
+        "httpOnly": true,
+        "sameSite": "Strict"
+      }
+    },
+    {
+      "profile": "native",
+      "caseId": "PROXY-001",
+      "result": "NOT-APPLICABLE",
+      "observation": {
+        "trustedProxyAccepted": true,
+        "untrustedProxyEndpointConfigured": false
+      },
+      "detail": "未信頼送信元を再現する別 endpoint が設定されていません。"
+    },
+    {
+      "profile": "native",
+      "caseId": "SQLITE-001",
+      "result": "NOT-APPLICABLE",
+      "observation": {
+        "evidenceConfigured": false
+      },
+      "detail": "Resolver側の実SQLite受入れ証跡が設定されていません。"
+    }
+  ]
+}

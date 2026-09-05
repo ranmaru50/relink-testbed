@@ -1,12 +1,12 @@
 {
   "catalogVersion": "0.1",
-  "profile": "container",
+  "profile": "native",
   "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
-  "generatedAt": "2026-09-05T14:33:38.355Z",
+  "generatedAt": "2026-09-05T14:33:37.959Z",
   "results": [
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "RES-001",
@@ -20,7 +20,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=84",
           "location": "https://entity.example/description-a.arxml",
           "referrer-policy": "no-referrer",
@@ -33,7 +33,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "RES-002",
@@ -47,7 +47,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=80",
           "location": "https://entity.example/description-b.arxml",
           "referrer-policy": "no-referrer",
@@ -60,7 +60,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "RES-003",
@@ -74,7 +74,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=79",
           "referrer-policy": "no-referrer",
           "server": "Apache",
@@ -86,7 +86,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "RES-004",
@@ -100,7 +100,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "ID-001",
@@ -114,7 +114,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=76",
           "location": "https://entity.example/description-b.arxml",
           "referrer-policy": "no-referrer",
@@ -127,7 +127,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "ID-002",
@@ -141,7 +141,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=79",
           "location": "https://entity.example/description-b.arxml",
           "referrer-policy": "no-referrer",
@@ -154,7 +154,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "ID-003",
@@ -168,7 +168,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=75",
           "location": "https://entity.example/description-b.arxml",
           "referrer-policy": "no-referrer",
@@ -181,7 +181,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "ID-004",
@@ -195,7 +195,7 @@
           "connection": "close",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "referrer-policy": "no-referrer",
           "server": "Apache",
           "strict-transport-security": "max-age=31536000",
@@ -206,7 +206,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "ID-005",
@@ -220,7 +220,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=74",
           "location": "https://entity.example/description-a.arxml",
           "referrer-policy": "no-referrer",
@@ -233,7 +233,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "HTTP-001",
@@ -248,7 +248,7 @@
             "connection": "Keep-Alive",
             "content-length": "0",
             "content-type": "text/html; charset=UTF-8",
-            "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+            "date": "Sat, 05 Sep 2026 14:33:37 GMT",
             "keep-alive": "timeout=5, max=73",
             "location": "https://entity.example/description-b.arxml",
             "referrer-policy": "no-referrer",
@@ -266,7 +266,7 @@
             "connection": "Keep-Alive",
             "content-length": "0",
             "content-type": "text/html; charset=UTF-8",
-            "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+            "date": "Sat, 05 Sep 2026 14:33:37 GMT",
             "keep-alive": "timeout=5, max=99",
             "location": "https://entity.example/description-b.arxml",
             "referrer-policy": "no-referrer",
@@ -282,7 +282,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "HTTP-002",
@@ -297,7 +297,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=98",
           "referrer-policy": "no-referrer",
           "server": "Apache",
@@ -309,7 +309,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "HTTP-003",
@@ -326,7 +326,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "HTTP-004",
@@ -340,7 +340,7 @@
           "connection": "close",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "referrer-policy": "no-referrer",
           "server": "Apache",
           "strict-transport-security": "max-age=31536000",
@@ -351,7 +351,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "HTTP-005",
@@ -365,7 +365,7 @@
           "connection": "close",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "referrer-policy": "no-referrer",
           "server": "Apache",
           "strict-transport-security": "max-age=31536000",
@@ -376,7 +376,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "LIFE-001",
@@ -390,7 +390,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=100",
           "location": "https://entity.example/description-b.arxml",
           "referrer-policy": "no-referrer",
@@ -403,7 +403,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "LIFE-002",
@@ -417,7 +417,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=100",
           "referrer-policy": "no-referrer",
           "server": "Apache",
@@ -429,7 +429,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "LIFE-003",
@@ -443,7 +443,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=99",
           "referrer-policy": "no-referrer",
           "server": "Apache",
@@ -455,7 +455,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "LIFECYCLE-ADMIN",
       "caseId": "LIFE-004",
@@ -468,7 +468,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "LIFECYCLE-ADMIN",
       "caseId": "LIFE-005",
@@ -481,7 +481,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "LIFECYCLE-ADMIN",
       "caseId": "LIFE-006",
@@ -494,7 +494,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "LIFECYCLE-ADMIN",
       "caseId": "LIFE-007",
@@ -507,7 +507,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "LIFECYCLE-ADMIN",
       "caseId": "LIFE-008",
@@ -522,7 +522,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "LIFECYCLE-ADMIN",
       "caseId": "LIFE-009",
@@ -537,7 +537,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "LIFECYCLE-ADMIN",
       "caseId": "LIFE-010",
@@ -552,7 +552,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "LIFE-010",
@@ -567,7 +567,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "REFERENCE-RESOLVER",
       "caseId": "LIFE-011",
@@ -586,7 +586,7 @@
             "new_location": "https://entity.example/description-a.arxml",
             "reason": "conformance fixture",
             "actor": "acceptance-admin",
-            "created_at": "2026-09-05 14:33:38"
+            "created_at": "2026-09-05 14:33:37"
           },
           {
             "id": 3,
@@ -598,7 +598,7 @@
             "new_location": "https://entity.example/description-a.arxml",
             "reason": "conformance fixture",
             "actor": "acceptance-admin",
-            "created_at": "2026-09-05 14:33:38"
+            "created_at": "2026-09-05 14:33:37"
           },
           {
             "id": 2,
@@ -610,14 +610,14 @@
             "new_location": "https://entity.example/description-a.arxml",
             "reason": "conformance fixture",
             "actor": "acceptance-admin",
-            "created_at": "2026-09-05 14:33:38"
+            "created_at": "2026-09-05 14:33:37"
           }
         ]
       }
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "LIFE-012",
@@ -631,7 +631,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=88",
           "referrer-policy": "no-referrer",
           "server": "Apache",
@@ -643,7 +643,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "CACHE-001",
@@ -656,7 +656,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "REFERENCE-RESOLVER",
       "caseId": "CACHE-002",
@@ -668,7 +668,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "REFERENCE-RESOLVER",
       "caseId": "CACHE-003",
@@ -693,7 +693,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "CACHE-004",
@@ -706,7 +706,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "CORS-001",
@@ -719,7 +719,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-001",
@@ -730,7 +730,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-PRODUCER",
       "caseId": "MAN-001",
@@ -758,7 +758,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-005",
@@ -769,7 +769,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-ENDPOINT",
       "caseId": "MAN-005",
@@ -782,7 +782,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-PRODUCER",
       "caseId": "MAN-006",
@@ -795,7 +795,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-006",
@@ -806,7 +806,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-PRODUCER",
       "caseId": "MAN-008",
@@ -818,7 +818,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-008",
@@ -829,7 +829,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "RESOLVER-SERVER",
       "caseId": "MAN-009",
@@ -843,7 +843,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=81",
           "location": "https://entity.example/description-b.arxml",
           "referrer-policy": "no-referrer",
@@ -856,7 +856,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "MAN-009",
@@ -867,7 +867,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-ENDPOINT",
       "caseId": "MAN-010",
@@ -895,7 +895,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-ENDPOINT",
       "caseId": "MAN-011",
@@ -909,7 +909,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=80",
           "referrer-policy": "no-referrer",
           "server": "Apache",
@@ -921,7 +921,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-ENDPOINT",
       "caseId": "MAN-012",
@@ -935,7 +935,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=92",
           "referrer-policy": "no-referrer",
           "server": "Apache",
@@ -947,7 +947,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-ENDPOINT",
       "caseId": "MAN-013",
@@ -961,7 +961,7 @@
           "connection": "Keep-Alive",
           "content-length": "0",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Sat, 05 Sep 2026 14:33:38 GMT",
+          "date": "Sat, 05 Sep 2026 14:33:37 GMT",
           "keep-alive": "timeout=5, max=79",
           "referrer-policy": "no-referrer",
           "server": "Apache",
@@ -973,7 +973,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-PRODUCER",
       "caseId": "MAN-014",
@@ -986,7 +986,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-014",
@@ -997,7 +997,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-PRODUCER",
       "caseId": "MAN-015",
@@ -1013,7 +1013,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-015",
@@ -1024,7 +1024,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-ENDPOINT",
       "caseId": "MNET-001",
@@ -1036,7 +1036,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MNET-001",
@@ -1047,7 +1047,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "INTEGRITY-CONSUMER",
       "caseId": "INT-002",
@@ -1058,7 +1058,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "INTEGRITY-CONSUMER",
       "caseId": "INT-003",
@@ -1069,7 +1069,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "INTEGRITY-CONSUMER",
       "caseId": "INT-004",
@@ -1080,7 +1080,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "INTEGRITY-CONSUMER",
       "caseId": "INT-006",
@@ -1091,7 +1091,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "INTEGRITY-CONSUMER",
       "caseId": "INT-007",
@@ -1102,7 +1102,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "INTEGRITY-CONSUMER",
       "caseId": "INT-008",
@@ -1113,7 +1113,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "REDIR-001",
@@ -1124,7 +1124,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "REDIR-002",
@@ -1135,7 +1135,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "REDIR-003",
@@ -1146,7 +1146,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "REDIR-004",
@@ -1157,7 +1157,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "REDIR-005",
@@ -1168,7 +1168,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "REDIR-006",
@@ -1179,7 +1179,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "REDIR-007",
@@ -1190,7 +1190,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "NET-001",
@@ -1201,7 +1201,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "NET-002",
@@ -1212,7 +1212,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "NET-003",
@@ -1223,7 +1223,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "NET-003",
@@ -1234,7 +1234,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "NET-004",
@@ -1245,7 +1245,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "NET-004",
@@ -1256,7 +1256,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "NET-005",
@@ -1267,7 +1267,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "NET-005",
@@ -1278,7 +1278,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "L1-CONSUMER",
       "caseId": "CORS-002",
@@ -1289,7 +1289,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-002",
@@ -1300,7 +1300,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-003",
@@ -1311,7 +1311,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-PRODUCER",
       "caseId": "MAN-003",
@@ -1339,7 +1339,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-004",
@@ -1350,7 +1350,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-PRODUCER",
       "caseId": "MAN-004",
@@ -1378,7 +1378,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MAN-007",
@@ -1389,7 +1389,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MNET-002",
@@ -1400,7 +1400,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "MNET-003",
@@ -1411,7 +1411,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "EXT-001",
@@ -1422,7 +1422,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "EXT-002",
@@ -1433,7 +1433,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "EXT-003",
@@ -1444,7 +1444,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "EXT-004",
@@ -1455,7 +1455,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "EXT-005",
@@ -1466,7 +1466,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "EXT-006",
@@ -1477,7 +1477,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "EXT-007",
@@ -1488,7 +1488,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "LIMIT-001",
@@ -1499,7 +1499,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "LIMIT-002",
@@ -1510,7 +1510,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "LIMIT-003",
@@ -1521,7 +1521,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "SCHEMA-001",
@@ -1532,7 +1532,7 @@
     },
     {
       "catalogVersion": "0.1",
-      "profile": "container",
+      "profile": "native",
       "resolverCommit": "b790ac9770975b39b488a104125dc6510e1f54bf",
       "target": "MANIFEST-CONSUMER",
       "caseId": "SCHEMA-002",

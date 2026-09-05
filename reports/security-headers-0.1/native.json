@@ -1,0 +1,676 @@
+{
+  "reportVersion": "resolver-http-security-headers-0.1",
+  "profile": "native",
+  "generatedAt": "2026-09-05T14:35:16.887Z",
+  "results": [
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTPS-PUBLIC",
+      "result": "PASS",
+      "observation": {
+        "status": 303,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "strict-transport-security": "max-age=31536000",
+          "access-control-allow-origin": "*",
+          "referrer-policy": "no-referrer",
+          "location": "https://fixture.invalid/security-headers.arxml",
+          "cache-control": "public, max-age=60",
+          "content-length": "0",
+          "keep-alive": "timeout=5, max=100",
+          "connection": "Keep-Alive",
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "name": "Referrer-Policy",
+            "value": "no-referrer"
+          },
+          {
+            "name": "Location",
+            "value": "https://fixture.invalid/security-headers.arxml"
+          },
+          {
+            "name": "Cache-Control",
+            "value": "public, max-age=60"
+          },
+          {
+            "name": "Content-Length",
+            "value": "0"
+          },
+          {
+            "name": "Keep-Alive",
+            "value": "timeout=5, max=100"
+          },
+          {
+            "name": "Connection",
+            "value": "Keep-Alive"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=UTF-8"
+          }
+        ],
+        "body": "",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true,
+          "cors": true,
+          "referrerPolicy": true
+        },
+        "transport": "https",
+        "url": "https://127.0.0.1:9444/relink/550e8400-e29b-41d4-a716-446655440000"
+      }
+    },
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTPS-MANIFEST",
+      "result": "PASS",
+      "observation": {
+        "status": 200,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "strict-transport-security": "max-age=31536000",
+          "access-control-allow-origin": "*",
+          "referrer-policy": "no-referrer",
+          "cache-control": "public, max-age=60",
+          "content-length": "286",
+          "keep-alive": "timeout=5, max=99",
+          "connection": "Keep-Alive",
+          "content-type": "application/json; charset=utf-8"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "name": "Referrer-Policy",
+            "value": "no-referrer"
+          },
+          {
+            "name": "Cache-Control",
+            "value": "public, max-age=60"
+          },
+          {
+            "name": "Content-Length",
+            "value": "286"
+          },
+          {
+            "name": "Keep-Alive",
+            "value": "timeout=5, max=99"
+          },
+          {
+            "name": "Connection",
+            "value": "Keep-Alive"
+          },
+          {
+            "name": "Content-Type",
+            "value": "application/json; charset=utf-8"
+          }
+        ],
+        "body": "{\"manifestVersion\":\"0.1\",\"anchor\":{\"id\":\"550e8400-e29b-41d4-a716-446655440000\"},\"entity\":{\"id\":\"https://fixture.invalid/entities/security-headers\"},\"description\":{\"location\":\"https://fixture.invalid/security-headers.arxml\",\"mediaType\":\"application/xml\"},\"lifecycle\":{\"status\":\"active\"}}",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true
+        },
+        "transport": "https",
+        "url": "https://127.0.0.1:9444/relink/550e8400-e29b-41d4-a716-446655440000/manifest"
+      }
+    },
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTPS-ADMIN",
+      "result": "PASS",
+      "observation": {
+        "status": 200,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "strict-transport-security": "max-age=31536000",
+          "cache-control": "no-store",
+          "content-security-policy": "default-src 'none'; style-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+          "set-cookie": "PHPSESSID=v3nq87jckk7te235p4e00ok7ht; path=/; secure; HttpOnly; SameSite=Strict",
+          "vary": "Accept-Encoding",
+          "content-length": "1392",
+          "keep-alive": "timeout=5, max=98",
+          "connection": "Keep-Alive",
+          "content-type": "text/html; charset=utf-8"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
+            "name": "Cache-Control",
+            "value": "no-store"
+          },
+          {
+            "name": "Content-Security-Policy",
+            "value": "default-src 'none'; style-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'"
+          },
+          {
+            "name": "Set-Cookie",
+            "value": "PHPSESSID=v3nq87jckk7te235p4e00ok7ht; path=/; secure; HttpOnly; SameSite=Strict"
+          },
+          {
+            "name": "Vary",
+            "value": "Accept-Encoding"
+          },
+          {
+            "name": "Content-Length",
+            "value": "1392"
+          },
+          {
+            "name": "Keep-Alive",
+            "value": "timeout=5, max=98"
+          },
+          {
+            "name": "Connection",
+            "value": "Keep-Alive"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=utf-8"
+          }
+        ],
+        "body": "<!doctype html><html lang=\"ja\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"description\" content=\"RELink Reference Resolver 管理画面\"><link rel=\"stylesheet\" href=\"assets/admin.css\"><title>ログイン | RELink Resolver</title></head><body><main class=\"login-shell\"><div class=\"login-locale\"><div class=\"locale-switcher\" aria-label=\"表示言語\"><strong lang=\"ja\">日本語</strong><span aria-hidden=\"true\">/</span><a lang=\"en\" href=\"admin.php?route=&amp;lang=en\">English</a></div></div><div class=\"login-card\"><div class=\"login-emblem\">R</div><p class=\"eyebrow\">REFERENCE RESOLVER</p><h1>管理画面にログイン</h1><p class=\"lede\">登録情報と公開設定を安全に管理します。</p><form method=\"post\" class=\"stack-form\"><input type=\"hidden\" name=\"action\" value=\"login\"><input type=\"hidden\" name=\"lang\" value=\"ja\"><div class=\"field\"><label for=\"username\">ユーザー名</label><input id=\"username\" name=\"username\" autocomplete=\"username\" required></div><div class=\"field\"><label for=\"password\">パスワード</label><input id=\"password\" name=\"password\" type=\"password\" autocomplete=\"current-password\" required></div><button type=\"submit\" class=\"button-primary button-wide\">ログイン</button></form></div></main><footer class=\"site-footer\">RELink Reference Resolver 0.1 Reference UI</footer></body></html>",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true,
+          "cacheControl": true,
+          "csp": true
+        },
+        "transport": "https",
+        "url": "https://127.0.0.1:9444/admin.php"
+      }
+    },
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTPS-APACHE-ERROR",
+      "result": "PASS",
+      "observation": {
+        "status": 403,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "strict-transport-security": "max-age=31536000",
+          "content-length": "199",
+          "keep-alive": "timeout=5, max=97",
+          "connection": "Keep-Alive",
+          "content-type": "text/html; charset=iso-8859-1"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
+            "name": "Content-Length",
+            "value": "199"
+          },
+          {
+            "name": "Keep-Alive",
+            "value": "timeout=5, max=97"
+          },
+          {
+            "name": "Connection",
+            "value": "Keep-Alive"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=iso-8859-1"
+          }
+        ],
+        "body": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\n<p>You don't have permission to access this resource.</p>\n</body></html>\n",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true
+        },
+        "transport": "https",
+        "url": "https://127.0.0.1:9444/__security__/apache-error"
+      }
+    },
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTPS-TRACE",
+      "result": "PASS",
+      "observation": {
+        "status": 405,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "strict-transport-security": "max-age=31536000",
+          "allow": "",
+          "content-length": "222",
+          "keep-alive": "timeout=5, max=96",
+          "connection": "Keep-Alive",
+          "content-type": "text/html; charset=iso-8859-1"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
+            "name": "Allow",
+            "value": ""
+          },
+          {
+            "name": "Content-Length",
+            "value": "222"
+          },
+          {
+            "name": "Keep-Alive",
+            "value": "timeout=5, max=96"
+          },
+          {
+            "name": "Connection",
+            "value": "Keep-Alive"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=iso-8859-1"
+          }
+        ],
+        "body": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>405 Method Not Allowed</title>\n</head><body>\n<h1>Method Not Allowed</h1>\n<p>The requested method TRACE is not allowed for this URL.</p>\n</body></html>\n",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true,
+          "traceRejected": true
+        },
+        "transport": "https",
+        "url": "https://127.0.0.1:9444/relink/550e8400-e29b-41d4-a716-446655440000"
+      }
+    },
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTPS-REDIRECT",
+      "result": "PASS",
+      "observation": {
+        "status": 303,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "strict-transport-security": "max-age=31536000",
+          "access-control-allow-origin": "*",
+          "referrer-policy": "no-referrer",
+          "location": "https://fixture.invalid/security-headers.arxml",
+          "cache-control": "public, max-age=60",
+          "content-length": "0",
+          "keep-alive": "timeout=5, max=95",
+          "connection": "Keep-Alive",
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "name": "Referrer-Policy",
+            "value": "no-referrer"
+          },
+          {
+            "name": "Location",
+            "value": "https://fixture.invalid/security-headers.arxml"
+          },
+          {
+            "name": "Cache-Control",
+            "value": "public, max-age=60"
+          },
+          {
+            "name": "Content-Length",
+            "value": "0"
+          },
+          {
+            "name": "Keep-Alive",
+            "value": "timeout=5, max=95"
+          },
+          {
+            "name": "Connection",
+            "value": "Keep-Alive"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=UTF-8"
+          }
+        ],
+        "body": "",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true,
+          "cors": true,
+          "referrerPolicy": true
+        },
+        "transport": "https",
+        "url": "https://127.0.0.1:9444/relink/550e8400-e29b-41d4-a716-446655440000"
+      }
+    },
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTPS-4XX",
+      "result": "PASS",
+      "observation": {
+        "status": 400,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "strict-transport-security": "max-age=31536000",
+          "access-control-allow-origin": "*",
+          "referrer-policy": "no-referrer",
+          "cache-control": "no-store",
+          "content-length": "0",
+          "connection": "close",
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "name": "Referrer-Policy",
+            "value": "no-referrer"
+          },
+          {
+            "name": "Cache-Control",
+            "value": "no-store"
+          },
+          {
+            "name": "Content-Length",
+            "value": "0"
+          },
+          {
+            "name": "Connection",
+            "value": "close"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=UTF-8"
+          }
+        ],
+        "body": "",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true,
+          "cors": true,
+          "referrerPolicy": true
+        },
+        "transport": "https",
+        "url": "https://127.0.0.1:9444/relink/not-a-uuid"
+      }
+    },
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTPS-5XX",
+      "result": "PASS",
+      "observation": {
+        "status": 503,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "strict-transport-security": "max-age=31536000",
+          "content-length": "299",
+          "connection": "close",
+          "content-type": "text/html; charset=iso-8859-1"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Strict-Transport-Security",
+            "value": "max-age=31536000"
+          },
+          {
+            "name": "Content-Length",
+            "value": "299"
+          },
+          {
+            "name": "Connection",
+            "value": "close"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=iso-8859-1"
+          }
+        ],
+        "body": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>503 Service Unavailable</title>\n</head><body>\n<h1>Service Unavailable</h1>\n<p>The server is temporarily unable to service your\nrequest due to maintenance downtime or capacity\nproblems. Please try again later.</p>\n</body></html>\n",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true
+        },
+        "transport": "https",
+        "url": "https://127.0.0.1:9444/__security__/503"
+      }
+    },
+    {
+      "profile": "native",
+      "scenario": "NATIVE-HTTP-DEVELOPMENT",
+      "result": "PASS",
+      "observation": {
+        "status": 303,
+        "headers": {
+          "date": "Sat, 05 Sep 2026 14:35:16 GMT",
+          "server": "Apache",
+          "x-content-type-options": "nosniff",
+          "access-control-allow-origin": "*",
+          "referrer-policy": "no-referrer",
+          "location": "https://fixture.invalid/security-headers.arxml",
+          "cache-control": "public, max-age=60",
+          "content-length": "0",
+          "keep-alive": "timeout=5, max=100",
+          "connection": "Keep-Alive",
+          "content-type": "text/html; charset=UTF-8"
+        },
+        "rawHeaders": [
+          {
+            "name": "Date",
+            "value": "Sat, 05 Sep 2026 14:35:16 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "Apache"
+          },
+          {
+            "name": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "name": "Referrer-Policy",
+            "value": "no-referrer"
+          },
+          {
+            "name": "Location",
+            "value": "https://fixture.invalid/security-headers.arxml"
+          },
+          {
+            "name": "Cache-Control",
+            "value": "public, max-age=60"
+          },
+          {
+            "name": "Content-Length",
+            "value": "0"
+          },
+          {
+            "name": "Keep-Alive",
+            "value": "timeout=5, max=100"
+          },
+          {
+            "name": "Connection",
+            "value": "Keep-Alive"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=UTF-8"
+          }
+        ],
+        "body": "",
+        "checks": {
+          "expectedStatus": true,
+          "xContentTypeOptions": true,
+          "noInformationDisclosure": true,
+          "noPoweredBy": true,
+          "hstsScope": true,
+          "cors": true,
+          "referrerPolicy": true
+        },
+        "transport": "http",
+        "url": "http://127.0.0.1:9081/relink/550e8400-e29b-41d4-a716-446655440000"
+      }
+    }
+  ]
+}
