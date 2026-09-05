@@ -15,7 +15,7 @@ interface MockRecord {
 
 type LoginResponseMode = "success" | "redirect" | "missing-location" | "external" | "final-error";
 type AdminOperation = "register" | "location" | "transition" | "all";
-type AdminOperationResponseMode = "success" | "redirect" | "missing-location" | "external" | "too-many";
+type AdminOperationResponseMode = "success" | "redirect" | "redirect-301" | "redirect-303" | "missing-location" | "external" | "too-many" | "307" | "308";
 
 interface ObservedAdminRedirect {
   readonly action: string;
@@ -142,7 +142,9 @@ class MockResolverClient implements ConformanceHttpClient {
     if (this.adminOperationResponseMode === "missing-location") return this.response(302, "", { "set-cookie": "operation=redirected" });
     if (this.adminOperationResponseMode === "external") return this.response(302, "", { location: "https://attacker.example/admin", "set-cookie": "operation=redirected" });
     if (this.adminOperationResponseMode === "too-many") return this.response(302, "", { location: `/admin.php?operation=${action}&hop=1`, "set-cookie": "operation=redirected" });
-    return this.response(302, "", { location: `/admin.php?operation=${action}`, "set-cookie": "operation=redirected" });
+    if (this.adminOperationResponseMode === "307" || this.adminOperationResponseMode === "308") return this.response(Number(this.adminOperationResponseMode), "", { location: `/admin.php?operation=${action}`, "set-cookie": "operation=redirected" });
+    const status = this.adminOperationResponseMode === "redirect-301" ? 301 : this.adminOperationResponseMode === "redirect-303" ? 303 : 302;
+    return this.response(status, "", { location: `/admin.php?operation=${action}`, "set-cookie": "operation=redirected" });
   }
 
   private publicEndpoint(request: HttpRequest, url: URL): HttpResponseSnapshot {
@@ -228,6 +230,21 @@ describe("ResolverConformanceRunner", () => {
     expect(report.results.filter(result => result.result === "FAIL").map(result => result.caseId)).toEqual(["MNET-001"]);
     expect(client.observedAdminRedirects.length).toBeGreaterThan(0);
     expect(client.observedAdminRedirects.every(redirect => redirect.action === operation && redirect.cookie.includes("operation=redirected"))).toBe(true);
+  });
+
+  it.each(["redirect-301", "redirect-303"] as const)("follows %s as a PRG redirect", async responseMode => {
+    const client = new MockResolverClient(undefined, "success", "register", responseMode);
+
+    await new ResolverConformanceRunner(createTestProfile(), client).run();
+
+    expect(client.observedAdminRedirects.length).toBeGreaterThan(0);
+  });
+
+  it.each(["307", "308"] as const)("does not rewrite %s to a GET", async responseMode => {
+    const client = new MockResolverClient(undefined, "success", "register", responseMode);
+
+    await expect(new ResolverConformanceRunner(createTestProfile(), client).run()).rejects.toThrow(`Admin register redirect status ${responseMode} is not supported.`);
+    expect(client.observedAdminRedirects).toEqual([]);
   });
 
   it.each([

@@ -128,7 +128,7 @@ class AdminClient {
   /** 管理面POSTのredirectをCookie付きGETで手動追従する。 */
   private async followAdminRedirects(initialResponse: HttpResponseSnapshot, operation: string): Promise<HttpResponseSnapshot> {
     let response = initialResponse;
-    for (let redirectCount = 0; response.status >= 300 && response.status < 400; redirectCount++) {
+    for (let redirectCount = 0; this.isPrgRedirect(response.status); redirectCount++) {
       if (redirectCount >= MAX_ADMIN_REDIRECTS) throw new Error(`Admin ${operation} redirect exceeded ${MAX_ADMIN_REDIRECTS} hops.`);
       const location = response.headers.location;
       if (location === undefined || location.trim() === "") throw new Error(`Admin ${operation} redirect response did not contain a Location header.`);
@@ -136,7 +136,13 @@ class AdminClient {
       response = await this.http.request({ url: target, method: "GET", headers: this.cookieHeaders(), redirect: "manual" });
       this.saveCookies(response);
     }
+    if (response.status >= 300 && response.status < 400) throw new Error(`Admin ${operation} redirect status ${response.status} is not supported.`);
     return response;
+  }
+
+  /** POSTをGETへ切り替えるPRG redirect statusだけを許可する。 */
+  private isPrgRedirect(status: number): boolean {
+    return status === 301 || status === 302 || status === 303;
   }
 
   /** 管理面redirect先を同一originに制限し、相対URLを解決する。 */
