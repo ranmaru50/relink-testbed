@@ -1,0 +1,2307 @@
+{
+  "catalogVersion": "0.1-draft",
+  "profile": "stub-offline",
+  "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+  "generatedAt": "2026-11-17T06:55:29.774Z",
+  "results": [
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-001",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "VERIFIED",
+        "observed": "VERIFIED",
+        "phase": 11
+      },
+      "detail": "all phases passed"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-002",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "parseFailures": [
+          "keyid-recompute-mismatch"
+        ],
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNKNOWN_AUTHORITY",
+            "observed": "UNKNOWN_AUTHORITY",
+            "phase": 5
+          },
+          "detail": "chain stopped: keyid-recompute-mismatch"
+        },
+        "baseline": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "checks": {
+          "keyid-recompute-detected": true,
+          "statement-unknown-authority": true,
+          "baseline-still-verified": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-003",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "dupStatement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "INVALID",
+            "observed": "INVALID",
+            "phase": 1
+          },
+          "detail": "wire:duplicate-member"
+        },
+        "trailDupFailures": [
+          "wire:duplicate-member"
+        ],
+        "nonInteger": {
+          "result": "PASS",
+          "observation": {
+            "expected": "INVALID",
+            "observed": "INVALID",
+            "phase": 1
+          },
+          "detail": "non-integer:issuedAt"
+        },
+        "version": {
+          "result": "PASS",
+          "observation": {
+            "expected": "INVALID",
+            "observed": "INVALID",
+            "phase": 1
+          },
+          "detail": "l2Version-mismatch"
+        },
+        "signatureInside": {
+          "result": "PASS",
+          "observation": {
+            "expected": "INVALID",
+            "observed": "INVALID",
+            "phase": 1
+          },
+          "detail": "signature-inside-payload"
+        },
+        "keyIdRecompute": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNKNOWN_AUTHORITY",
+            "observed": "UNKNOWN_AUTHORITY",
+            "phase": 5
+          },
+          "detail": "chain stopped: keyid-recompute-mismatch"
+        },
+        "checks": {
+          "duplicate-members-invalid": true,
+          "duplicate-members-in-transfer-payload-invalid": true,
+          "non-integer-timestamp-invalid": true,
+          "l2version-mismatch-invalid": true,
+          "signature-inside-payload-invalid": true,
+          "keyid-recompute-statement-unknown-authority": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-004",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "ANCHOR_MISMATCH",
+        "observed": "ANCHOR_MISMATCH",
+        "phase": 2
+      },
+      "detail": "anchorId does not match the Trust Anchor Binding"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-005",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "UNSUPPORTED_ALGORITHM",
+        "observed": "UNSUPPORTED_ALGORITHM",
+        "phase": 3
+      },
+      "detail": "algorithm ED25519X is not supported by the baseline verifier"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-006",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "UNVERIFIED",
+        "observed": "UNVERIFIED",
+        "phase": 4
+      },
+      "detail": "no trusted clock value for T"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-007",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "UNVERIFIED",
+        "observed": "UNVERIFIED",
+        "phase": 5
+      },
+      "detail": "chain stopped: contiguity-gap"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-008",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "UNKNOWN_AUTHORITY",
+        "observed": "UNKNOWN_AUTHORITY",
+        "phase": 5
+      },
+      "detail": "signer keyId is not present in the accepted chain"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-009",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "noProvenanceStop": "record0-material-provenance-not-policy-channel",
+        "acceptedWithProvenance": 4,
+        "checks": {
+          "record0-rejected-without-policy-provenance": true,
+          "record0-accepted-with-policy-provenance": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-010",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "acceptedMax": 3,
+        "key1Entry": {
+          "algorithm": "ed25519",
+          "keyId": "ECMERdvpV0k",
+          "publicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I",
+          "status": "retired",
+          "validFrom": 1769996400,
+          "validUntil": 1769997000
+        },
+        "checks": {
+          "record1-accepted": true,
+          "key1-retired-with-truncation-cap": true,
+          "key1-current-during-own-record": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-011",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "acceptedEpoch": "epoch-1",
+        "statementFloor": 0,
+        "key3Entry": {
+          "algorithm": "ed25519",
+          "keyId": "G8VbXumewVs",
+          "publicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs",
+          "status": "current",
+          "validFrom": 1769997600,
+          "validUntil": 1770001200
+        },
+        "checks": {
+          "record2-accepted": true,
+          "epoch-1-accepted": true,
+          "statement-floor-zero": true,
+          "key3-current-window": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-012",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "acceptedMax": 3,
+        "record3IssuedAt": 1769998200,
+        "checks": {
+          "record3-accepted": true,
+          "accepted-max-three": true,
+          "snapshot-fresh-at-T": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-013",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "snapshotGeneration": 3,
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "checks": {
+          "snapshot-is-last-record-of-prefix": true,
+          "snapshot-freshness-uses-record-issuedAt": true,
+          "statement-freshness-independent": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-014",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "recordDupStatement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 5
+          },
+          "detail": "chain stopped: wire:duplicate-member"
+        },
+        "trailWalkStop": "trail-epochid-not-previous-epoch,trail-signature-fails-under-outgoing-key",
+        "trailStatement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 5
+          },
+          "detail": "chain stopped: trail-epochid-not-previous-epoch,trail-signature-fails-under-outgoing-key"
+        },
+        "signerAbsent": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNKNOWN_AUTHORITY",
+            "observed": "UNKNOWN_AUTHORITY",
+            "phase": 5
+          },
+          "detail": "signer keyId is not present in the accepted chain"
+        },
+        "materialGap": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 5
+          },
+          "detail": "chain stopped: contiguity-gap"
+        },
+        "snapshotGap": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 6
+          },
+          "detail": "snapshot Record older than the freshness window W"
+        },
+        "checks": {
+          "record-wire-duplicate-stops-chain": true,
+          "trail-verification-failure-stops-at-previous": true,
+          "statement-signer-absent-unknown-authority": true,
+          "statement-material-missing-unverified": true,
+          "chain-accepted-snapshot-gap-unverified": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-015",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "acceptedEpoch": "epoch-1",
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "STALE",
+            "observed": "STALE",
+            "phase": 10
+          },
+          "detail": "statement epoch epoch-2 is not the accepted epoch"
+        },
+        "checks": {
+          "statement-in-unaccepted-epoch-stale": true,
+          "accepted-epoch-stays-epoch-1": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-016",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "record5Stop": "trail-incoming-key-not-sole-current",
+        "trailSignatureOk": true,
+        "checks": {
+          "record5-rejected-by-trail-matching": true,
+          "record5-trail-signature-verifies-under-key4": true,
+          "rejection-not-a-signature-failure": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-017",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "contiguity-gap",
+        "acceptedEpochs": [
+          "epoch-0",
+          "epoch-1"
+        ],
+        "checks": {
+          "record6-contiguity-gap-stops-walk": true,
+          "accepted-max-stays-four": true,
+          "epochs-two-and-three-never-accepted": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-018",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "prefixGenerations": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "checks": {
+          "record4f-accepted-by-walk": true,
+          "effective-prefix-gens-zero-to-three": true,
+          "statement-verified-on-prefix": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-019",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 6
+          },
+          "detail": "snapshot Record older than the freshness window W"
+        },
+        "checks": {
+          "snapshot-4f-not-fresh-at-keypoint": true,
+          "older-record-3-also-stale-at-keypoint": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-020",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 6
+          },
+          "detail": "snapshot Record expired at T"
+        },
+        "checks": {
+          "snapshot-4e-expired-at-T": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-021",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "snapshotExpiresAt": 1769998300,
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "checks": {
+          "boundary-equality-passes": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-022",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "prefixGenerations": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "checks": {
+          "prefix-generations-zero-to-five": true,
+          "snapshot-k-is-record-4r": true,
+          "record4b-issued-after-T-excluded": true,
+          "statement-s9-verified": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-023",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "evaluations": [
+          "ACCEPTED",
+          "ACCEPTED",
+          "ACCEPTED",
+          "STALE",
+          "STALE",
+          "REPLAY",
+          "ACCEPTED"
+        ],
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "checks": {
+          "lower-position-presentations-stale": true,
+          "byte-identical-replay-accepted-as-replay": true,
+          "walk-continues-to-record3": true,
+          "freshness-point-stays-record3-issuedAt": true,
+          "re-present-record3-replay-keeps-point": true,
+          "statement-verified": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-024",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 6
+          },
+          "detail": "snapshot Record older than the freshness window W"
+        },
+        "statementWindow": true,
+        "checks": {
+          "skew-does-not-manufacture-snapshot-freshness": true,
+          "statement-window-contains-T": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-025",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "STALE",
+            "observed": "STALE",
+            "phase": 10
+          },
+          "detail": "statement epoch epoch-0 is not the accepted epoch"
+        },
+        "checks": {
+          "statement-in-prior-epoch-stale": true,
+          "phase-9-skipped-for-prior-epoch": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-026",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "REVOKED",
+            "observed": "REVOKED",
+            "phase": 9
+          },
+          "detail": "signing key revoked at Record generation 5"
+        },
+        "checks": {
+          "revoked-at-statement-issuedAt": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-027",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "VERIFIED",
+        "observed": "VERIFIED",
+        "phase": 11
+      },
+      "detail": "all phases passed"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-028",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "CONFLICT",
+        "observed": "CONFLICT",
+        "phase": 10
+      },
+      "detail": "same statement generation with a different payload (equivocation)"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-029",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "evaluations": [
+          "ACCEPTED",
+          "ACCEPTED",
+          "ACCEPTED",
+          "ACCEPTED",
+          "STALE",
+          "REPLAY",
+          "CONFLICT"
+        ],
+        "checks": {
+          "replay-record2-stale": true,
+          "replay-record3-replay": true,
+          "same-generation-variant-conflict": true,
+          "accepted-max-stays-three": true,
+          "chain-continues-after-stale-and-replay": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-030",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "STALE",
+            "observed": "STALE",
+            "phase": 10
+          },
+          "detail": "statement generation is at or below the epoch statement floor"
+        },
+        "checks": {
+          "generation-at-or-below-floor-stale": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-031",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "EXPIRED",
+            "observed": "EXPIRED",
+            "phase": 10
+          },
+          "detail": "statement time window does not contain T"
+        },
+        "checks": {
+          "expiresAt-before-T-expired": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-032",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "atT": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "later": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 6
+          },
+          "detail": "snapshot Record older than the freshness window W"
+        },
+        "checks": {
+          "verified-at-T": true,
+          "unverified-after-window": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-033",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "snapshotEpoch": "epoch-1",
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "STALE",
+            "observed": "STALE",
+            "phase": 10
+          },
+          "detail": "statement epoch epoch-0 is not the accepted epoch"
+        },
+        "checks": {
+          "snapshot-covers-accepted-epoch": true,
+          "snapshot-covers-key3": true,
+          "snapshot-floor-carried": true,
+          "phase-6-passes-statement-stale": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-034",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 9
+          },
+          "detail": "statement issuedAt is outside the signing key validity window"
+        },
+        "checks": {
+          "retired-key-in-accepted-epoch-unverified": true,
+          "never-revoked-or-verified": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-035",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "expected": "REVOKED",
+        "observed": "REVOKED",
+        "phase": 9
+      },
+      "detail": "signing key revoked at Record generation 5"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-036",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "terminal-state-reopened,revokedFrom-mutated",
+        "acceptedMax": 5,
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "REVOKED",
+            "observed": "REVOKED",
+            "phase": 9
+          },
+          "detail": "signing key revoked at Record generation 5"
+        },
+        "checks": {
+          "terminal-state-reopening-rejected": true,
+          "chain-tip-stays-generation-five": true,
+          "statement-stays-revoked": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-037",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "revokedFrom-mutated",
+        "acceptedMax": 5,
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "REVOKED",
+            "observed": "REVOKED",
+            "phase": 9
+          },
+          "detail": "signing key revoked at Record generation 5"
+        },
+        "checks": {
+          "revokedFrom-mutation-rejected": true,
+          "tip-stays-generation-five": true,
+          "statement-stays-revoked": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-038",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "verificationMode": "l1-bound",
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "checks": {
+          "l1-bound-verified": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-039",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "verificationMode": "l1-bound",
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "MISMATCH",
+            "observed": "MISMATCH",
+            "phase": 11
+          },
+          "detail": "L1 observed location differs from the statement descriptionLocation"
+        },
+        "checks": {
+          "location-mismatch-phase-11": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-040",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "l1Bound": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 11
+          },
+          "detail": "no L1 observation for an l1-bound verification"
+        },
+        "statementOnly": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "checks": {
+          "missing-l1-observation-unverified": true,
+          "statement-only-mode-makes-no-l1-request": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-041",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "verdicts": 11,
+        "observed": "VERIFIED",
+        "walkMax": 3,
+        "checks": {
+          "eleven-verdict-states": true,
+          "verdict-is-a-state-not-a-boolean": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-042",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "dupAndClock": {
+          "result": "PASS",
+          "observation": {
+            "expected": "INVALID",
+            "observed": "INVALID",
+            "phase": 1
+          },
+          "detail": "wire:duplicate-member"
+        },
+        "anchorAndAlgorithm": {
+          "result": "PASS",
+          "observation": {
+            "expected": "ANCHOR_MISMATCH",
+            "observed": "ANCHOR_MISMATCH",
+            "phase": 2
+          },
+          "detail": "anchorId does not match the Trust Anchor Binding"
+        },
+        "algorithmAndClock": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNSUPPORTED_ALGORITHM",
+            "observed": "UNSUPPORTED_ALGORITHM",
+            "phase": 3
+          },
+          "detail": "algorithm ED25519X is not supported by the baseline verifier"
+        },
+        "clockAndGap": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 4
+          },
+          "detail": "no trusted clock value for T"
+        },
+        "gapAndExpired": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 5
+          },
+          "detail": "chain stopped: contiguity-gap"
+        },
+        "checks": {
+          "wire-failure-first": true,
+          "anchor-before-algorithm": true,
+          "algorithm-before-clock": true,
+          "clock-before-chain": true,
+          "chain-before-statement-freshness": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-043",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "emptyMaterial": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 5
+          },
+          "detail": "no accepted Record material provides a trusted lower bound"
+        },
+        "signerAbsent": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNKNOWN_AUTHORITY",
+            "observed": "UNKNOWN_AUTHORITY",
+            "phase": 5
+          },
+          "detail": "signer keyId is not present in the accepted chain"
+        },
+        "revokedEvidence": {
+          "result": "PASS",
+          "observation": {
+            "expected": "REVOKED",
+            "observed": "REVOKED",
+            "phase": 9
+          },
+          "detail": "signing key revoked at Record generation 5"
+        },
+        "checks": {
+          "fail-closed-empty-material": true,
+          "signer-absent-complete-chain-unknown-authority": true,
+          "cached-revocation-evidence-not-verified": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-044",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 6
+          },
+          "detail": "snapshot Record expired at T"
+        },
+        "checks": {
+          "snapshot-failure-unverified": true,
+          "never-reported-as-revoked": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-045",
+      "strength": "MUST",
+      "result": "UNSUPPORTED-OPTIONAL",
+      "observation": {
+        "scope": "statement-revocation",
+        "baseline": "resolution statements only"
+      },
+      "detail": "statement revocation (§7.2 extension, L2-VER-045) is optional in the L2 0.1 baseline: not implemented by the reference pipeline; recorded as UNSUPPORTED-OPTIONAL in the baseline report"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-046",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "nestedCanonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"expiresAt\":1770000000,\"extExample\":{\"a\":[2,3],\"z\":1},\"generation\":7,\"issuedAt\":1769996400,\"keyId\":\"ECMERdvpV0k\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+        "vectorOk": true,
+        "paddedOk": true,
+        "checks": {
+          "nested-canonicalization-reproducible": true,
+          "all-vectors-canonical": true,
+          "outer-whitespace-tolerated": true,
+          "duplicate-detected-on-raw-text": true,
+          "duplicate-detected-in-transfer-payload-text": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-VERIFIER",
+      "caseId": "L2-VER-047",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "staleVariant": {
+          "result": "PASS",
+          "observation": {
+            "expected": "STALE",
+            "observed": "STALE",
+            "phase": 10
+          },
+          "detail": "statement generation is below the accepted statement maximum"
+        },
+        "equivocation": {
+          "result": "PASS",
+          "observation": {
+            "expected": "CONFLICT",
+            "observed": "CONFLICT",
+            "phase": 10
+          },
+          "detail": "same statement generation with a different payload (equivocation)"
+        },
+        "replay": {
+          "result": "PASS",
+          "observation": {
+            "expected": "VERIFIED",
+            "observed": "VERIFIED",
+            "phase": 11
+          },
+          "detail": "all phases passed"
+        },
+        "s8Replay": {
+          "result": "PASS",
+          "observation": {
+            "expected": "REVOKED",
+            "observed": "REVOKED",
+            "phase": 9
+          },
+          "detail": "signing key revoked at Record generation 5"
+        },
+        "checks": {
+          "s9-generation-1-stale-variant": true,
+          "s9-generation-1-equivocation-conflict": true,
+          "s9-generation-2-byte-identical-replay-verified": true,
+          "s8-replay-byte-identical-stays-revoked": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-001",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "unanchoredStop": "record0-material-provenance-not-policy-channel",
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 5
+          },
+          "detail": "chain stopped: record0-material-provenance-not-policy-channel"
+        },
+        "checks": {
+          "record0-without-policy-provenance-rejected": true,
+          "statement-unverified-from-unsigned-material": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-002",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "digest0": "36ce3c7bf819434ebc79e534649873081ee0999af85c798c6586235680809afb",
+        "digest1": "870b931dd8f9ad01a6a037524842549ad60fcde1066dbc9caf4f3e6140102f61",
+        "digest2": "39808d467859fcad7589d70d54e0666038ac039d4956964ddda751f10f3e3234",
+        "checks": {
+          "record0-digest-pinned": true,
+          "record1-digest-pinned": true,
+          "record2-digest-pinned": true,
+          "digests-are-prev-fields-of-next-records": true,
+          "signature-and-envelope-not-covered-by-digest": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-003",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "generations": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "gapStop": "contiguity-gap",
+        "regressionMax": 3,
+        "checks": {
+          "generations-increase-in-preset": true,
+          "full-preset-accepted": true,
+          "gap-breaks-at-first-offending-record": true,
+          "regression-presentation-does-not-advance": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-004",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "walkStop": "key-entry-deleted",
+        "tamperFailures": [
+          "keyid-recompute-mismatch"
+        ],
+        "checks": {
+          "entry-deletion-rejected": true,
+          "identity-fields-preserved-across-records": true,
+          "public-key-tamper-detected-by-keyid-recompute": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-005",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "revokedFrom-mutated",
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "REVOKED",
+            "observed": "REVOKED",
+            "phase": 9
+          },
+          "detail": "signing key revoked at Record generation 5"
+        },
+        "checks": {
+          "revokedFrom-immutability-rejects-4c": true,
+          "statement-verdict-unchanged": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-006",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "terminal-state-reopened,revokedFrom-mutated",
+        "checks": {
+          "terminal-state-never-returns-to-current": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-007",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "key1ValidUntil": 1769997000,
+        "key2ValidUntil": 1769997600,
+        "violationStop": "retired-validUntil-not-min",
+        "checks": {
+          "key1-retired-at-cap": true,
+          "key2-retired-at-cap": true,
+          "cap-violation-rejected": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-008",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "missingFailures": [
+          "missing-member:statementFloor",
+          "non-integer:statementFloor"
+        ],
+        "checks": {
+          "record-without-statementfloor-rejected": true,
+          "floor-zero-on-epoch-switch-records": true,
+          "floor-repeated-within-epoch": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-009",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "changeStop": "epoch-change-without-transfer",
+        "transferStop": "transfer-without-epoch-change",
+        "checks": {
+          "epoch-change-without-transfer-rejected": true,
+          "transfer-without-epoch-change-rejected": true,
+          "surgery-kept-fields-locally-consistent": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-010",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "trailMembers": "algorithm,anchorId,entityId,epochId,incomingKeyId,l2Version,newEpochId,outgoingKeyId,recordGeneration,statementFloor,statementType",
+        "checks": {
+          "trail-field-set-complete": true,
+          "trail-values-match-record-2": true,
+          "key3-window-contains-record2-issuedAt": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-011",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "forbiddenFailures": [
+          "forbidden-member:issuedAt"
+        ],
+        "checks": {
+          "trail-with-issuedAt-rejected": true,
+          "pinned-trail-has-no-forbidden-members": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-012",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "signatureOk": true,
+        "window": {
+          "algorithm": "ed25519",
+          "keyId": "4KKXd7XSJW8",
+          "publicKey": "kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM",
+          "status": "current",
+          "validFrom": 1769997000,
+          "validUntil": 1770000600
+        },
+        "checks": {
+          "trail-signature-verifies-under-outgoing-key": true,
+          "outgoing-key-window-contains-record2-issuedAt": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-013",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "signer-window-excludes-record-issuedAt",
+        "acceptedMax": 4,
+        "signatureOk": true,
+        "checks": {
+          "record5v-window-exclusion-rejected": true,
+          "trail-epoch-still-new": true,
+          "record5v-signature-verifies": true,
+          "accepted-max-stays-four": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-014",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "walkStop": "trail-epochid-not-previous-epoch,trail-signature-fails-under-outgoing-key",
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 5
+          },
+          "detail": "chain stopped: trail-epochid-not-previous-epoch,trail-signature-fails-under-outgoing-key"
+        },
+        "checks": {
+          "trail-defect-stops-chain-at-previous": true,
+          "dependent-statement-unverified": true,
+          "never-unknown-authority-when-signer-resolves-inside-prefix": true,
+          "missing-transfer-rejected": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-015",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "walkStop": "trail-incoming-key-not-sole-current",
+        "checks": {
+          "sole-current-rule-rejects-variant": true,
+          "pinned-record2-atomic-epoch-switch": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-016",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "trailVerifiesAtLater": true,
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 6
+          },
+          "detail": "snapshot Record expired at T"
+        },
+        "checks": {
+          "trail-has-no-validity-window": true,
+          "trail-verifies-historically-at-T2000": true,
+          "statement-unverified-by-snapshot-freshness-at-T2000": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-017",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "standaloneFailures": [
+          "missing-member:signerKeyId",
+          "missing-member:issuedAt",
+          "missing-member:expiresAt",
+          "missing-member:prevRecordDigest",
+          "missing-member:keys",
+          "statementType-mismatch",
+          "non-integer:issuedAt",
+          "non-integer:expiresAt",
+          "keys-not-array"
+        ],
+        "acceptedEpochs": [
+          "epoch-0",
+          "epoch-1"
+        ],
+        "checks": {
+          "standalone-trail-rejected-as-record": true,
+          "trail-presentation-never-creates-epoch": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-018",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "acceptedEpochs": [
+          "epoch-0",
+          "epoch-1"
+        ],
+        "checks": {
+          "record1-signed-by-key1-in-epoch-0": true,
+          "rotation-preserves-epoch": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-019",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "signer-outside-accepted-chain",
+        "acceptedMax": 3,
+        "checks": {
+          "signer-of-next-record-must-be-present-in-previous": true,
+          "accepted-max-stays-three": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-020",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "unanchoredMax": 0,
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNVERIFIED",
+            "observed": "UNVERIFIED",
+            "phase": 5
+          },
+          "detail": "chain stopped: record0-material-provenance-not-policy-channel"
+        },
+        "selfBootstrapStop": "record0-signer-against-binding-keyid",
+        "reanchoredMax": 0,
+        "checks": {
+          "no-verified-lower-bound-without-policy-channel": true,
+          "self-bootstrap-rejected-against-original-binding": true,
+          "compromise-requires-new-anchor-binding": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-021",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "record0-signer-against-binding-keyid",
+        "verdict": "UNKNOWN_AUTHORITY",
+        "checks": {
+          "record0-key-introduction-by-self-signing-rejected": true,
+          "introduced-key-never-authorizes-itself": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-022",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statement": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNKNOWN_AUTHORITY",
+            "observed": "UNKNOWN_AUTHORITY",
+            "phase": 5
+          },
+          "detail": "chain stopped: keyid-recompute-mismatch"
+        },
+        "checks": {
+          "keyid-recompute-failure-never-invalid-on-statement": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-023",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "stopReason": "epoch-already-accepted",
+        "acceptedEpochs": [
+          "epoch-0",
+          "epoch-1"
+        ],
+        "checks": {
+          "epoch-never-accepted-twice": true,
+          "epochs-two-and-three-unaccepted": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-AUTHORITY",
+      "caseId": "L2-AUT-024",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "acceptedMax": 4,
+        "record4AKeys": [
+          {
+            "algorithm": "ed25519",
+            "keyId": "ECMERdvpV0k",
+            "publicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I",
+            "status": "retired",
+            "validFrom": 1769996400,
+            "validUntil": 1769997000
+          },
+          {
+            "algorithm": "ed25519",
+            "keyId": "4KKXd7XSJW8",
+            "publicKey": "kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM",
+            "status": "retired",
+            "validFrom": 1769997000,
+            "validUntil": 1769997600
+          },
+          {
+            "algorithm": "ed25519",
+            "keyId": "G8VbXumewVs",
+            "publicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs",
+            "status": "current",
+            "validFrom": 1769997600,
+            "validUntil": 1770001200
+          },
+          {
+            "algorithm": "ed25519",
+            "keyId": "ECYh7yJFAn8",
+            "publicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA",
+            "status": "current",
+            "validFrom": 1769998300,
+            "validUntil": 1770001900
+          }
+        ],
+        "checks": {
+          "positive-rotation-record4a-accepted": true,
+          "key3-remains-current": true,
+          "key4-introduced-current": true,
+          "overlapping-windows-allowed": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-001",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "allVectorsOk": true,
+        "record2PayloadTextEqual": true,
+        "checks": {
+          "single-jcs-canonical-signing-target": true,
+          "wire-carries-payload-bytes-verbatim": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-002",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "canonicalEqualsPinned": true,
+        "signatureOk": true,
+        "checks": {
+          "byte-identical-reproduction": true,
+          "pinned-signature-verifies": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-003",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "order": [
+          "algorithm",
+          "anchorId",
+          "descriptionLocation",
+          "entityId",
+          "epochId",
+          "expiresAt",
+          "extExample",
+          "generation",
+          "issuedAt",
+          "keyId",
+          "l2Version",
+          "lifecycleStatus",
+          "statementType"
+        ],
+        "codePointSorted": [
+          "algorithm",
+          "anchorId",
+          "descriptionLocation",
+          "entityId",
+          "epochId",
+          "expiresAt",
+          "extExample",
+          "generation",
+          "issuedAt",
+          "keyId",
+          "l2Version",
+          "lifecycleStatus",
+          "statementType"
+        ],
+        "checks": {
+          "keys-sorted-by-utf-16-code-units": true,
+          "canonicalization-is-reproducible": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-004",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "unicodeKeys": [
+          "a",
+          "z",
+          "é",
+          "😀",
+          ""
+        ],
+        "topOrder": [
+          "algorithm",
+          "anchorId",
+          "descriptionLocation",
+          "entityId",
+          "epochId",
+          "expiresAt",
+          "extExample",
+          "extUnicode",
+          "generation",
+          "issuedAt",
+          "keyId",
+          "l2Version",
+          "lifecycleStatus",
+          "statementType"
+        ],
+        "checks": {
+          "non-bmp-key-order-by-utf-16": true,
+          "top-level-key-order-by-utf-16": true,
+          "byte-identical-to-pinned-vector": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-005",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "embeddedPresent": true,
+        "checks": {
+          "trail-canonical-appears-verbatim-in-record": true,
+          "trail-signature-carried-unchanged": true,
+          "record-signature-covers-trail-bytes": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-006",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "noDuplicates": true,
+        "nestedOk": true,
+        "checks": {
+          "producer-canonical-output-has-no-duplicates": true,
+          "duplicate-wire-rejected-by-parser": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-007",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "payloadHasNoSignature": true,
+        "envelopeShape": true,
+        "checks": {
+          "payload-objects-never-carry-signature": true,
+          "envelope-carries-only-payload-and-signature": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-008",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "derived": [
+          {
+            "keyId": "ECMERdvpV0k",
+            "recomputed": "ECMERdvpV0k",
+            "keyIdBytes": 8,
+            "publicKeyBytes": 32,
+            "signatureBytes": 64,
+            "caseSensitive": true
+          },
+          {
+            "keyId": "4KKXd7XSJW8",
+            "recomputed": "4KKXd7XSJW8",
+            "keyIdBytes": 8,
+            "publicKeyBytes": 32,
+            "signatureBytes": 64,
+            "caseSensitive": true
+          },
+          {
+            "keyId": "G8VbXumewVs",
+            "recomputed": "G8VbXumewVs",
+            "keyIdBytes": 8,
+            "publicKeyBytes": 32,
+            "signatureBytes": 64,
+            "caseSensitive": true
+          },
+          {
+            "keyId": "ECYh7yJFAn8",
+            "recomputed": "ECYh7yJFAn8",
+            "keyIdBytes": 8,
+            "publicKeyBytes": 32,
+            "signatureBytes": 64,
+            "caseSensitive": true
+          },
+          {
+            "keyId": "cIbUqaV2qxI",
+            "recomputed": "cIbUqaV2qxI",
+            "keyIdBytes": 8,
+            "publicKeyBytes": 32,
+            "signatureBytes": 64,
+            "caseSensitive": true
+          }
+        ],
+        "checks": {
+          "keyid-equals-first-8-sha256-bytes-base64url": true,
+          "11-char-8-byte-32-byte-64-byte-shapes": true,
+          "keyid-is-case-sensitive": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-009",
+      "strength": "MUST baseline, SHOULD practice",
+      "result": "PASS",
+      "observation": {
+        "record0Only": {
+          "result": "PASS",
+          "observation": {
+            "expected": "UNKNOWN_AUTHORITY",
+            "observed": "UNKNOWN_AUTHORITY",
+            "phase": 5
+          },
+          "detail": "signer keyId is not present in the accepted chain"
+        },
+        "acceptedMaxRotation": 4,
+        "acceptedMaxRevocation": 5,
+        "checks": {
+          "single-key-deployment-never-verified": true,
+          "rotation-records-present": true,
+          "retirement-cap-enforced": true,
+          "revocation-accepted": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-010",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "digest": "a6982511317de03c92452982c50014d3ce82917c8dc61c315a8736274ffa761f",
+        "checks": {
+          "escape-fixture-byte-identical": true,
+          "digest-consistent-with-canonical-bytes": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-011",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "failed": [],
+        "checks": {
+          "every-pinned-signature-verifies-over-canonical-bytes": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-PRODUCER",
+      "caseId": "L2-PRO-012",
+      "strength": "MUST when offered, optional to baseline",
+      "result": "UNSUPPORTED-OPTIONAL",
+      "observation": {
+        "algorithm": "ES256",
+        "baseline": "ed25519 only"
+      },
+      "detail": "ES256 support is optional in L2 0.1: the baseline pipeline implements ed25519 only; ES256 offered by a producer is recorded as UNSUPPORTED-OPTIONAL (see L2-VER-005 for the verifier-side UNSUPPORTED_ALGORITHM path)"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-SERVER",
+      "caseId": "L2-SRV-001",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statementStatus": 200,
+        "coreStatus": 303,
+        "checks": {
+          "statement-surface-200-verbatim": true,
+          "core-303-additive": true,
+          "suspended-404": true,
+          "retired-410": true,
+          "unknown-anchor-404": true,
+          "malformed-uuid-400": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-SERVER",
+      "caseId": "L2-SRV-002",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "generations": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "recordCount": 5,
+        "checks": {
+          "material-200-records-array": true,
+          "records-0-to-G-verbatim-ascending": true,
+          "body-framing-unsigned": true,
+          "suspended-404": true,
+          "retired-410": true,
+          "gap-chain-not-served-404": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-SERVER",
+      "caseId": "L2-SRV-003",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "putStatementStatus": 405,
+        "postStatus": 405,
+        "checks": {
+          "put-statement-405-with-allow": true,
+          "put-material-405-with-allow": true,
+          "post-statement-405": true,
+          "anonymous-get-works": true,
+          "binding-unchanged-after-mutation-attempts": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-SERVER",
+      "caseId": "L2-SRV-004",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "pStatement": {
+          "status": 400,
+          "headers": {
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "date": "Tue, 17 Nov 2026 06:55:29 GMT",
+            "keep-alive": "timeout=5",
+            "transfer-encoding": "chunked"
+          },
+          "body": "{\"error\":\"unsupported p parameter\"}"
+        },
+        "l1": {
+          "status": 400,
+          "headers": {
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "date": "Tue, 17 Nov 2026 06:55:29 GMT",
+            "keep-alive": "timeout=5",
+            "transfer-encoding": "chunked"
+          },
+          "body": "{\"error\":\"unsupported l parameter\"}"
+        },
+        "l3": {
+          "status": 400,
+          "headers": {
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "date": "Tue, 17 Nov 2026 06:55:29 GMT",
+            "keep-alive": "timeout=5",
+            "transfer-encoding": "chunked"
+          },
+          "body": "{\"error\":\"unsupported l parameter\"}"
+        },
+        "checks": {
+          "p-with-l2-400-before-lookup": true,
+          "l1-not-treated-as-l2": true,
+          "l3-fail-closed-400": true,
+          "l2-defined-semantics-200": true,
+          "material-rejects-p-400": true,
+          "no-client-submitted-signing-targets": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-SERVER",
+      "caseId": "L2-SRV-005",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "cache": "public, max-age=2800",
+        "remaining": 2800,
+        "immediateCache": "no-store",
+        "cachedThenRevoked": {
+          "result": "PASS",
+          "observation": {
+            "expected": "REVOKED",
+            "observed": "REVOKED",
+            "phase": 9
+          },
+          "detail": "signing key revoked at Record generation 5"
+        },
+        "checks": {
+          "cache-bounded-by-remaining-validity": true,
+          "immediate-freshness-profile-recorded": true,
+          "error-responses-do-not-enable-positive-reuse": true,
+          "cache-reusability-is-not-revocation-detection": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-SERVER",
+      "caseId": "L2-SRV-006",
+      "strength": "SHOULD",
+      "result": "PASS",
+      "observation": {
+        "Referrer-Policy": "no-referrer",
+        "onStatement": "no-referrer",
+        "onMaterial": "no-referrer"
+      },
+      "detail": "SHOULD honored by the tested server"
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-SERVER",
+      "caseId": "L2-SRV-007",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "statementStatus": 200,
+        "pRejectedStatus": 400,
+        "checks": {
+          "anchor-uuids-are-the-loggable-metadata": true,
+          "no-cookies-credentials-required": true,
+          "p-not-expanded-beyond-core": true,
+          "l-values-never-expanded-into-other-levels": true
+        }
+      }
+    },
+    {
+      "catalogVersion": "0.1-draft",
+      "profile": "stub-offline",
+      "resolverCommit": "4b08eead4bcc23374044bb60340bb915102a29db",
+      "target": "L2-SERVER",
+      "caseId": "L2-SRV-008",
+      "strength": "MUST",
+      "result": "PASS",
+      "observation": {
+        "adminStatus": 400,
+        "checks": {
+          "no-ar-xml-fetch-parse-validate": true,
+          "no-management-ui-device-capability-endpoints": true,
+          "no-public-mutations": true,
+          "additive-optional-surface": true,
+          "core-conformance-valid-without-l2": true,
+          "admin-auth-required-not-public": true
+        }
+      }
+    }
+  ]
+}
