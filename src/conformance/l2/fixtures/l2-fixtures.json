@@ -1,0 +1,227 @@
+{
+  "l2Version": "0.1",
+  "anchorId": "550e8400-e29b-41d4-a716-446655440000",
+  "entityId": "urn:relink:entity:thermal-sensor-42",
+  "timeT": 1769998400,
+  "freshnessWindowW": 600,
+  "seeds": [
+    "relink-l2-0.1-draft-test-vector-seed-1",
+    "relink-l2-0.1-draft-test-vector-seed-2",
+    "relink-l2-0.1-draft-test-vector-seed-3",
+    "relink-l2-0.1-draft-test-vector-seed-4",
+    "relink-l2-0.1-draft-test-vector-seed-5"
+  ],
+  "constants": {
+    "SEED_STRING_1": "relink-l2-0.1-draft-test-vector-seed-1",
+    "KEY1_PRIVATE_SEED_HEX": "62d7fed7cdbced7fb568f23de5442ab57ebe2fe567f76ac092d85ffd882c693e",
+    "KEY1_PUBLIC_HEX": "b3edee607589a8e02950718078cc737507e1f47b678b933635f673ed45919fe2",
+    "KEY1_SHA256_HEX": "10230445dbe957492b6d67f2a0d1d66d655e167c9fc1a58f93f2fbf788acbdbb"
+  },
+  "keys": {
+    "key1": {
+      "keyId": "ECMERdvpV0k",
+      "publicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I",
+      "publicHex": "b3edee607589a8e02950718078cc737507e1f47b678b933635f673ed45919fe2",
+      "shaHex": "10230445dbe957492b6d67f2a0d1d66d655e167c9fc1a58f93f2fbf788acbdbb",
+      "seedString": "relink-l2-0.1-draft-test-vector-seed-1"
+    },
+    "key2": {
+      "keyId": "4KKXd7XSJW8",
+      "publicKey": "kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM",
+      "publicHex": "92446f197e98d48765c07683e51c7261bdf01ed5d8b0d271a3ad40c184572563",
+      "shaHex": "e0a29777b5d2256ffa591e993e6daa9f941fb1a45d32587e44603d5d0c7692a4",
+      "seedString": "relink-l2-0.1-draft-test-vector-seed-2"
+    },
+    "key3": {
+      "keyId": "G8VbXumewVs",
+      "publicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs",
+      "publicHex": "1b7ecbe59de3d86053280be9b424c1e674d48dba257febd06ac89207bca9bdcb",
+      "shaHex": "1bc55b5ee99ec15bd6ab107a8eea608e67ef8bba02e8b9537f20555b81fd1752",
+      "seedString": "relink-l2-0.1-draft-test-vector-seed-3"
+    },
+    "key4": {
+      "keyId": "ECYh7yJFAn8",
+      "publicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA",
+      "publicHex": "5c96c39ec91e5f00b5ca83df0675a641979f29129092b4772adc1892923a79d0",
+      "shaHex": "102621ef2245027f4eca01ef407507e2f22677a02f5419ee11f612f3e163b0b6",
+      "seedString": "relink-l2-0.1-draft-test-vector-seed-4"
+    },
+    "key5": {
+      "keyId": "cIbUqaV2qxI",
+      "publicKey": "jRCG67jhdcpQ_6xxV-NxUw7uPCAGN7-XuwTYRtgMe2E",
+      "publicHex": "8d1086ebb8e175ca50ffac7157e371530eee3c200637bf97bb04d846d80c7b61",
+      "shaHex": "7086d4a9a576ab126718797fc1dc378dc2a25590abdf5c6d392ad46cf05620fc",
+      "seedString": "relink-l2-0.1-draft-test-vector-seed-5"
+    }
+  },
+  "vectors": [
+    {
+      "id": "A2-Vector1",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"expiresAt\":1770000000,\"generation\":7,\"issuedAt\":1769996400,\"keyId\":\"ECMERdvpV0k\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "z2u8xgPs0p-OJcBwycTyYmTTc23uwniF0JgzK02jEvqaoYWkNdpIfB6yQ5-LbZbjRHxfaZHpTlUFavYoO8nQBw",
+      "signerPublicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I"
+    },
+    {
+      "id": "A3-Vector2",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"expiresAt\":1770000000,\"extExample\":{\"a\":[2,3],\"z\":1},\"generation\":7,\"issuedAt\":1769996400,\"keyId\":\"ECMERdvpV0k\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "HChT88MiaoViTfGVUMcfrPTikpbeMs8PYlBozWkBkTlJQWzhPWNTZ1B5MB7Q_pf2k7DqmGxiu-REmKhdKMgkBA",
+      "signerPublicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I"
+    },
+    {
+      "id": "A4-Vector3",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"expiresAt\":1770000000,\"extExample\":{\"a\":[2,3],\"z\":1},\"extUnicode\":{\"a\":1,\"z\":1,\"é\":2,\"😀\":3,\"\":4},\"generation\":7,\"issuedAt\":1769996400,\"keyId\":\"ECMERdvpV0k\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "nNEFPVF4vUZWiUU9eadPkEqQEb_pNBXR3yksE5IHTNrYASA8Fg4hubCdDr9PR4vPLxzaBRzeeYdYH-O4XArjCQ",
+      "signerPublicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I"
+    },
+    {
+      "id": "A4-Vector3b",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"expiresAt\":1770000900,\"generation\":2,\"issuedAt\":1769997300,\"keyId\":\"ECMERdvpV0k\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"note\":\"lineA lineB deltab\\tend\",\"statementType\":\"resolution\"}",
+      "signature": "o-as8zOSOzLKI-mgL6sKIKjW4Wy6PTbMZYGOBILgmUMGTcAYPPIJb95iUX8jy4z-B4zEM42VGp97ElTVgVQqAQ",
+      "signerPublicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I"
+    },
+    {
+      "id": "Record0",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"expiresAt\":1770000000,\"issuedAt\":1769996400,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"current\",\"validFrom\":1769996400,\"validUntil\":1770000000}],\"l2Version\":\"0.1\",\"prevRecordDigest\":null,\"recordGeneration\":0,\"signerKeyId\":\"ECMERdvpV0k\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "DObC78YFVR6d-TIuJKO_WbeXw8bmlE9uhd0e8UaQQWLEoLZedRgca8CJcVD3v1K2vbJ1JESUQzV6Uo1YvSnXAQ",
+      "signerPublicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I"
+    },
+    {
+      "id": "Record1",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"expiresAt\":1770000600,\"issuedAt\":1769997000,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"current\",\"validFrom\":1769997000,\"validUntil\":1770000600}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"36ce3c7bf819434ebc79e534649873081ee0999af85c798c6586235680809afb\",\"recordGeneration\":1,\"signerKeyId\":\"ECMERdvpV0k\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "uSDzPwzTq4xubwXA4NbkhTRiwaT1GfMM3bzdZ5Axoz0Rw3xcwTIFpnVB3Yv8y6yDYXixDC-1HMw1fTFM05HICw",
+      "signerPublicKey": "s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I"
+    },
+    {
+      "id": "Trail2",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"incomingKeyId\":\"G8VbXumewVs\",\"l2Version\":\"0.1\",\"newEpochId\":\"epoch-1\",\"outgoingKeyId\":\"4KKXd7XSJW8\",\"recordGeneration\":2,\"statementFloor\":0,\"statementType\":\"transfer\"}",
+      "signature": "Ijetk5nXS-lFfjypHyQyi3QYKCXxBPSew2H6LB_qr0BYD7tw21X7MmZknNGl1K4jXpO_an7qQUoEqERJPf15BQ",
+      "signerPublicKey": "kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM"
+    },
+    {
+      "id": "Record2",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770001200,\"issuedAt\":1769997600,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"current\",\"validFrom\":1769997600,\"validUntil\":1770001200}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"870b931dd8f9ad01a6a037524842549ad60fcde1066dbc9caf4f3e6140102f61\",\"recordGeneration\":2,\"signerKeyId\":\"4KKXd7XSJW8\",\"statementFloor\":0,\"statementType\":\"authority\",\"transfer\":{\"payload\":{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"incomingKeyId\":\"G8VbXumewVs\",\"l2Version\":\"0.1\",\"newEpochId\":\"epoch-1\",\"outgoingKeyId\":\"4KKXd7XSJW8\",\"recordGeneration\":2,\"statementFloor\":0,\"statementType\":\"transfer\"},\"signature\":\"Ijetk5nXS-lFfjypHyQyi3QYKCXxBPSew2H6LB_qr0BYD7tw21X7MmZknNGl1K4jXpO_an7qQUoEqERJPf15BQ\"}}",
+      "signature": "198jI84AoMGGcA6AQvoqgF_OVrw5SU3i88-RKX1dZ8kYcCICdmf-UKst3vShf6hkkxd6d4Jv-_CEpWoN1tsFAw",
+      "signerPublicKey": "kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM"
+    },
+    {
+      "id": "Record3",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770001800,\"issuedAt\":1769998200,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"current\",\"validFrom\":1769997600,\"validUntil\":1770001200}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"39808d467859fcad7589d70d54e0666038ac039d4956964ddda751f10f3e3234\",\"recordGeneration\":3,\"signerKeyId\":\"G8VbXumewVs\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "zvbOz9_FWQoqCq9yQ46VGFGF7JsxZr2SOf7Y9nYJbdkXhtQ90WWHBgycvnbN7VqjA7cqxNT8164yyMKk5lYvAw",
+      "signerPublicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs"
+    },
+    {
+      "id": "S7",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770001200,\"generation\":1,\"issuedAt\":1769998300,\"keyId\":\"G8VbXumewVs\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "ahcug-ygTSwa7kit4p4ZtQ-8NInObst_l_FTzZKaL4bd2dV0lCShbVrKDbg-HRgQuKf485lOVSDNrFrrv0CGDQ",
+      "signerPublicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs"
+    },
+    {
+      "id": "Record4",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770002400,\"issuedAt\":1770000900,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"current\",\"validFrom\":1769997600,\"validUntil\":1770002400},{\"algorithm\":\"ed25519\",\"keyId\":\"ECYh7yJFAn8\",\"publicKey\":\"XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA\",\"status\":\"current\",\"validFrom\":1770000900,\"validUntil\":1770002400}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"72d46a3ca11dfdd8c275c4702f23c1415ff5b24ed6cabe88eea28b40ee895d03\",\"recordGeneration\":4,\"signerKeyId\":\"G8VbXumewVs\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "W5El3bBE8R0AdqGAKN3Owy5StGHyAFV0AAuOKBORsI5hf5fO-s0Da-FhyCKn0C4_qD0Nsyn43uXEM6SCWxNkCg",
+      "signerPublicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs"
+    },
+    {
+      "id": "Trail5",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"incomingKeyId\":\"cIbUqaV2qxI\",\"l2Version\":\"0.1\",\"newEpochId\":\"epoch-2\",\"outgoingKeyId\":\"ECYh7yJFAn8\",\"recordGeneration\":5,\"statementFloor\":0,\"statementType\":\"transfer\"}",
+      "signature": "BLyaj6zMmZLoO4C0MXTjj1Hc42GGrlys9UbNotBAvLDRVwpBBODBffweqLzfx8OxLr6pquhZAippy1lcfY48Cw",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "Record5",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-2\",\"expiresAt\":1770002400,\"issuedAt\":1770001500,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"current\",\"validFrom\":1769997600,\"validUntil\":1770002400},{\"algorithm\":\"ed25519\",\"keyId\":\"ECYh7yJFAn8\",\"publicKey\":\"XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA\",\"status\":\"retired\",\"validFrom\":1770000900,\"validUntil\":1770001500},{\"algorithm\":\"ed25519\",\"keyId\":\"cIbUqaV2qxI\",\"publicKey\":\"jRCG67jhdcpQ_6xxV-NxUw7uPCAGN7-XuwTYRtgMe2E\",\"status\":\"current\",\"validFrom\":1770001500,\"validUntil\":1770002400}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"cf347228c0a32f5b47f10bff1ef86ca3e20b34172dceda39b706280db0a0665d\",\"recordGeneration\":5,\"signerKeyId\":\"ECYh7yJFAn8\",\"statementFloor\":0,\"statementType\":\"authority\",\"transfer\":{\"payload\":{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"incomingKeyId\":\"cIbUqaV2qxI\",\"l2Version\":\"0.1\",\"newEpochId\":\"epoch-2\",\"outgoingKeyId\":\"ECYh7yJFAn8\",\"recordGeneration\":5,\"statementFloor\":0,\"statementType\":\"transfer\"},\"signature\":\"BLyaj6zMmZLoO4C0MXTjj1Hc42GGrlys9UbNotBAvLDRVwpBBODBffweqLzfx8OxLr6pquhZAippy1lcfY48Cw\"}}",
+      "signature": "ev9uPwTgn68dXyYmSfUOjY--ogMPMnz2wkrCMN2V6mfdhvDpJY3CI4WSIcjpN9-TCzfmNGQtRjYiZoZixCzEAQ",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "Trail6",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-2\",\"incomingKeyId\":\"cIbUqaV2qxI\",\"l2Version\":\"0.1\",\"newEpochId\":\"epoch-3\",\"outgoingKeyId\":\"ECYh7yJFAn8\",\"recordGeneration\":6,\"statementFloor\":0,\"statementType\":\"transfer\"}",
+      "signature": "sJId5k5StJcUDoT0A4It8BTYEwjhkOhtHAsQxU65TBGXEIQkaftXPgyx4v1j0YNEoQEGAqxqNP2HKrZys1DRBg",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "Record6",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-3\",\"expiresAt\":1770002400,\"issuedAt\":1770001800,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"retired\",\"validFrom\":1769997600,\"validUntil\":1770001500},{\"algorithm\":\"ed25519\",\"keyId\":\"ECYh7yJFAn8\",\"publicKey\":\"XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA\",\"status\":\"retired\",\"validFrom\":1770000900,\"validUntil\":1770001800},{\"algorithm\":\"ed25519\",\"keyId\":\"cIbUqaV2qxI\",\"publicKey\":\"jRCG67jhdcpQ_6xxV-NxUw7uPCAGN7-XuwTYRtgMe2E\",\"status\":\"current\",\"validFrom\":1770001800,\"validUntil\":1770002400}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"66ea457884fe3bc5f9555523b4728d270524eda80b8ccda330a596a61916a750\",\"recordGeneration\":6,\"signerKeyId\":\"ECYh7yJFAn8\",\"statementFloor\":0,\"statementType\":\"authority\",\"transfer\":{\"payload\":{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-2\",\"incomingKeyId\":\"cIbUqaV2qxI\",\"l2Version\":\"0.1\",\"newEpochId\":\"epoch-3\",\"outgoingKeyId\":\"ECYh7yJFAn8\",\"recordGeneration\":6,\"statementFloor\":0,\"statementType\":\"transfer\"},\"signature\":\"sJId5k5StJcUDoT0A4It8BTYEwjhkOhtHAsQxU65TBGXEIQkaftXPgyx4v1j0YNEoQEGAqxqNP2HKrZys1DRBg\"}}",
+      "signature": "V62IKH72c7W924Z3gBE3bxwf6lWIJvsoKxFZilZyD4k1iVvpI33xUOy3ddIl54wK545YRpVOZv9f4zoyfSfCCw",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "S6",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-2\",\"expiresAt\":1770002400,\"generation\":1,\"issuedAt\":1770001100,\"keyId\":\"ECYh7yJFAn8\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "DQLGea9EXGOAXoXK4Un1a0F1sZXxsUGF6NDD965OSm0rxSsCleLR5PUSJkh5FtTck3U1LWbyT01s5XXgW4Z5DQ",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "S5",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-0\",\"expiresAt\":1770001000,\"generation\":1,\"issuedAt\":1769997200,\"keyId\":\"4KKXd7XSJW8\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "Dr5OL9j6Er18zcYAAghaygB1EQQAPEgEQXeck_wGAIItUzTDgtgORJNjzf8usYS0ibaEjmhmJUapRPP9blJUCA",
+      "signerPublicKey": "kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM"
+    },
+    {
+      "id": "Record4F",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770002000,\"issuedAt\":1769999000,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"current\",\"validFrom\":1769997600,\"validUntil\":1770001200}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"72d46a3ca11dfdd8c275c4702f23c1415ff5b24ed6cabe88eea28b40ee895d03\",\"recordGeneration\":4,\"signerKeyId\":\"G8VbXumewVs\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "ZN-7Z-5SPb8La6n6P6n-KjHUsQpEp-q5YXBzbb-K0Iu1LhsUxEBE_CwUTLv0y1Qme2ESD4O-UnKf8PaIcW2KBQ",
+      "signerPublicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs"
+    },
+    {
+      "id": "Record4E",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1769998300,\"issuedAt\":1769998250,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"current\",\"validFrom\":1769997600,\"validUntil\":1770001200}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"72d46a3ca11dfdd8c275c4702f23c1415ff5b24ed6cabe88eea28b40ee895d03\",\"recordGeneration\":4,\"signerKeyId\":\"G8VbXumewVs\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "iHQ8u7fdzazGOmgd7_k8C5NzOknLDjGu0sQxKggCxV3ldOYEGTnve0NjB4G8LHSNEvfx4XtDOeDk0kkGCZQgCA",
+      "signerPublicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs"
+    },
+    {
+      "id": "Record4A",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770001900,\"issuedAt\":1769998300,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"current\",\"validFrom\":1769997600,\"validUntil\":1770001200},{\"algorithm\":\"ed25519\",\"keyId\":\"ECYh7yJFAn8\",\"publicKey\":\"XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA\",\"status\":\"current\",\"validFrom\":1769998300,\"validUntil\":1770001900}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"72d46a3ca11dfdd8c275c4702f23c1415ff5b24ed6cabe88eea28b40ee895d03\",\"recordGeneration\":4,\"signerKeyId\":\"G8VbXumewVs\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "DNo9qZ825MBK1OnRtE6eAsazdpEqgq09R64QouTMiKfjbL09YO3wfSC0ifobgmLEktjrrI_YtA94yttyv9aOCQ",
+      "signerPublicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs"
+    },
+    {
+      "id": "Record4R",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770002000,\"issuedAt\":1769998400,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"revokedFrom\":5,\"status\":\"revoked\",\"validFrom\":1769997600,\"validUntil\":1770001200},{\"algorithm\":\"ed25519\",\"keyId\":\"ECYh7yJFAn8\",\"publicKey\":\"XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA\",\"status\":\"current\",\"validFrom\":1769998300,\"validUntil\":1770001900}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"aeb2b8b0a4e58bec966bb24f3715bcba1217be7193c3d7bb98aa7db129a12c4e\",\"recordGeneration\":5,\"signerKeyId\":\"G8VbXumewVs\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "qoS4e0uIJorMTGFhsjk5HWhJgiaoWFUeIVu___O71i4_WLfdogMDytrOSbzc0sFubCPEuvd3KEU1o1btZ6r-BA",
+      "signerPublicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs"
+    },
+    {
+      "id": "Record4B",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770002300,\"issuedAt\":1769998700,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"revokedFrom\":5,\"status\":\"revoked\",\"validFrom\":1769997600,\"validUntil\":1770001200},{\"algorithm\":\"ed25519\",\"keyId\":\"ECYh7yJFAn8\",\"publicKey\":\"XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA\",\"status\":\"current\",\"validFrom\":1769998300,\"validUntil\":1770001900}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"defd7165768ee1dd76e9a809b4a8b2e3d06a7822351a89269c6b420cc7dd4a2d\",\"recordGeneration\":6,\"signerKeyId\":\"ECYh7yJFAn8\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "zhOmjkX4nljnUvu_7_vytCscYlvsJ9xo2yZc4NB-KFPUEVhNPfdS_kUDt6geArES7Xj4qUwA8Qf9fqT7HNtVDA",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "Record4C",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770002300,\"issuedAt\":1769998700,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"revokedFrom\":1,\"status\":\"revoked\",\"validFrom\":1769997600,\"validUntil\":1770001200},{\"algorithm\":\"ed25519\",\"keyId\":\"ECYh7yJFAn8\",\"publicKey\":\"XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA\",\"status\":\"current\",\"validFrom\":1769998300,\"validUntil\":1770001900}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"defd7165768ee1dd76e9a809b4a8b2e3d06a7822351a89269c6b420cc7dd4a2d\",\"recordGeneration\":6,\"signerKeyId\":\"ECYh7yJFAn8\",\"statementFloor\":0,\"statementType\":\"authority\"}",
+      "signature": "s5uAe8fUrj8C2wm6v6vAqlHZsFiKPGbg8ntnCJHMifq1dHToTrnS1Lj4dBMbprSN-38aJ9KnnkB1zdNfBIIrAQ",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "S8",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770001200,\"generation\":1,\"issuedAt\":1769998400,\"keyId\":\"G8VbXumewVs\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "9ODxd3n8egOSSmCUTzbsD-UHGHTfnyaEPTKr8IvFJUtut63CuMx7Qz9pu9_QOusH-MZVr48FvDGhNIl5pRB9CQ",
+      "signerPublicKey": "G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs"
+    },
+    {
+      "id": "Record5V",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-2\",\"expiresAt\":1770003900,\"issuedAt\":1770002700,\"keys\":[{\"algorithm\":\"ed25519\",\"keyId\":\"ECMERdvpV0k\",\"publicKey\":\"s-3uYHWJqOApUHGAeMxzdQfh9Htni5M2NfZz7UWRn-I\",\"status\":\"retired\",\"validFrom\":1769996400,\"validUntil\":1769997000},{\"algorithm\":\"ed25519\",\"keyId\":\"4KKXd7XSJW8\",\"publicKey\":\"kkRvGX6Y1IdlwHaD5RxyYb3wHtXYsNJxo61AwYRXJWM\",\"status\":\"retired\",\"validFrom\":1769997000,\"validUntil\":1769997600},{\"algorithm\":\"ed25519\",\"keyId\":\"G8VbXumewVs\",\"publicKey\":\"G37L5Z3j2GBTKAvptCTB5nTUjbolf-vQasiSB7ypvcs\",\"status\":\"retired\",\"validFrom\":1769997600,\"validUntil\":1770002400},{\"algorithm\":\"ed25519\",\"keyId\":\"ECYh7yJFAn8\",\"publicKey\":\"XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA\",\"status\":\"retired\",\"validFrom\":1770000900,\"validUntil\":1770002700},{\"algorithm\":\"ed25519\",\"keyId\":\"cIbUqaV2qxI\",\"publicKey\":\"jRCG67jhdcpQ_6xxV-NxUw7uPCAGN7-XuwTYRtgMe2E\",\"status\":\"current\",\"validFrom\":1770002700,\"validUntil\":1770003900}],\"l2Version\":\"0.1\",\"prevRecordDigest\":\"cf347228c0a32f5b47f10bff1ef86ca3e20b34172dceda39b706280db0a0665d\",\"recordGeneration\":5,\"signerKeyId\":\"ECYh7yJFAn8\",\"statementFloor\":0,\"statementType\":\"authority\",\"transfer\":{\"payload\":{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"incomingKeyId\":\"cIbUqaV2qxI\",\"l2Version\":\"0.1\",\"newEpochId\":\"epoch-2\",\"outgoingKeyId\":\"ECYh7yJFAn8\",\"recordGeneration\":5,\"statementFloor\":0,\"statementType\":\"transfer\"},\"signature\":\"BLyaj6zMmZLoO4C0MXTjj1Hc42GGrlys9UbNotBAvLDRVwpBBODBffweqLzfx8OxLr6pquhZAippy1lcfY48Cw\"}}",
+      "signature": "I924C6doUis7-AlOd1gpHJ-bV9tc-XA2cS1INMOcqH5Jw_Sj0uzdG_RFxf__YkwySCz-VdrX_aWEOdJ2vLqPAg",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "S9",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770001200,\"generation\":2,\"issuedAt\":1769998300,\"keyId\":\"ECYh7yJFAn8\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "04Z-__f7h35mshYil-sF67cVE07SE4czanw-0nQ7oC76UiZ15IJmERM8DID5a5Mlc_6FeMO0hAHWfqCy-mD0DQ",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "S9v1",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770001200,\"generation\":1,\"issuedAt\":1769998300,\"keyId\":\"ECYh7yJFAn8\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "tDFzpWAzdJKqiBdAGodXDXVi6gXHGODq3uBsoPz96wtFW8H-eiXNo7uZGQv8YhQS61uI_zPbcciCq9kbI0__Aw",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    },
+    {
+      "id": "S9v2",
+      "canonical": "{\"algorithm\":\"ed25519\",\"anchorId\":\"550e8400-e29b-41d4-a716-446655440000\",\"descriptionLocation\":\"https://sensors.example/thermal/42/ar-xml-2\",\"entityId\":\"urn:relink:entity:thermal-sensor-42\",\"epochId\":\"epoch-1\",\"expiresAt\":1770001200,\"generation\":1,\"issuedAt\":1769998300,\"keyId\":\"ECYh7yJFAn8\",\"l2Version\":\"0.1\",\"lifecycleStatus\":\"active\",\"statementType\":\"resolution\"}",
+      "signature": "EFXwBIToOlZVoWvyfkAuYhOgNaYrsIiH3V7d_1h_AbMUmZB8SuZEvRpbqVmlwEnt_iNF2_jqByHT1abwDhNfDA",
+      "signerPublicKey": "XJbDnskeXwC1yoPfBnWmQZefKRKQkrR3KtwYkpI6edA"
+    }
+  ]
+}
