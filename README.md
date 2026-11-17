@@ -110,6 +110,45 @@ Administrative authentication security acceptance is implemented and documented 
 
 Resolver HTTP security-header acceptance runner is implemented, reviewed, and documented in [docs/resolver-http-security-headers-0.1.md](docs/resolver-http-security-headers-0.1.md). It keeps raw status and header fields, including duplicate fields, and verifies Native HTTPS/HTTP scoping plus Container error, administrative, TRACE, and representative redirect scenarios. Run it with `pnpm security:headers` against explicitly configured deployment endpoints. Live Native HTTPS / Container acceptance and raw observation artifact commits remain a separate open deployment task.
 
+## Resolver L2 conformance
+
+The Resolver L2 0.1-draft conformance suite lives under `src/conformance/l2/`. It covers 91 catalog cases
+(`L2_CONFORMANCE_CATALOG_VERSION = "0.1-draft"`) across four targets: `L2-SERVER`, `L2-PRODUCER`, `L2-VERIFIER`,
+and `L2-AUTHORITY`. The L1 catalog remains frozen; the L2 catalog is a separate file and the L1 `pnpm conformance`
+entrypoint is unchanged.
+
+Pinned fixtures: `src/conformance/l2/fixtures/l2-fixtures.json` carries the 28 pinned canonical payload vectors,
+five ed25519 key pairs (seed strings derive the PKCS#8 seeds deterministically), and the fixed clock
+(T = 1769998400, W = 600). Fixtures are runtime-independent: every canonical string, signature, and keyId re-derives
+byte-for-byte, and the suite never re-signs or modifies a pinned vector.
+
+The verifier implements phases 1–11 of §15.2: wire canonicality and strict parse, anchor binding, algorithm,
+trusted clock, chain walk (§9.6, including the §12.2 transfer trail), revocation snapshot, Record chain position,
+signature over the canonical payload bytes, key state (§9.5), freshness, floor, and replay, and the L1-bound
+observation (§7.4). Negative Record and statement variants are built by canonical-preserving string surgery on the
+pinned vectors, or by re-signing a mutated payload with a fixture seed.
+
+Run the suite:
+
+```bash
+pnpm tsx src/conformance/l2/run.ts
+```
+
+It writes `reports/resolver-l2-0.1-draft/<profile>.json`. With no deployment URL configured, the runner uses the
+offline stub Resolver server (`node:http`, ephemeral port, explicit fixture registry, closed cleanly) for the
+L2-SRV cases. To point the L2-SRV handlers at a real deployment, set `RELINK_NATIVE_URL` (profile `native`) or
+`RELINK_CONTAINER_URL` (profile `container`) in the environment; the same runner and the same 91 handlers then
+drive the real base URL, exactly as the L1 runner does through `src/conformance/profiles.ts`.
+
+`pnpm test` runs the L2 vitest suites under `tests/conformance/`: fixtures self-consistency, L2-VER, L2-AUT,
+L2-PRO, L2-SRV, and the coverage test, which asserts that every one of the 91 catalog case ids is covered by a
+test title naming it and that the coverage map contains no unknown ids. The coverage map is
+`tests/conformance/l2-coverage.ts`.
+
+Known baseline deviations are recorded in the report: ES256 support (L2-PRO-012) and statement revocation
+(L2-VER-045) are `UNSUPPORTED-OPTIONAL`, and a deployment that omits the SHOULD-level
+`Referrer-Policy: no-referrer` header is recorded as `PASS-WITH-DEVIATION` (L2-SRV-006).
+
 ---
 
 ## Design Goals

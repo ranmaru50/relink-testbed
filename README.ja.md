@@ -108,6 +108,26 @@ Testbed は `pnpm dev` で起動します。エフェメラルな localhost ポ�
 
 Resolver HTTP セキュリティヘッダーの受入れ runner は実装・レビュー・文書化が完了しており、[docs/resolver-http-security-headers-0.1.ja.md](docs/resolver-http-security-headers-0.1.ja.md) に記載しています。重複 field を含む raw status / header を保持し、Native の HTTPS/HTTP 境界と Container の error、administrative、TRACE、代表的な redirect scenario を確認します。明示的に設定した deployment endpoint に対して `pnpm security:headers` で実行できます。実 Native HTTPS / Container 受入れと raw observation artifact の commit は、引き続き別の open な deployment 作業です。
 
+## Resolver L2 適合性
+
+Resolver L2 0.1-draft 適合性スイートは `src/conformance/l2/` 配下に実装されています。`L2_CONFORMANCE_CATALOG_VERSION = "0.1-draft"` の 91 の catalog case を、`L2-SERVER` / `L2-PRODUCER` / `L2-VERIFIER` / `L2-AUTHORITY` の 4 つの target で扱います。L1 catalog は frozen のまま変更せず、L2 catalog は別ファイルです。L1 の `pnpm conformance` entrypoint も変更していません。
+
+Pinned fixtures: `src/conformance/l2/fixtures/l2-fixtures.json` は 28 の pinned canonical payload vector、5 つの ed25519 key pair（seed string から PKCS#8 seed が決定的に導出されます）、固定時計（T = 1769998400、W = 600）を持ちます。Fixtures は runtime 非依存です。すべての canonical string、signature、keyId は byte-for-byte に再導出され、pinned vector を再署名・改変することはありません。
+
+Verifier は §15.2 の phase 1〜11 を実装しています: wire の canonical 性厳密 parse、anchor binding、algorithm、trusted clock、chain walk（§9.6、§12.2 の transfer trail を含む）、revocation snapshot、Record chain position、canonical payload bytes に対する signature、key state（§9.5）、freshness・floor・replay、そして L1-bound observation（§7.4）です。Record と statement の negative variant は、pinned vector に対する canonical を保つ string surgery、または fixture seed で変異 payload を再署名して作成します。
+
+実行方法:
+
+```bash
+pnpm tsx src/conformance/l2/run.ts
+```
+
+`reports/resolver-l2-0.1-draft/<profile>.json` に書き出します。deployment URL が設定されていない場合、runner は offline の stub Resolver サーバー（`node:http`、ephemeral port、明示的な fixture registry、クリーンに close）を L2-SRV case に使います。L2-SRV handler を実 deployment へ向けるには、環境変数 `RELINK_NATIVE_URL`（profile `native`）または `RELINK_CONTAINER_URL`（profile `container`）を設定します。同じ runner と同じ 91 の handler が real base URL を駆動します。これは L1 runner が `src/conformance/profiles.ts` を通じて行うのと同じ仕組みです。
+
+`pnpm test` は `tests/conformance/` 配下の L2 vitest スイートを実行します: fixtures 自己整合性、L2-VER、L2-AUT、L2-PRO、L2-SRV、そして coverage test（91 の catalog case id すべてが id を名前に含む test title でカバーされ、coverage map に unknown id がないことを検証）。Coverage map は `tests/conformance/l2-coverage.ts` です。
+
+既知の baseline deviation は report に記録します: ES256 サポート（L2-PRO-012）と statement revocation（L2-VER-045）は `UNSUPPORTED-OPTIONAL`、SHOULD レベルの `Referrer-Policy: no-referrer` header を省略した deployment は `PASS-WITH-DEVIATION`（L2-SRV-006）として記録されます。
+
 ---
 
 ## 設計目標
