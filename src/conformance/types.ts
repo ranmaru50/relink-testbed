@@ -20,7 +20,11 @@ export type ConformanceTarget =
   | "MANIFEST-CONSUMER"
   | "INTEGRITY-CONSUMER"
   | "LIFECYCLE-ADMIN"
-  | "REFERENCE-RESOLVER";
+  | "REFERENCE-RESOLVER"
+  | "L2-SERVER"
+  | "L2-PRODUCER"
+  | "L2-VERIFIER"
+  | "L2-AUTHORITY";
 
 export type NormativeStrength = "MUST" | "SHOULD" | "MAY";
 
